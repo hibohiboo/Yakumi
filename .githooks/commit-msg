@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# https://efcl.info/2021/08/21/git-precommit-hook/
+# https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue
+#############################################################
+## Functions
+#############################################################
+getGitBranchName()
+{
+    branch="$(git symbolic-ref HEAD 2>/dev/null)" ||
+            "$(git describe --contains --all HEAD)"
+    echo ${branch##refs/heads/}
+}
+
+extractTicketId()
+{
+    echo "$(getGitBranchName)" \
+    | awk 'BEGIN{ FS="[/]"}
+           $1 == "id" || $1 == "hotfix" { printf "#%s", $2, $3 }
+           $2 == "id" || $2 == "hotfix" { printf "#%s", $3, $4 }
+           '
+}
+appendMsgTo1stLine()
+{
+    mv $1 $1.$$
+    if [ -s "$1.$$" ]; then
+    if head -1 "$1.$$" | grep "$2" > /dev/null; then
+        cp "$1.$$" "$1"
+    else
+            sed '1s/$/ '"$2"'/' "$1.$$" > $1
+    fi
+    else
+        echo "$2" > "$1"
+    fi
+    rm -f $1.$$
+}
+
+#############################################################
+## main
+#############################################################
+ticket="$(extractTicketId)"
+if [ -n "${ticket}" ]; then
+    appendMsgTo1stLine "$1" "${ticket}"
+fi
