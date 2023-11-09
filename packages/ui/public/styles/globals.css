@@ -1,0 +1,79 @@
+:root {
+  --white: #ffffff;
+  --ghost-gray: #ccccdb;
+  --light-gray: #9f9fb8;
+  --middle-gray: #6a6a80;
+  --gray: #313140;
+  --navy: #252532;
+  --dark-navy: #070a15;
+  --pink: #f41773;
+  --orange: #f46c17;
+  --vivid-orange: #ff8400;
+  --blue: #005ec3;
+  --vivid-blue: #007bff;
+  --yellow: #ffbb00;
+  --pc-max-content-width: 1184px;
+  --pc-min-content-width: 960px;
+  --pc-inner-padding: 48px;
+  --sp-max-content-width: 767px;
+  --sp-min-content-width: 320px;
+  --sp-inner-padding: 24px;
+}
+
+html {
+  /* // 下の設定が認識できないブラウザのための指定。 */
+  font-size: 100%;
+  /* //calc(1em + 1vw); // ビューポートの高さと幅に合わせてテキストサイズを調整。  */
+  font-size: 1em; 
+  background-color: var(--white);
+}
+
+body {
+  font-size: 1.6rem;
+  color: var(--black);
+  font-family:  -apple-system, Segoe UI, Helvetica Neue, Hiragino Kaku Gothic ProN, "メイリオ",meiryo,
+    BlinkMacSystemFont, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 2.2rem;
+    line-height: 1.4;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    line-height: 1.4;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+}

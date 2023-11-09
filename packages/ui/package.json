@@ -1,0 +1,46 @@
+{
+  "name": "@yakumi/ui",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o ../../docs/astro/public/rinne-components",
+    "clean": "rm -rf .turbo",
+    "test": "jest --config ./jest.config.json",
+    "mv-jest-reports": "cp ./public/mockServiceWorker.js ../../docs/astro/public/ && mv ./__reports__ ../../docs/astro/public/jest-reports-components"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sanitize-html": "^2.11.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-swc": "^3.4.1",
+    "@storybook/addon-essentials": "^7.5.3",
+    "@storybook/addon-interactions": "^7.5.3",
+    "@storybook/addon-links": "^7.5.3",
+    "@storybook/addon-mdx-gfm": "^7.5.3",
+    "@storybook/addon-onboarding": "^1.0.8",
+    "@storybook/blocks": "^7.5.3",
+    "@storybook/react": "^7.5.3",
+    "@storybook/react-vite": "^7.5.3",
+    "@storybook/testing-library": "^0.2.2",
+    "storybook": "^7.5.3"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": [
+      "./src/*.ts",
+      "./src/*.tsx",
+      "./src/*/index.ts"
+    ]
+  },
+  "files": [
+    "src"
+  ]
+}

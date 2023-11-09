@@ -1,0 +1,14 @@
+import { Meta, Story, Canvas } from '@storybook/blocks';
+import * as ComponentStories from './index.stories';
+
+<Meta title="Card/Base" of={ComponentStories} />
+
+# テキストカード
+
+- 1: カードの名前
+- 2: 説明文
+- 3: ID
+
+<Canvas>
+  <Story of={ComponentStories.Default} />
+</Canvas>
