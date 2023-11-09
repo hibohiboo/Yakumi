@@ -1,5 +1,11 @@
 {
   "extends": "@yakumi/tsconfig/react",
+  "compilerOptions": {
+    "paths": {
+      "@yakumi-components/*": ["../packages/ui/src/*"]
+    }
+  },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  
 }

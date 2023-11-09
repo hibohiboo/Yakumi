@@ -1,6 +1,10 @@
-import React from 'react';
 import CardWrapper from '../../layouts/CardWrapper';
-import { CardContent, CardId, CardName, CardType } from '../../layouts/Components';
+import {
+  CardContent,
+  CardId,
+  CardName,
+  CardType,
+} from '../../layouts/Components';
 
 export default function AttributeCard(props: {
   name: string;
