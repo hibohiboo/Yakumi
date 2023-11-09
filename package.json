@@ -12,10 +12,12 @@
   },
   "scripts": {
     "prepare": "git config --local core.hooksPath .githooks && echo Changed hooks directory when npm install",
-    "build": "turbo build"
+    "build": "turbo build",
+    "dev": "turbo dev"
   },
   "packageManager": "npm@9.8.1",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "app"
   ]
 }

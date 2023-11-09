@@ -1,7 +1,7 @@
 module.exports = {
   env: { browser: true, es2020: true },
   extends: [
-    "@kaminiten/eslint-config-custom/defaults",
+    "@yakumi/eslint-config-custom/defaults",
     "plugin:react-hooks/recommended",
     "turbo",
     "prettier",
