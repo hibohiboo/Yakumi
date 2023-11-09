@@ -5,7 +5,7 @@ const meta = {
   title: 'Card/Base',
   component: Component,
   args: {
-    name: '① 尻が光る',
+    name: '① 尻(しり)が光《ひか》る(真)',
     content: `②
     尻からまばゆい光を発する。
     うろん妖力。複数使用可能。`,
