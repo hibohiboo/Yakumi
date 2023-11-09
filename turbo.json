@@ -3,6 +3,7 @@
   "globalDotEnv": [".env"],
   "pipeline": {
     "dev": {},
+    "ncu": {},
     "build": { "dependsOn": ["^build"],
     "outputs": ["dist"] }
   }
