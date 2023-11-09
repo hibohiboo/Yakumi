@@ -13,7 +13,8 @@
 .cardName {
   text-align: center;
   font-size: 1.2em;
-  border-bottom: #000 solid 1px;
+  /* border-bottom: #000 solid 1px; */
+
 }
 .cardType {
   align-self: center;

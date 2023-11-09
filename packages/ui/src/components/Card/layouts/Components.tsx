@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './CardWrapper.module.css';
 import sanitizeHtml from 'sanitize-html';
+import styles from './CardWrapper.module.css';
 
 export function rubyText(text?: string) {
-  if (!text) return text;
+  if (!text) return '';
   const html = text
     .replace(/[|｜](.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
     .replace(/[|｜](.+?)（(.+?)）/g, '<ruby>$1<rt>$2</rt></ruby>')
@@ -24,16 +24,21 @@ export function CardName(props: { children: React.ReactNode }) {
   return (
     <div
       className={styles.cardName}
-      dangerouslySetInnerHTML={{ __html: rubyText(props.children.toString()) }}
+      dangerouslySetInnerHTML={{ __html: rubyText(props.children?.toString()) }}
     ></div>
   );
 }
-export function CardContent(props: { children: React.ReactNode; style?: React.CSSProperties }) {
+export function CardContent(props: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}) {
   return (
     <div
       style={{ ...props.style }}
       className={styles.cardContent}
-      dangerouslySetInnerHTML={{ __html: rubyText(props?.children?.toString()) }}
+      dangerouslySetInnerHTML={{
+        __html: rubyText(props?.children?.toString()),
+      }}
     ></div>
   );
 }
@@ -62,7 +67,9 @@ export function CardProp(props: {
       <div
         className={styles.cardPropContent}
         style={props.contentStyle}
-        dangerouslySetInnerHTML={{ __html: rubyText(props.children?.toString()) }}
+        dangerouslySetInnerHTML={{
+          __html: rubyText(props.children?.toString()),
+        }}
       ></div>
     </div>
   );
