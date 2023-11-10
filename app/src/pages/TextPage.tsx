@@ -5,13 +5,19 @@ import {
   reOpenDirectory,
   selectDirectory,
 } from '@yakumi-app/domain/fileSystem/fileReader';
+import { createTextDeckToUdonarium } from '@yakumi-app/domain/textDeck/useUdonarium';
 import { basePath } from '@yakumi-app/router';
 import { AttributeCard, BackCard } from '@yakumi-components/index';
-import { useState } from 'react';
+import { createRef, useRef, useState } from 'react';
 
 function App() {
   const [items, setItems] = useState<TextCard[]>([]);
   const [file, setFile] = useState<string | null>(null);
+  const listRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);
+  items.forEach((_, i) => {
+    listRefs.current[i] = createRef<HTMLDivElement>();
+  });
+  const backRef = useRef<HTMLDivElement>(null);
   return (
     <div>
       <a href={`/${basePath}/textDeck.zip`}>
@@ -39,6 +45,7 @@ function App() {
           back.pngとtext.csvが置いてあるフォルダを選択してください。
         </span>
       </div>
+
       {file && (
         <div>
           <Button
@@ -58,8 +65,28 @@ function App() {
             再読み込み
           </Button>
           <span style={{ marginLeft: '10px' }}>
-            text.csvを編集したり、画像を差し替えた場合は再読み込みしてください。{' '}
+            text.csvを編集したり、画像を差し替えた場合は再読み込みしてください。
           </span>
+        </div>
+      )}
+      {file && (
+        <div>
+          <Button
+            icon="refresh"
+            onClick={async () => {
+              if (!listRefs.current) {
+                console.warn('listRefs is undefined');
+                return;
+              }
+              if (!backRef.current) {
+                console.warn('backRef is undefined');
+                return;
+              }
+              await createTextDeckToUdonarium(listRefs.current, items, backRef);
+            }}
+          >
+            Udonarium用カードダウンロード
+          </Button>
         </div>
       )}
 
@@ -74,9 +101,21 @@ function App() {
         }}
       >
         {!file && <div>フォルダを選択するとここにカード一覧が表示されます</div>}
-        {file && <BackCard url={file} />}
+
+        {file && (
+          <div ref={backRef} style={{ width: 'fit-content' }}>
+            <BackCard url={file} />
+          </div>
+        )}
+
         {items.map((item, i) => (
-          <AttributeCard {...item} key={i} />
+          <div
+            ref={listRefs.current[i]}
+            key={i}
+            style={{ width: 'fit-content' }}
+          >
+            <AttributeCard {...item} />
+          </div>
         ))}
       </div>
     </div>
