@@ -13,7 +13,12 @@ import { createRef, useRef, useState } from 'react';
 
 function App() {
   const [items, setItems] = useState<TextCard[]>([]);
-  const [setting, setSetting] = useState<Settings>({ deckName: 'サンプル' });
+  const [setting, setSetting] = useState<Settings>({
+    deckName: 'サンプル',
+    size: '1',
+    description: '',
+    state: '0',
+  });
   const [file, setFile] = useState<string | null>(null);
   const listRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);
   items.forEach((_, i) => {
