@@ -139,8 +139,9 @@ export class CardDraftTRPGFrontCdkStack extends cdk.Stack {
         var request = event.request;
         if(request.uri.includes('.')){
           return request;
-        }
-        if (request.uri.endsWith('/')) {
+        } else if(request.uri.startsWith('/app')) {
+          request.uri = '/app/index.html';
+        } else if (request.uri.endsWith('/')) {
           request.uri = request.uri + 'index.html';
         }
         return request;

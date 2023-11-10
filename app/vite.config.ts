@@ -19,4 +19,18 @@ export default defineConfig({
       '@yakumi-components': path.join(__dirname, '../packages/ui/src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          reactFamily: ['react-router-dom'],
+          others: ['date-fns', 'papaparse'],
+          udon: ['file-saver', 'crypto-js', 'jszip'],
+          canvas: ['html2canvas'],
+          ui: ['@blueprintjs/core'],
+        },
+      },
+    },
+  },
 });
