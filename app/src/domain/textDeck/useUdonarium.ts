@@ -40,6 +40,7 @@ export const createTextDeckToUdonarium = async (
         front.identifier,
         back.identifier,
         props,
+        setting.state,
       );
       const xml = createXML(item.name, doc, card);
       return { xml, file: front.file, card, type: item.type };
@@ -49,6 +50,7 @@ export const createTextDeckToUdonarium = async (
   const deck = createDeck(
     setting.deckName,
     files.map((f) => f.card),
+    setting.state,
   );
   await createZip(
     [back.file, deck, ...files.map((f) => f.file)],

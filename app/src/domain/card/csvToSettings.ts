@@ -11,5 +11,8 @@ export function csvToSettings(csv: string): Settings {
 
   // 配列からマップを作成
   const map = new Map(lines);
-  return { deckName: `${map.get('デッキ名')}` };
+  return {
+    deckName: `${map.get('デッキ名')}`,
+    state: map.get('デッキの向き') === '裏' ? '1' : '0',
+  };
 }

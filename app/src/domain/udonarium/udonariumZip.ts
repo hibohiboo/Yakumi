@@ -25,6 +25,7 @@ export const createCardStackXML = (
   stackName: string,
   doc: XMLDocument,
   children: HTMLElement[],
+  state = '0',
 ) => {
   const cardStackWrapper = createElement(doc, 'card-stack', [
     ['location.name', 'table'],
@@ -34,7 +35,7 @@ export const createCardStackXML = (
     ['rotate', '0'],
     ['roll', '0'],
     ['zindex', '0'],
-    ['state', '0'],
+    ['state', state],
     ['isShowTotal', 'true'],
   ]);
   cardStackWrapper.appendChild(createCardStackElment(doc, stackName));
@@ -61,6 +62,7 @@ const createCardBase = ({
   common = createElement(doc, 'data', [['name', 'common']]),
   detail = createElement(doc, 'data', [['name', 'detail']]),
   state = '0',
+  cardSize = '3',
 }: {
   doc: Document;
   stackName: string;
@@ -69,6 +71,7 @@ const createCardBase = ({
   common?: HTMLElement;
   detail?: HTMLElement;
   state?: string;
+  cardSize?: string;
 }) => {
   const cardWrapper = createElement(doc, 'card', [
     ['location.name', 'table'],
@@ -109,7 +112,7 @@ const createCardBase = ({
   image.appendChild(back);
 
   const name = createElement(doc, 'data', [['name', 'name']], stackName);
-  const size = createElement(doc, 'data', [['name', 'size']], '3');
+  const size = createElement(doc, 'data', [['name', 'size']], cardSize);
 
   image.appendChild(imageIdentifier);
   common.appendChild(name);
@@ -135,9 +138,13 @@ export const createCardRoot = (doc: Document, children: HTMLElement[]) => {
   children.forEach((child) => cardRoot.appendChild(child));
   return cardRoot;
 };
-export const createDeck = (deckTitle: string, list: HTMLElement[]) => {
+export const createDeck = (
+  deckTitle: string,
+  list: HTMLElement[],
+  state = '0',
+) => {
   const root = createCardRoot(getDoc(), list);
-  const deck = createCardStackXML(deckTitle, getDoc(), [root]);
+  const deck = createCardStackXML(deckTitle, getDoc(), [root], state);
   return deck;
 };
 
@@ -150,7 +157,8 @@ export const createCardWithProp = (
     title: string;
     props: { label: string; value: string; type?: string }[];
   }[],
-  state = undefined,
+  state?: string,
+  cardSize?: string,
 ): HTMLElement => {
   const detail = createElement(doc, 'data', [['name', 'detail']]);
   cardProps.forEach((p) => {
@@ -172,5 +180,6 @@ export const createCardWithProp = (
     backIdentifier,
     detail,
     state,
+    cardSize,
   });
 };
