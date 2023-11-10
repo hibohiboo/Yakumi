@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import html2canvas from 'html2canvas';
-import { TextCard } from '../card/types';
+import { Settings, TextCard } from '../card/types';
 import { canvasToFile } from '../udonarium/canvas';
 import { createZip, getDoc } from '../udonarium/common';
 import {
@@ -13,6 +13,7 @@ export const createTextDeckToUdonarium = async (
   refList: React.RefObject<HTMLDivElement>[],
   items: TextCard[],
   backRef: any,
+  setting: Settings,
 ) => {
   const back = await canvasToFile(await html2canvas(backRef.current));
 
@@ -46,8 +47,11 @@ export const createTextDeckToUdonarium = async (
   );
 
   const deck = createDeck(
-    'カードデッキ',
+    setting.deckName,
     files.map((f) => f.card),
   );
-  await createZip([back.file, deck, ...files.map((f) => f.file)]);
+  await createZip(
+    [back.file, deck, ...files.map((f) => f.file)],
+    setting.deckName,
+  );
 };

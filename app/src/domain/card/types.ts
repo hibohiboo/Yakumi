@@ -4,3 +4,6 @@ export interface TextCard {
   id: string;
   type: string;
 }
+export interface Settings {
+  deckName: string;
+}

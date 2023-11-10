@@ -1,6 +1,7 @@
 import { Button } from '@blueprintjs/core';
+import { csvToSettings } from '@yakumi-app/domain/card/csvToSettings';
 import { csvToTextCards } from '@yakumi-app/domain/card/csvToTextCards';
-import { TextCard } from '@yakumi-app/domain/card/types';
+import { Settings, TextCard } from '@yakumi-app/domain/card/types';
 import {
   reOpenDirectory,
   selectDirectory,
@@ -12,6 +13,7 @@ import { createRef, useRef, useState } from 'react';
 
 function App() {
   const [items, setItems] = useState<TextCard[]>([]);
+  const [setting, setSetting] = useState<Settings>({ deckName: 'サンプル' });
   const [file, setFile] = useState<string | null>(null);
   const listRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);
   items.forEach((_, i) => {
@@ -31,11 +33,14 @@ function App() {
           icon="folder-open"
           onClick={async () => {
             try {
-              const { text: csv, back } = await selectDirectory();
+              const result = await selectDirectory();
+              if (!result) return;
+              const { text: csv, back, settings } = result;
               setItems(csvToTextCards(csv));
               setFile(back);
+              setSetting(csvToSettings(settings));
             } catch (e) {
-              console.log(e);
+              alert(e);
             }
           }}
         >
@@ -82,7 +87,12 @@ function App() {
                 console.warn('backRef is undefined');
                 return;
               }
-              await createTextDeckToUdonarium(listRefs.current, items, backRef);
+              await createTextDeckToUdonarium(
+                listRefs.current,
+                items,
+                backRef,
+                setting,
+              );
             }}
           >
             Udonarium用カードダウンロード
