@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@kaminiten/eslint-config-custom/backend"
+  ]
+}

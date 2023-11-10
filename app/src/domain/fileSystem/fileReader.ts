@@ -1,5 +1,3 @@
-import { ca } from 'date-fns/locale';
-
 declare global {
   interface Window {
     showDirectoryPicker(): Promise<FileSystemDirectoryHandle>;
