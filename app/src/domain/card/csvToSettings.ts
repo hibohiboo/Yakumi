@@ -15,5 +15,6 @@ export function csvToSettings(csv: string): Settings {
     deckName: `${map.get('デッキ名')}`,
     state: map.get('表裏') === '裏' ? '1' : '0',
     size: `${map.get('カードサイズ')}`,
+    description: `${map.get('説明')}`,
   };
 }

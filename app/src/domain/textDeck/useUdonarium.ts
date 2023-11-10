@@ -51,7 +51,7 @@ export const createTextDeckToUdonarium = async (
   const deck = createDeck(
     setting.deckName,
     files.map((f) => f.card),
-    setting.state,
+    setting,
   );
   await createZip(
     [back.file, deck, ...files.map((f) => f.file)],

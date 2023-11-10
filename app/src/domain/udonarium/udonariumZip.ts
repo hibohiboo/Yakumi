@@ -1,7 +1,12 @@
+import { Settings } from '../card/types';
 import { getDoc } from './common';
 import { convertDocToXML, createElement } from './fileArchiver';
 
-export const createCardStackElment = (doc: Document, stackName: string) => {
+export const createCardStackElment = (
+  doc: Document,
+  stackName: string,
+  description: string,
+) => {
   // #card-stack
   const cardStack = createElement(doc, 'data', [['name', 'card-stack']]);
   const image = createElement(doc, 'data', [['name', 'image']]);
@@ -14,6 +19,17 @@ export const createCardStackElment = (doc: Document, stackName: string) => {
   const detail = createElement(doc, 'data', [['name', 'detail']]);
   image.appendChild(imageIdentifier);
   common.appendChild(name);
+  common.appendChild(
+    createElement(
+      doc,
+      'data',
+      [
+        ['name', '説明'],
+        ['type', 'note'],
+      ],
+      description,
+    ),
+  );
   cardStack.appendChild(image);
   cardStack.appendChild(common);
   cardStack.appendChild(detail);
@@ -25,7 +41,7 @@ export const createCardStackXML = (
   stackName: string,
   doc: XMLDocument,
   children: HTMLElement[],
-  state = '0',
+  settings: Settings,
 ) => {
   const cardStackWrapper = createElement(doc, 'card-stack', [
     ['location.name', 'table'],
@@ -35,10 +51,12 @@ export const createCardStackXML = (
     ['rotate', '0'],
     ['roll', '0'],
     ['zindex', '0'],
-    ['state', state],
+    ['state', settings.state],
     ['isShowTotal', 'true'],
   ]);
-  cardStackWrapper.appendChild(createCardStackElment(doc, stackName));
+  cardStackWrapper.appendChild(
+    createCardStackElment(doc, stackName, settings.description),
+  );
   children.forEach((child) => cardStackWrapper.appendChild(child));
 
   return createXML(stackName, doc, cardStackWrapper);
@@ -141,10 +159,10 @@ export const createCardRoot = (doc: Document, children: HTMLElement[]) => {
 export const createDeck = (
   deckTitle: string,
   list: HTMLElement[],
-  state = '0',
+  settings: Settings,
 ) => {
   const root = createCardRoot(getDoc(), list);
-  const deck = createCardStackXML(deckTitle, getDoc(), [root], state);
+  const deck = createCardStackXML(deckTitle, getDoc(), [root], settings);
   return deck;
 };
 
