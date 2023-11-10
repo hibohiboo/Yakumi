@@ -9,6 +9,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0; /* 親要素がflexで並べた時に縮まないようにする */
 }
 .cardName {
   text-align: center;

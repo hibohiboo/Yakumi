@@ -15,7 +15,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@app': path.join(__dirname, './src'),
+      '@yakumi-app': path.join(__dirname, './src'),
       '@yakumi-components': path.join(__dirname, '../packages/ui/src'),
     },
   },

@@ -3,7 +3,7 @@ declare global {
     showDirectoryPicker(): Promise<FileSystemDirectoryHandle>;
   }
 }
-
+let handle: FileSystemDirectoryHandle;
 /**
  * ブラウザからFile System Access APIを使い、ディレクトリにアクセスする。
  * ディレクトリ内のファイルを読み込む。
@@ -11,7 +11,11 @@ declare global {
  * - back.png
  */
 export async function selectDirectory() {
-  const handle = await window.showDirectoryPicker();
+  handle = await window.showDirectoryPicker();
+  return await accessDirectory(handle);
+}
+export async function reOpenDirectory() {
+  if (!handle) return;
   return await accessDirectory(handle);
 }
 

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "paths": {
       "@yakumi-components/*": ["../packages/ui/src/*"],
-      "@app/*": ["./src/*"]
+      "@yakumi-app/*": ["./src/*"]
     }
   },
   "include": ["src"],

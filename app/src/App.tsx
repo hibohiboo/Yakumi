@@ -1,9 +1,9 @@
-import { selectDirectory } from '@app/domain/fileSystem/fileReader';
 import { Button } from '@blueprintjs/core';
+import { csvToTextCards } from '@yakumi-app/domain/card/csvToTextCards';
+import { TextCard } from '@yakumi-app/domain/card/types';
+import { selectDirectory } from '@yakumi-app/domain/fileSystem/fileReader';
 import { AttributeCard, BackCard } from '@yakumi-components/index';
 import { useState } from 'react';
-import { csvToTextCards } from './domain/card/csvToTextCards';
-import { TextCard } from './domain/card/types';
 
 function App() {
   const [items, setItems] = useState<TextCard[]>([]);
