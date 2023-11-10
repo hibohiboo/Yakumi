@@ -20,13 +20,20 @@ export async function selectDirectory() {
  * @param handle ディレクトリのハンドル
  */
 async function accessDirectory(handle: FileSystemDirectoryHandle) {
-  const textFile = await handle.getFileHandle('text.csv');
-  const text = await textFile.getFile();
+  const textFileHandle = await handle.getFileHandle('text.csv');
+  const text = await textFileHandle.getFile();
   const textContent = await text.text();
-  console.log(textContent);
 
-  const backFile = await handle.getFileHandle('back.png');
-  const back = await backFile.getFile();
-  console.log(back);
-  return [textContent, back];
+  const backFileHandle = await handle.getFileHandle('back.png');
+  const backFile = await backFileHandle.getFile();
+  const back = await new Promise<string>((resolve) => {
+    // 画像ファイルをDataUrlに変換
+    const reader = new FileReader();
+    reader.readAsDataURL(backFile);
+    reader.onload = () => {
+      resolve(reader.result as string);
+    };
+  });
+
+  return { text: textContent, back };
 }

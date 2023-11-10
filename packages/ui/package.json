@@ -12,7 +12,8 @@
     "build-storybook": "storybook build -o ../../docs/astro/public/rinne-components",
     "clean": "rm -rf .turbo",
     "test": "jest --config ./jest.config.json",
-    "mv-jest-reports": "cp ./public/mockServiceWorker.js ../../docs/astro/public/ && mv ./__reports__ ../../docs/astro/public/jest-reports-components"
+    "mv-jest-reports": "cp ./public/mockServiceWorker.js ../../docs/astro/public/ && mv ./__reports__ ../../docs/astro/public/jest-reports-components",
+    "ncu": "ncu -u"
   },
   "dependencies": {
     "react": "^18.2.0",

@@ -2,7 +2,8 @@
   "extends": "@yakumi/tsconfig/react",
   "compilerOptions": {
     "paths": {
-      "@yakumi-components/*": ["../packages/ui/src/*"]
+      "@yakumi-components/*": ["../packages/ui/src/*"],
+      "@app/*": ["./src/*"]
     }
   },
   "include": ["src"],
