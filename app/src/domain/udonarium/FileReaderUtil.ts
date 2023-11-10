@@ -1,5 +1,5 @@
-import * as WordArray from 'crypto-js/lib-typedarrays.js';
-import * as SHA256 from 'crypto-js/sha256.js';
+import * as WordArray from 'crypto-js/lib-typedarrays';
+import * as SHA256 from 'crypto-js/sha256';
 
 export function readAsArrayBufferAsync(blob: Blob): Promise<ArrayBuffer> {
   return new Promise<ArrayBuffer>((resolve, reject) => {
