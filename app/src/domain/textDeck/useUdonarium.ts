@@ -41,6 +41,7 @@ export const createTextDeckToUdonarium = async (
         back.identifier,
         props,
         setting.state,
+        setting.size,
       );
       const xml = createXML(item.name, doc, card);
       return { xml, file: front.file, card, type: item.type };

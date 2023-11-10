@@ -7,4 +7,5 @@ export interface TextCard {
 export interface Settings {
   deckName: string;
   state: '0' | '1';
+  size: string;
 }
