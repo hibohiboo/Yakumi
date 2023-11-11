@@ -5,9 +5,9 @@ import {
   reOpenImageDirectory,
   selectImageDirectory,
 } from '@yakumi-app/domain/fileSystem/imageCardFileReader';
-import { createTextDeckToUdonarium } from '@yakumi-app/domain/textDeck/useUdonarium';
+import { createImageDeckToUdonarium } from '@yakumi-app/domain/imageDeck/useUdonarium';
 import { basePath } from '@yakumi-app/router';
-import { createRef, useRef, useState } from 'react';
+import { useState } from 'react';
 
 function ImagePge() {
   const [items, setItems] = useState<ImageCardWithFile[]>([]);
@@ -17,9 +17,7 @@ function ImagePge() {
     description: '',
     state: '0',
   });
-  const [file, setFile] = useState<string | null>(null);
 
-  const backRef = useRef<HTMLDivElement>(null);
   return (
     <div>
       <a href={`/${basePath}/sample-text-deck.zip`}>
@@ -36,7 +34,7 @@ function ImagePge() {
               const result = await selectImageDirectory();
               if (!result) return;
               const { settings, cardListWithFile } = result;
-              console.log(cardListWithFile);
+
               setItems(cardListWithFile);
               setSetting(csvToSettings(settings));
             } catch (e) {
@@ -51,7 +49,7 @@ function ImagePge() {
         </span>
       </div>
 
-      {file && (
+      {items.length !== 0 && (
         <div>
           <Button
             icon="refresh"
@@ -74,18 +72,13 @@ function ImagePge() {
           </span>
         </div>
       )}
-      {file && (
+      {items.length !== 0 && (
         <div>
           <Button
             icon="refresh"
             onClick={async () => {
               if (items.length === 0) return;
-              // await createTextDeckToUdonarium(
-              //   listRefs.current,
-              //   items,
-              //   backRef,
-              //   setting,
-              // );
+              await createImageDeckToUdonarium(items, setting);
             }}
           >
             Udonarium用カードダウンロード
