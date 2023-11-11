@@ -7,7 +7,6 @@ import {
 } from '@yakumi-app/domain/fileSystem/imageCardFileReader';
 import { createTextDeckToUdonarium } from '@yakumi-app/domain/textDeck/useUdonarium';
 import { basePath } from '@yakumi-app/router';
-import { AttributeCard, BackCard } from '@yakumi-components/index';
 import { createRef, useRef, useState } from 'react';
 
 function ImagePge() {

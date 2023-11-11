@@ -28,12 +28,25 @@ async function accessImageDirectory(handle: FileSystemDirectoryHandle) {
   const dirHandle = await handle.getDirectoryHandle('images');
   const cardListWithFile: ImageCardWithFile[] = await Promise.all(
     cardList.map(async (card) => {
-      const backFileHandle = await dirHandle.getFileHandle(`${card.back}.png`);
+      let backFileHandle: FileSystemFileHandle;
+      let frontFileHandle: FileSystemFileHandle;
+      try {
+        backFileHandle = await dirHandle.getFileHandle(`${card.back}.png`);
+      } catch (e) {
+        throw new Error(
+          `画像ファイルがimagesフォルダに含まれていません.[${card.back}.png]`,
+        );
+      }
       const backFile = await backFileHandle.getFile();
       const backUrl = await readDataUrl(backFile);
-      const frontFileHandle = await dirHandle.getFileHandle(
-        `${card.front}.png`,
-      );
+      try {
+        frontFileHandle = await dirHandle.getFileHandle(`${card.front}.png`);
+      } catch (e) {
+        throw new Error(
+          `画像ファイルがimagesフォルダに含まれていません.[${card.front}.png]`,
+        );
+      }
+
       const frontFile = await frontFileHandle.getFile();
       const frontUrl = await readDataUrl(frontFile);
       return { ...card, frontFile, backFile, frontUrl, backUrl };
