@@ -1,19 +1,17 @@
 import { Button } from '@blueprintjs/core';
 import { csvToSettings } from '@yakumi-app/domain/card/csvToSettings';
-import { csvToTextCards } from '@yakumi-app/domain/card/csvToTextCards';
-import { Settings, TextCard } from '@yakumi-app/domain/card/types';
+import { ImageCardWithFile, Settings } from '@yakumi-app/domain/card/types';
 import {
-  reOpenTextDirectory,
-  selectTextDirectory,
-} from '@yakumi-app/domain/fileSystem/fileReader';
-import { selectImageDirectory } from '@yakumi-app/domain/fileSystem/imageCardFileReader';
+  reOpenImageDirectory,
+  selectImageDirectory,
+} from '@yakumi-app/domain/fileSystem/imageCardFileReader';
 import { createTextDeckToUdonarium } from '@yakumi-app/domain/textDeck/useUdonarium';
 import { basePath } from '@yakumi-app/router';
 import { AttributeCard, BackCard } from '@yakumi-components/index';
 import { createRef, useRef, useState } from 'react';
 
 function ImagePge() {
-  const [items, setItems] = useState<TextCard[]>([]);
+  const [items, setItems] = useState<ImageCardWithFile[]>([]);
   const [setting, setSetting] = useState<Settings>({
     deckName: 'サンプル',
     size: '1',
@@ -21,10 +19,7 @@ function ImagePge() {
     state: '0',
   });
   const [file, setFile] = useState<string | null>(null);
-  const listRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);
-  items.forEach((_, i) => {
-    listRefs.current[i] = createRef<HTMLDivElement>();
-  });
+
   const backRef = useRef<HTMLDivElement>(null);
   return (
     <div>
@@ -41,10 +36,10 @@ function ImagePge() {
             try {
               const result = await selectImageDirectory();
               if (!result) return;
-              // const { text: csv, back, settings } = result;
-              // setItems(csvToTextCards(csv));
-              // setFile(back);
-              // setSetting(csvToSettings(settings));
+              const { settings, cardListWithFile } = result;
+              console.log(cardListWithFile);
+              setItems(cardListWithFile);
+              setSetting(csvToSettings(settings));
             } catch (e) {
               alert(e);
             }
@@ -63,11 +58,11 @@ function ImagePge() {
             icon="refresh"
             onClick={async () => {
               try {
-                const result = await reOpenTextDirectory();
+                const result = await reOpenImageDirectory();
                 if (!result) return;
-                const { text: csv, back } = result;
-                setItems(csvToTextCards(csv));
-                setFile(back);
+                const { settings, cardListWithFile } = result;
+                setItems(cardListWithFile);
+                setSetting(csvToSettings(settings));
               } catch (e) {
                 console.log(e);
               }
@@ -85,20 +80,13 @@ function ImagePge() {
           <Button
             icon="refresh"
             onClick={async () => {
-              if (!listRefs.current) {
-                console.warn('listRefs is undefined');
-                return;
-              }
-              if (!backRef.current) {
-                console.warn('backRef is undefined');
-                return;
-              }
-              await createTextDeckToUdonarium(
-                listRefs.current,
-                items,
-                backRef,
-                setting,
-              );
+              if (items.length === 0) return;
+              // await createTextDeckToUdonarium(
+              //   listRefs.current,
+              //   items,
+              //   backRef,
+              //   setting,
+              // );
             }}
           >
             Udonarium用カードダウンロード
@@ -110,27 +98,21 @@ function ImagePge() {
         style={{
           background: 'white',
           color: 'black',
-          display: 'flex',
           gap: '1rem',
           padding: '1rem',
-          flexWrap: 'wrap',
         }}
       >
-        {!file && <div>フォルダを選択するとここにカード一覧が表示されます</div>}
-
-        {file && (
-          <div ref={backRef} style={{ width: 'fit-content' }}>
-            <BackCard url={file} />
-          </div>
+        {items.length === 0 && (
+          <div>フォルダを選択するとここにカード一覧が表示されます</div>
         )}
-
         {items.map((item, i) => (
-          <div
-            ref={listRefs.current[i]}
-            key={i}
-            style={{ width: 'fit-content' }}
-          >
-            <AttributeCard {...item} />
+          <div key={i}>
+            <strong>{item.name}</strong>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <img src={item.backUrl} />
+              <img src={item.frontUrl} />
+              <pre>{item.description}</pre>
+            </div>
           </div>
         ))}
       </div>

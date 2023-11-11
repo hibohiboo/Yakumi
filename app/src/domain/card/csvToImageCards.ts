@@ -11,6 +11,7 @@ export function csvToImageCards(csv: string): ImageCard[] {
   const textCards: ImageCard[] = [];
   for (const line of lines) {
     const [name, back, front, description] = line;
+    console.log(line);
     textCards.push({ name, back, front, description });
   }
   return textCards;

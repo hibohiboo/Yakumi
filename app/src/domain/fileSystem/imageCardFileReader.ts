@@ -6,7 +6,7 @@ export async function selectImageDirectory() {
   return selectDirectory(accessImageDirectory);
 }
 let handle: FileSystemDirectoryHandle;
-export async function reOpenTextDirectory() {
+export async function reOpenImageDirectory() {
   if (!handle) return;
   return await accessImageDirectory(handle);
 }
