@@ -29,4 +29,4 @@ export interface TextImageCard {
   type: string;
   imageName: string;
 }
-export type TextImageCardWithUrl = TextImageCard & { imageUrl: string };
+export type TextImageCardWithUrl = TextImageCard & { src: string };

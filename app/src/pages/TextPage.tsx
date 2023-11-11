@@ -65,9 +65,10 @@ function TextPage() {
               try {
                 const result = await reOpenTextDirectory();
                 if (!result) return;
-                const { text: csv, back } = result;
+                const { text: csv, back, settings } = result;
                 setItems(csvToTextCards(csv));
                 setFile(back);
+                setSetting(csvToSettings(settings));
               } catch (e) {
                 console.log(e);
               }

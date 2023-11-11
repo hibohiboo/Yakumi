@@ -24,7 +24,7 @@ async function accessTextImageDirectory(handle: FileSystemDirectoryHandle) {
   }
   const cardList = csvToTextImageCards(text);
   const dirHandle = await handle.getDirectoryHandle('images');
-  const cardListWithFile: TextImageCardWithUrl[] = await Promise.all(
+  const cardListWithUrl: TextImageCardWithUrl[] = await Promise.all(
     cardList.map(async (card) => {
       let frontFileHandle: FileSystemFileHandle;
 
@@ -40,8 +40,12 @@ async function accessTextImageDirectory(handle: FileSystemDirectoryHandle) {
 
       const frontFile = await frontFileHandle.getFile();
       const frontUrl = await readDataUrl(frontFile);
-      return { ...card, imageUrl: frontUrl };
+
+      return { ...card, src: frontUrl };
     }),
   );
-  return { cardListWithFile, settings };
+  const backFileHandle = await handle.getFileHandle('back.png');
+  const backFile = await backFileHandle.getFile();
+  const back = await readDataUrl(backFile);
+  return { cardListWithUrl, settings, back };
 }

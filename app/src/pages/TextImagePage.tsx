@@ -1,18 +1,17 @@
 import { Button } from '@blueprintjs/core';
 import { csvToSettings } from '@yakumi-app/domain/card/csvToSettings';
-import { csvToTextCards } from '@yakumi-app/domain/card/csvToTextCards';
-import { Settings, TextCard } from '@yakumi-app/domain/card/types';
+import { Settings, TextImageCardWithUrl } from '@yakumi-app/domain/card/types';
 import {
-  reOpenTextDirectory,
-  selectTextDirectory,
-} from '@yakumi-app/domain/fileSystem/fileReader';
+  reOpenTextImageDirectory,
+  selectTextImageDirectory,
+} from '@yakumi-app/domain/fileSystem/textImageCardFileReader';
 import { createTextDeckToUdonarium } from '@yakumi-app/domain/textDeck/useUdonarium';
 import { basePath } from '@yakumi-app/router';
 import { AttributeCard, BackCard } from '@yakumi-components/index';
 import { createRef, useRef, useState } from 'react';
 
 function TextImagePage() {
-  const [items, setItems] = useState<TextCard[]>([]);
+  const [items, setItems] = useState<TextImageCardWithUrl[]>([]);
   const [setting, setSetting] = useState<Settings>({
     deckName: 'サンプル',
     size: '1',
@@ -28,7 +27,7 @@ function TextImagePage() {
   return (
     <div>
       <h1>テキスト&画像カードデッキ作成</h1>
-      <a href={`/${basePath}/sample-text-deck.zip`}>
+      <a href={`/${basePath}/sample-text-image-deck.zip`}>
         <Button icon="download">サンプルzipダウンロード</Button>
       </a>
       <span style={{ marginLeft: '10px' }}>
@@ -39,10 +38,10 @@ function TextImagePage() {
           icon="folder-open"
           onClick={async () => {
             try {
-              const result = await selectTextDirectory();
+              const result = await selectTextImageDirectory();
               if (!result) return;
-              const { text: csv, back, settings } = result;
-              setItems(csvToTextCards(csv));
+              const { cardListWithUrl, back, settings } = result;
+              setItems(cardListWithUrl);
               setFile(back);
               setSetting(csvToSettings(settings));
             } catch (e) {
@@ -63,11 +62,12 @@ function TextImagePage() {
             icon="refresh"
             onClick={async () => {
               try {
-                const result = await reOpenTextDirectory();
+                const result = await reOpenTextImageDirectory();
                 if (!result) return;
-                const { text: csv, back } = result;
-                setItems(csvToTextCards(csv));
+                const { cardListWithUrl, back, settings } = result;
+                setItems(cardListWithUrl);
                 setFile(back);
+                setSetting(csvToSettings(settings));
               } catch (e) {
                 console.log(e);
               }

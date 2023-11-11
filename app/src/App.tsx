@@ -4,6 +4,7 @@ import { basePath } from './router';
 function App() {
   return (
     <div style={{ padding: '1rem' }}>
+      <h1>Yakumi</h1>
       <ul>
         <li>
           <Link style={{ color: 'white' }} to={'/text/'}>
@@ -111,6 +112,12 @@ function App() {
           alt="テキストファイルの編集参考用画像"
         />
       </section>
+      <h3>参考</h3>
+      <p>
+        <a href="https://lostrpg-751c1.firebaseapp.com/cardlist/">
+          ユドナリウムカード作成ツール
+        </a>
+      </p>
       <footer>
         <a
           style={{ color: 'white' }}
