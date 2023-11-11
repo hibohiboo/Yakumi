@@ -22,3 +22,11 @@ export type ImageCardWithFile = ImageCard & {
   backUrl: string;
   frontUrl: string;
 };
+export interface TextImageCard {
+  name: string;
+  content: string;
+  id: string;
+  type: string;
+  imageName: string;
+}
+export type TextImageCardWithUrl = TextImageCard & { imageUrl: string };

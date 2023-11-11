@@ -15,6 +15,11 @@ function App() {
             画像カードデッキ作成
           </Link>
         </li>
+        <li>
+          <Link style={{ color: 'white' }} to={'/text-image/'}>
+            テキスト&画像カードデッキ作成
+          </Link>
+        </li>
       </ul>
 
       <section>

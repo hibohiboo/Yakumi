@@ -11,7 +11,7 @@ import { basePath } from '@yakumi-app/router';
 import { AttributeCard, BackCard } from '@yakumi-components/index';
 import { createRef, useRef, useState } from 'react';
 
-function TextPage() {
+function TextImagePage() {
   const [items, setItems] = useState<TextCard[]>([]);
   const [setting, setSetting] = useState<Settings>({
     deckName: 'サンプル',
@@ -27,7 +27,7 @@ function TextPage() {
   const backRef = useRef<HTMLDivElement>(null);
   return (
     <div>
-      <h1>ユドナリウム情報カード作成</h1>
+      <h1>テキスト&画像カードデッキ作成</h1>
       <a href={`/${basePath}/sample-text-deck.zip`}>
         <Button icon="download">サンプルzipダウンロード</Button>
       </a>
@@ -138,4 +138,4 @@ function TextPage() {
   );
 }
 
-export default TextPage;
+export default TextImagePage;
