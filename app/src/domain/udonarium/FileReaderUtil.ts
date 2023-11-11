@@ -1,6 +1,12 @@
-import * as WordArray from 'crypto-js/lib-typedarrays';
-import * as SHA256 from 'crypto-js/sha256';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-redeclare */
+/* eslint-disable no-unused-vars */
 
+// buildしたときに TypeError: SHA256 is not a function のエラーがでるので CDNからインストール
+// import * as WordArray from 'crypto-js/lib-typedarrays.js';
+// https://www.mycashflow.online/cdn/assets/global/plugins/cryptoJS/components/lib-typedarrays.js
+// import * as SHA256 from 'crypto-js/sha256.js';
+// https://cdnjs.com/libraries/crypto-js
 export function readAsArrayBufferAsync(blob: Blob): Promise<ArrayBuffer> {
   return new Promise<ArrayBuffer>((resolve, reject) => {
     const reader = new FileReader();
@@ -44,6 +50,12 @@ async function _calcSHA256Async(blob: Blob): Promise<string> {
 }
 
 function _calcSHA256(arrayBuffer: ArrayBuffer): string {
-  const wordArray = WordArray.create(arrayBuffer as any); // TODO: 一旦直し方が不明なのでコメントアウト。ArrayBuffefrも対応できるようにしたい
-  return SHA256(<any>wordArray).toString();
+  const wordArray = window.CryptoJS.lib.WordArray.create(
+    arrayBuffer as any,
+    arrayBuffer.byteLength,
+  );
+  const sha256 = window.CryptoJS.SHA256(wordArray);
+  const ret = sha256.toString();
+
+  return ret;
 }
