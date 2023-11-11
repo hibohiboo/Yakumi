@@ -1,3 +1,4 @@
+import ImagePge from '@yakumi-app/pages/ImagePage';
 import TextPage from '@yakumi-app/pages/TextPage';
 import { createBrowserRouter } from 'react-router-dom';
 import Top from '../App';
@@ -12,6 +13,10 @@ export const router = createBrowserRouter(
     {
       path: '/text',
       element: <TextPage />,
+    },
+    {
+      path: '/image',
+      element: <ImagePge />,
     },
   ],
   {

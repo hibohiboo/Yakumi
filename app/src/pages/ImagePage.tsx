@@ -6,12 +6,13 @@ import {
   reOpenTextDirectory,
   selectTextDirectory,
 } from '@yakumi-app/domain/fileSystem/fileReader';
+import { selectImageDirectory } from '@yakumi-app/domain/fileSystem/imageCardFileReader';
 import { createTextDeckToUdonarium } from '@yakumi-app/domain/textDeck/useUdonarium';
 import { basePath } from '@yakumi-app/router';
 import { AttributeCard, BackCard } from '@yakumi-components/index';
 import { createRef, useRef, useState } from 'react';
 
-function App() {
+function ImagePge() {
   const [items, setItems] = useState<TextCard[]>([]);
   const [setting, setSetting] = useState<Settings>({
     deckName: 'サンプル',
@@ -38,12 +39,12 @@ function App() {
           icon="folder-open"
           onClick={async () => {
             try {
-              const result = await selectTextDirectory();
+              const result = await selectImageDirectory();
               if (!result) return;
-              const { text: csv, back, settings } = result;
-              setItems(csvToTextCards(csv));
-              setFile(back);
-              setSetting(csvToSettings(settings));
+              // const { text: csv, back, settings } = result;
+              // setItems(csvToTextCards(csv));
+              // setFile(back);
+              // setSetting(csvToSettings(settings));
             } catch (e) {
               alert(e);
             }
@@ -137,4 +138,4 @@ function App() {
   );
 }
 
-export default App;
+export default ImagePge;

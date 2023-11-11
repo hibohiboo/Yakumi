@@ -1,0 +1,43 @@
+import { csvToImageCards } from '../card/csvToImageCards';
+import { ImageCardWithFile } from '../card/types';
+import { readDataUrl, selectDirectory } from './fileReader';
+
+export async function selectImageDirectory() {
+  return selectDirectory(accessImageDirectory);
+}
+let handle: FileSystemDirectoryHandle;
+export async function reOpenTextDirectory() {
+  if (!handle) return;
+  return await accessImageDirectory(handle);
+}
+async function accessImageDirectory(handle: FileSystemDirectoryHandle) {
+  let text = '';
+  let settings = '';
+  try {
+    const textFileHandle = await handle.getFileHandle('text.csv');
+    const textFile = await textFileHandle.getFile();
+    text = await textFile.text();
+
+    const settingsFileHandle = await handle.getFileHandle('settings.txt');
+    const settingsFile = await settingsFileHandle.getFile();
+    settings = await settingsFile.text();
+  } catch (e) {
+    throw new Error('text.csv,settings.txtが含まれていません');
+  }
+  const cardList = csvToImageCards(text);
+  const dirHandle = await handle.getDirectoryHandle('images');
+  const cardListWithFile: ImageCardWithFile[] = await Promise.all(
+    cardList.map(async (card) => {
+      const backFileHandle = await dirHandle.getFileHandle(`${card.back}.png`);
+      const backFile = await backFileHandle.getFile();
+      const backUrl = await readDataUrl(backFile);
+      const frontFileHandle = await dirHandle.getFileHandle(
+        `${card.front}.png`,
+      );
+      const frontFile = await frontFileHandle.getFile();
+      const frontUrl = await readDataUrl(frontFile);
+      return { ...card, frontFile, backFile, frontUrl, backUrl };
+    }),
+  );
+  return { cardListWithFile, settings };
+}

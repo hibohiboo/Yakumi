@@ -28,7 +28,7 @@ export default defineConfig({
           others: ['date-fns', 'papaparse'],
           udon: ['file-saver', 'jszip'],
           canvas: ['html2canvas'],
-          ui: ['@blueprintjs/core'],
+          blueprint: ['@blueprintjs/core'],
         },
       },
     },
