@@ -1,14 +1,12 @@
 import { csvToImageCards } from '../card/csvToImageCards';
 import { ImageCardWithFile } from '../card/types';
-import { readDataUrl, selectDirectory } from './fileReader';
+import { reOpenDirectory, readDataUrl, selectDirectory } from './fileReader';
 
 export async function selectImageDirectory() {
   return selectDirectory(accessImageDirectory);
 }
-let handle: FileSystemDirectoryHandle;
 export async function reOpenImageDirectory() {
-  if (!handle) return;
-  return await accessImageDirectory(handle);
+  return reOpenDirectory(accessImageDirectory);
 }
 async function accessImageDirectory(handle: FileSystemDirectoryHandle) {
   let text = '';

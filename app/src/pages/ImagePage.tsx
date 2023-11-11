@@ -20,7 +20,7 @@ function ImagePge() {
 
   return (
     <div>
-      <a href={`/${basePath}/sample-text-deck.zip`}>
+      <a href={`/${basePath}/sample-image-deck.zip`}>
         <Button icon="download">サンプルzipダウンロード</Button>
       </a>
       <span style={{ marginLeft: '10px' }}>
@@ -56,6 +56,7 @@ function ImagePge() {
             onClick={async () => {
               try {
                 const result = await reOpenImageDirectory();
+                console.log(result);
                 if (!result) return;
                 const { settings, cardListWithFile } = result;
                 setItems(cardListWithFile);
@@ -101,8 +102,8 @@ function ImagePge() {
           <div key={i}>
             <strong>{item.name}</strong>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <img src={item.backUrl} />
-              <img src={item.frontUrl} />
+              <img src={item.backUrl} width={238} />
+              <img src={item.frontUrl} width={238} />
               <pre>{item.description}</pre>
             </div>
           </div>

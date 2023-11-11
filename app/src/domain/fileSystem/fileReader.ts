@@ -14,8 +14,13 @@ export async function selectTextDirectory() {
   return selectDirectory(accessTextDirectory);
 }
 export async function reOpenTextDirectory() {
+  return await reOpenDirectory(accessTextDirectory);
+}
+export async function reOpenDirectory<T>(
+  accessDirectory: (handle: FileSystemDirectoryHandle) => Promise<T>,
+) {
   if (!handle) return;
-  return await accessTextDirectory(handle);
+  return await accessDirectory(handle);
 }
 
 export async function selectDirectory<T>(
