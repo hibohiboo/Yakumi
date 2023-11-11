@@ -106,6 +106,14 @@ function App() {
           alt="テキストファイルの編集参考用画像"
         />
       </section>
+      <footer>
+        <a
+          style={{ color: 'white' }}
+          href="https://github.com/hibohiboo/Yakumi"
+        >
+          github
+        </a>
+      </footer>
     </div>
   );
 }
