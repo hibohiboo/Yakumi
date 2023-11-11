@@ -4,9 +4,19 @@ import { basePath } from './router';
 function App() {
   return (
     <div style={{ padding: '1rem' }}>
-      <Link style={{ color: 'white' }} to={'/text/'}>
-        テキストカードデッキ作成
-      </Link>
+      <ul>
+        <li>
+          <Link style={{ color: 'white' }} to={'/text/'}>
+            テキストカードデッキ作成
+          </Link>
+        </li>
+        <li>
+          <Link style={{ color: 'white' }} to={'/image/'}>
+            画像カードデッキ作成
+          </Link>
+        </li>
+      </ul>
+
       <section>
         <h2>使い方</h2>
         <p>1. デッキ用のフォルダが含まれたzipをダウンロードして解凍します</p>

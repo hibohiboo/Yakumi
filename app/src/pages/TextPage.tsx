@@ -27,6 +27,7 @@ function App() {
   const backRef = useRef<HTMLDivElement>(null);
   return (
     <div>
+      <h1>ユドナリウム情報カード作成</h1>
       <a href={`/${basePath}/sample-text-deck.zip`}>
         <Button icon="download">サンプルzipダウンロード</Button>
       </a>

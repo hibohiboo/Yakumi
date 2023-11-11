@@ -20,6 +20,7 @@ function ImagePge() {
 
   return (
     <div>
+      <h1>ユドナリウム画像カード作成</h1>
       <a href={`/${basePath}/sample-image-deck.zip`}>
         <Button icon="download">サンプルzipダウンロード</Button>
       </a>
