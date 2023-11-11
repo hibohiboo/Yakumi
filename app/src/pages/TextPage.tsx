@@ -27,11 +27,11 @@ function App() {
   const backRef = useRef<HTMLDivElement>(null);
   return (
     <div>
-      <a href={`/${basePath}/textDeck.zip`}>
+      <a href={`/${basePath}/sample-text-deck.zip`}>
         <Button icon="download">サンプルzipダウンロード</Button>
       </a>
       <span style={{ marginLeft: '10px' }}>
-        解凍してください。back.pngとtext.csvが入っています。
+        ダウンロード後、解凍してください。
       </span>
       <div>
         <Button
@@ -52,7 +52,7 @@ function App() {
           フォルダ選択
         </Button>
         <span style={{ marginLeft: '10px' }}>
-          back.pngとtext.csvが置いてあるフォルダを選択してください。
+          解凍してできたフォルダを選択してください。
         </span>
       </div>
 
@@ -75,7 +75,7 @@ function App() {
             再読み込み
           </Button>
           <span style={{ marginLeft: '10px' }}>
-            text.csvを編集したり、画像を差し替えた場合は再読み込みしてください。
+            テキストファイルを編集したり、画像を差し替えた場合は再読み込みしてください。
           </span>
         </div>
       )}
