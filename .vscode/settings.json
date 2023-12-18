@@ -8,7 +8,9 @@
     "typescriptreact"
   ],
   "files.eol": "\n",
-  "editor.codeActionsOnSave": {"source.fixAll.eslint": true},
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
   "editor.tabSize": 2,
   "editor.tabCompletion": "on",
   // "editor.formatOnSave": true,
