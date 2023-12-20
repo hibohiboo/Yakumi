@@ -21,18 +21,18 @@
     "sanitize-html": "^2.11.0"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.5",
-    "@storybook/addon-interactions": "^7.6.5",
-    "@storybook/addon-links": "^7.6.5",
-    "@storybook/addon-mdx-gfm": "^7.6.5",
+    "@storybook/addon-essentials": "^7.6.6",
+    "@storybook/addon-interactions": "^7.6.6",
+    "@storybook/addon-links": "^7.6.6",
+    "@storybook/addon-mdx-gfm": "^7.6.6",
     "@storybook/addon-onboarding": "^1.0.10",
-    "@storybook/blocks": "^7.6.5",
-    "@storybook/react": "^7.6.5",
-    "@storybook/react-vite": "^7.6.5",
+    "@storybook/blocks": "^7.6.6",
+    "@storybook/react": "^7.6.6",
+    "@storybook/react-vite": "^7.6.6",
     "@storybook/testing-library": "^0.2.2",
     "@types/sanitize-html": "^2.9.5",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "storybook": "^7.6.5"
+    "storybook": "^7.6.6"
   },
   "exports": {
     ".": "./src/index.ts",

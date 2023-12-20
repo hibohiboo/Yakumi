@@ -21,6 +21,16 @@ function App() {
             テキスト&画像カードデッキ作成
           </Link>
         </li>
+        <li>
+          <a href="/yakumi-udonarium/udonarium/" target="_blank">
+            ユドナリウム
+          </a>
+        </li>
+        <li>
+          <a href="/yakumi-udonarium/udonarium/?room=hollow" target="_blank">
+            HollowΦFlux用ユドナリウム
+          </a>
+        </li>
       </ul>
 
       <section>
