@@ -22,12 +22,25 @@ function App() {
           </Link>
         </li>
         <li>
-          <a href="/yakumi-udonarium/udonarium/" target="_blank">
+          <a
+            style={{ color: 'white' }}
+            href="/yakumi-udonarium/udonarium/"
+            target="_blank"
+          >
             ユドナリウム
           </a>
         </li>
         <li>
-          <a href="/yakumi-udonarium/udonarium/?room=hollow" target="_blank">
+          <Link style={{ color: 'white' }} to={'/hollow/'}>
+            HollowΦFlux デッキ作成
+          </Link>
+        </li>
+        <li>
+          <a
+            style={{ color: 'white' }}
+            href="/yakumi-udonarium/udonarium/?room=hollow"
+            target="_blank"
+          >
             HollowΦFlux用ユドナリウム
           </a>
         </li>

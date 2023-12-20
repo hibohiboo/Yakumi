@@ -1,3 +1,4 @@
+import HollowFluxPage from '@yakumi-app/pages/HollowFluxPage';
 import ImagePge from '@yakumi-app/pages/ImagePage';
 import TextImagePage from '@yakumi-app/pages/TextImagePage';
 import TextPage from '@yakumi-app/pages/TextPage';
@@ -23,6 +24,10 @@ export const router = createBrowserRouter(
     {
       path: '/text-image',
       element: <TextImagePage />,
+    },
+    {
+      path: '/hollow',
+      element: <HollowFluxPage />,
     },
   ],
   {
