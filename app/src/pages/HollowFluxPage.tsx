@@ -7,7 +7,8 @@ function HollowFluxPage() {
   const [cards, setCards] = React.useState(
     CARDS.map((card) => ({ ...card, count: 0 })),
   );
-  const [isDisplayCard, setIsDisplayCard] = React.useState(false);
+  const [isDisplayCardNameOnly, setIsDisplayCardNameOnly] =
+    React.useState(false);
   const [deckName, setDeckName] = React.useState('HollowFluxデッキ');
   const [deckDescription, setDeckDescription] = React.useState('');
   const [cards2, setCards2] = React.useState(
@@ -192,9 +193,9 @@ function HollowFluxPage() {
           カード名のみ表示{' '}
           <input
             type="checkbox"
-            checked={isDisplayCard}
+            checked={isDisplayCardNameOnly}
             onChange={() => {
-              setIsDisplayCard(!isDisplayCard);
+              setIsDisplayCardNameOnly(!isDisplayCardNameOnly);
             }}
           />
         </label>
@@ -210,7 +211,7 @@ function HollowFluxPage() {
             .flatMap((card) =>
               new Array(card.count).fill(0).map((_, i) => (
                 <span
-                  key={i}
+                  key={`${card.name}-${i}`}
                   style={{
                     border: 'solid 1px #fff',
                     display: 'inline-block',
@@ -228,7 +229,7 @@ function HollowFluxPage() {
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            height: '600px',
+            height: isDisplayCardNameOnly ? '200px' : '600px',
             overflow: 'auto',
           }}
         >
@@ -238,7 +239,7 @@ function HollowFluxPage() {
                 src={`/assets/images/hollowFlux/cards/${card.name}.png`}
                 width="350"
                 style={{
-                  display: isDisplayCard ? 'none' : 'block',
+                  display: isDisplayCardNameOnly ? 'none' : 'block',
                 }}
                 alt={card.name}
               />
@@ -300,7 +301,7 @@ function HollowFluxPage() {
             .flatMap((card) =>
               new Array(card.count).fill(0).map((_, i) => (
                 <span
-                  key={i}
+                  key={`${card.name}-${i}`}
                   style={{
                     border: 'solid 1px #fff',
                     display: 'inline-block',
@@ -328,7 +329,7 @@ function HollowFluxPage() {
                 src={`/assets/images/hollowFlux/cards/${card.name}.png`}
                 width="350"
                 style={{
-                  display: isDisplayCard ? 'none' : 'block',
+                  display: isDisplayCardNameOnly ? 'none' : 'block',
                 }}
                 alt={card.name}
               />
