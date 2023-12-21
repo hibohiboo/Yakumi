@@ -10,7 +10,12 @@ function HollowFluxPage() {
   const [isDisplayCard, setIsDisplayCard] = React.useState(false);
   const [deckName, setDeckName] = React.useState('HollowFluxデッキ');
   const [deckDescription, setDeckDescription] = React.useState('');
-
+  const [cards2, setCards2] = React.useState(
+    CARDS.map((card) => ({ ...card, count: 0 })),
+  );
+  const [deckName2, setDeckName2] = React.useState('HollowFluxガードデッキ');
+  const [deckDescription2, setDeckDescription2] =
+    React.useState('ガードデッキは10枚まで');
   return (
     <div style={{ padding: '1rem' }}>
       <h1> HollowΦFluxデッキ作成</h1>
@@ -53,7 +58,15 @@ function HollowFluxPage() {
               alert('カードを選択してください');
               return;
             }
-            createUdonariumZip(list, deckName, deckDescription);
+            const list2 = cards2.filter((card) => card.count > 0);
+            createUdonariumZip(
+              list,
+              deckName,
+              deckDescription,
+              list2,
+              deckName2,
+              deckDescription2,
+            );
           }}
         >
           ユドナリウム用デッキzipダウンロード
@@ -186,67 +199,164 @@ function HollowFluxPage() {
           />
         </label>
       </div>
-      <div style={{ paddingBottom: '1rem' }}>
-        現在のデッキ枚数:{' '}
-        {cards.reduce((prev, current) => prev + current.count, 0)}
+      <div>
+        <div style={{ paddingBottom: '1rem' }}>
+          現在のデッキ枚数:{' '}
+          {cards.reduce((prev, current) => prev + current.count, 0)}
+        </div>
+        <div>
+          {cards
+            .filter((card) => card.count > 0)
+            .flatMap((card) =>
+              new Array(card.count).fill(0).map((_, i) => (
+                <span
+                  key={i}
+                  style={{
+                    border: 'solid 1px #fff',
+                    display: 'inline-block',
+                    margin: '0.2rem',
+                    padding: '1px 5px',
+                    borderRadius: '5px',
+                  }}
+                >
+                  {card.name}
+                </span>
+              )),
+            )}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            height: '600px',
+            overflow: 'auto',
+          }}
+        >
+          {cards.map((card) => (
+            <div key={card.name} style={{ width: '360px' }}>
+              <img
+                src={`/assets/images/hollowFlux/cards/${card.name}.png`}
+                width="350"
+                style={{
+                  display: isDisplayCard ? 'none' : 'block',
+                }}
+                alt={card.name}
+              />
+              <strong>[{card.name}]</strong> 枚数:
+              <input
+                type="number"
+                style={{
+                  width: '3.5rem',
+                  padding: '0.3rem',
+                  fontSize: '1.2rem',
+                }}
+                value={card.count}
+                max={3}
+                min={0}
+                onChange={(e) => {
+                  setCards(
+                    cards.map((c) => {
+                      if (c.name === card.name) {
+                        return { ...c, count: e.target.valueAsNumber };
+                      }
+                      return c;
+                    }),
+                  );
+                }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       <div>
-        {cards
-          .filter((card) => card.count > 0)
-          .flatMap((card) =>
-            new Array(card.count).fill(0).map(() => (
-              <span
-                style={{
-                  border: 'solid 1px #fff',
-                  display: 'inline-block',
-                  margin: '0.2rem',
-                  padding: '1px 5px',
-                  borderRadius: '5px',
-                }}
-              >
-                {card.name}
-              </span>
-            )),
-          )}
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          height: '600px',
-          overflow: 'auto',
-        }}
-      >
-        {cards.map((card) => (
-          <div key={card.name} style={{ width: '360px' }}>
-            <img
-              src={`/assets/images/hollowFlux/cards/${card.name}.png`}
-              width="350"
-              style={{
-                display: isDisplayCard ? 'none' : 'block',
-              }}
-              alt={card.name}
-            />
-            <strong>[{card.name}]</strong> 枚数:
+        <div>
+          <label>
+            デッキ名:{' '}
             <input
-              type="number"
-              style={{ width: '3.5rem', padding: '0.3rem', fontSize: '1.2rem' }}
-              value={card.count}
-              max={3}
-              min={0}
+              type="text"
+              value={deckName2}
               onChange={(e) => {
-                setCards(
-                  cards.map((c) => {
-                    if (c.name === card.name) {
-                      return { ...c, count: e.target.valueAsNumber };
-                    }
-                    return c;
-                  }),
-                );
+                setDeckName2(e.target.value);
               }}
             />
-          </div>
-        ))}
+          </label>
+          <label>
+            デッキ説明:{' '}
+            <textarea
+              value={deckDescription2}
+              onChange={(e) => {
+                setDeckDescription2(e.target.value);
+              }}
+            />
+          </label>
+        </div>
+        <div style={{ paddingBottom: '1rem' }}>
+          現在のガードデッキ枚数:{' '}
+          {cards2.reduce((prev, current) => prev + current.count, 0)}
+        </div>
+        <div>
+          {cards2
+            .filter((card) => card.count > 0)
+            .flatMap((card) =>
+              new Array(card.count).fill(0).map((_, i) => (
+                <span
+                  key={i}
+                  style={{
+                    border: 'solid 1px #fff',
+                    display: 'inline-block',
+                    margin: '0.2rem',
+                    padding: '1px 5px',
+                    borderRadius: '5px',
+                  }}
+                >
+                  {card.name}
+                </span>
+              )),
+            )}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            height: '600px',
+            overflow: 'auto',
+          }}
+        >
+          {cards2.map((card) => (
+            <div key={card.name} style={{ width: '360px' }}>
+              <img
+                src={`/assets/images/hollowFlux/cards/${card.name}.png`}
+                width="350"
+                style={{
+                  display: isDisplayCard ? 'none' : 'block',
+                }}
+                alt={card.name}
+              />
+              <strong>[{card.name}]</strong> 枚数:
+              <input
+                type="number"
+                style={{
+                  width: '3.5rem',
+                  padding: '0.3rem',
+                  fontSize: '1.2rem',
+                }}
+                value={card.count}
+                max={3}
+                min={0}
+                onChange={(e) => {
+                  setCards2(
+                    cards2.map((c) => {
+                      if (c.name === card.name) {
+                        return { ...c, count: e.target.valueAsNumber };
+                      }
+                      return c;
+                    }),
+                  );
+                }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

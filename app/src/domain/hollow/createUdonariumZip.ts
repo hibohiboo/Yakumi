@@ -72,7 +72,11 @@ export const createUdonariumZip = async (
   items: { name: string; count: number }[],
   deckName: string,
   deckdescription: string,
+  items2: { name: string; count: number }[],
+  deckName2: string,
+  deckdescription2: string,
 ) => {
+  const decs = [];
   const list = items.flatMap((item) => {
     return new Array(item.count).fill(0).map(() => {
       const doc = getDoc();
@@ -86,5 +90,22 @@ export const createUdonariumZip = async (
     size: '2',
     description: deckdescription,
   });
-  await createZip([deck], deckName);
+  decs.push(deck);
+  if (items2.length > 0) {
+    const list2 = items2.flatMap((item) => {
+      return new Array(item.count).fill(0).map(() => {
+        const doc = getDoc();
+        const card = createCardWithProp(doc, item.name);
+        return card;
+      });
+    });
+    const deck2 = createDeck(deckName2, list2, {
+      deckName: deckName2,
+      state: '0',
+      size: '2',
+      description: deckdescription2,
+    });
+    decs.push(deck2);
+  }
+  await createZip(decs, deckName);
 };
