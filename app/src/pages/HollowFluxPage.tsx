@@ -8,6 +8,9 @@ function HollowFluxPage() {
     CARDS.map((card) => ({ ...card, count: 0 })),
   );
   const [isDisplayCard, setIsDisplayCard] = React.useState(false);
+  const [deckName, setDeckName] = React.useState('HollowFluxデッキ');
+  const [deckDescription, setDeckDescription] = React.useState('');
+
   return (
     <div style={{ padding: '1rem' }}>
       <h1> HollowΦFluxデッキ作成</h1>
@@ -20,20 +23,42 @@ function HollowFluxPage() {
           HollowΦFluxルールページ
         </a>
       </div>
-
-      <Button
-        icon="download"
-        onClick={() => {
-          const list = cards.filter((card) => card.count > 0);
-          if (list.length === 0) {
-            alert('カードを選択してください');
-            return;
-          }
-          createUdonariumZip(list);
-        }}
-      >
-        ユドナリウム用デッキzipダウンロード
-      </Button>
+      <div>
+        <label>
+          デッキ名:{' '}
+          <input
+            type="text"
+            value={deckName}
+            onChange={(e) => {
+              setDeckName(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          デッキ説明:{' '}
+          <textarea
+            value={deckDescription}
+            onChange={(e) => {
+              setDeckDescription(e.target.value);
+            }}
+          />
+        </label>
+      </div>
+      <div>
+        <Button
+          icon="download"
+          onClick={() => {
+            const list = cards.filter((card) => card.count > 0);
+            if (list.length === 0) {
+              alert('カードを選択してください');
+              return;
+            }
+            createUdonariumZip(list, deckName, deckDescription);
+          }}
+        >
+          ユドナリウム用デッキzipダウンロード
+        </Button>
+      </div>
 
       <div style={{ padding: '1rem' }}>
         <details>

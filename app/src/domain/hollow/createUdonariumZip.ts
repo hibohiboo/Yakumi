@@ -70,18 +70,19 @@ const createCardWithProp = (doc: Document, cardName: string): HTMLElement => {
 
 export const createUdonariumZip = async (
   items: { name: string; count: number }[],
+  deckName: string,
+  deckdescription: string,
 ) => {
   const list = items.map((item) => {
     const doc = getDoc();
     const card = createCardWithProp(doc, item.name);
     return card;
   });
-  const deckName = 'HollowFluxデッキ';
   const deck = createDeck(deckName, list, {
     deckName,
     state: '0',
     size: '2',
-    description: '',
+    description: deckdescription,
   });
   await createZip([deck], deckName);
 };
