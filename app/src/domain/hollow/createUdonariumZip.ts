@@ -73,10 +73,12 @@ export const createUdonariumZip = async (
   deckName: string,
   deckdescription: string,
 ) => {
-  const list = items.map((item) => {
-    const doc = getDoc();
-    const card = createCardWithProp(doc, item.name);
-    return card;
+  const list = items.flatMap((item) => {
+    return new Array(item.count).fill(0).map(() => {
+      const doc = getDoc();
+      const card = createCardWithProp(doc, item.name);
+      return card;
+    });
   });
   const deck = createDeck(deckName, list, {
     deckName,
