@@ -48,24 +48,24 @@ export class CardDraftTRPGFrontCdkStack extends cdk.Stack {
     const distribution = this.createCloudFront(bucket, oac, props);
     this.createPolicy(bucket, distribution);
 
-    // // // 指定したディレクトリをデプロイ
-    // for (const item of props.subDirectoryPath) {
-    //   this.deployS3(
-    //     bucket,
-    //     distribution,
-    //     item.path,
-    //     props.bucketName,
-    //     item.alias,
-    //   );
-    //   // 確認用にCloudFrontのURLに整形して出力
-    //   new cdk.CfnOutput(
-    //     this,
-    //     `${props.distributionName}-${item.alias}-top-url`,
-    //     {
-    //       value: `https://${distribution.distributionDomainName}/${item.alias}/`,
-    //     },
-    //   );
-    // }
+    // // 指定したディレクトリをデプロイ
+    for (const item of props.subDirectoryPath) {
+      this.deployS3(
+        bucket,
+        distribution,
+        item.path,
+        props.bucketName,
+        item.alias,
+      );
+      // 確認用にCloudFrontのURLに整形して出力
+      new cdk.CfnOutput(
+        this,
+        `${props.distributionName}-${item.alias}-top-url`,
+        {
+          value: `https://${distribution.distributionDomainName}/${item.alias}/`,
+        },
+      );
+    }
 
     cdk.Tags.of(this).add('Project', props.projectNameTag);
   }

@@ -1,11 +1,13 @@
 import { Button } from '@blueprintjs/core';
 import { CARDS } from '@yakumi-app/domain/hollow/constants';
+import { createUdonariumZip } from '@yakumi-app/domain/hollow/createUdonariumZip';
 import React from 'react';
 
 function HollowFluxPage() {
   const [cards, setCards] = React.useState(
     CARDS.map((card) => ({ ...card, count: 0 })),
   );
+  const [isDisplayCard, setIsDisplayCard] = React.useState(false);
   return (
     <div style={{ padding: '1rem' }}>
       <h1> HollowΦFluxデッキ作成</h1>
@@ -19,7 +21,19 @@ function HollowFluxPage() {
         </a>
       </div>
 
-      <Button icon="download">ユドナリウム用デッキzipダウンロード</Button>
+      <Button
+        icon="download"
+        onClick={() => {
+          const list = cards.filter((card) => card.count > 0);
+          if (list.length === 0) {
+            alert('カードを選択してください');
+            return;
+          }
+          createUdonariumZip(list);
+        }}
+      >
+        ユドナリウム用デッキzipダウンロード
+      </Button>
 
       <div style={{ padding: '1rem' }}>
         <details>
@@ -135,6 +149,18 @@ function HollowFluxPage() {
           </dl>
         </details>
       </div>
+      <div>
+        <label>
+          カード名のみ表示{' '}
+          <input
+            type="checkbox"
+            checked={isDisplayCard}
+            onChange={() => {
+              setIsDisplayCard(!isDisplayCard);
+            }}
+          />
+        </label>
+      </div>
       <div style={{ paddingBottom: '1rem' }}>
         現在のデッキ枚数:{' '}
         {cards.reduce((prev, current) => prev + current.count, 0)}
@@ -148,13 +174,16 @@ function HollowFluxPage() {
         }}
       >
         {cards.map((card) => (
-          <div key={card.name}>
+          <div key={card.name} style={{ width: '360px' }}>
             <img
-              src={`/app/images/hollowFlux/cards/${card.name}.png`}
+              src={`/assets/images/hollowFlux/cards/${card.name}.png`}
               width="350"
-              style={{ display: 'block' }}
+              style={{
+                display: isDisplayCard ? 'none' : 'block',
+              }}
+              alt={card.name}
             />
-            枚数:{' '}
+            <strong>[{card.name}]</strong> 枚数:
             <input
               type="number"
               style={{ width: '3.5rem', padding: '0.3rem', fontSize: '1.2rem' }}
