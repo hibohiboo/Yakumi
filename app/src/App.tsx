@@ -63,7 +63,7 @@ function App() {
         />
         <img src={`/${basePath}/images/sample-text-deck-04.png`} alt="許可" />
         <p>
-          ※2回目の選択ではフォルダが最初から選択された状態になります。何もファイルが表示されるかもしれませんがそのまま選択して大丈夫です。
+          ※2回目の選択ではフォルダが最初から選択された状態になります。この状態ではファイルが表示されないですが、そのまま選択して大丈夫です。
         </p>
         <img
           src={`/${basePath}/images/sample-text-deck-03.png`}
