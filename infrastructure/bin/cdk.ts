@@ -21,6 +21,7 @@ const env = {
 
 new CardDraftTRPGFrontCdkStack(app, `${processEnv.PROJECT_ID}-FrontCdkStack`, {
   bucketName: processEnv.BUCKET_NAME,
+  oacName: `${processEnv.PROJECT_ID}-OriginAccessControlForAppBucket`,
   identityName: `${processEnv.PROJECT_ID}-origin-access-identity-to-s3-bucket`,
   defaultCachePolicyName: `${processEnv.PROJECT_ID}-cache-policy-default`,
   functionName: `${processEnv.PROJECT_ID}-lambda-edge-ogp`,
