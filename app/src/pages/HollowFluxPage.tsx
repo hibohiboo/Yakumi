@@ -190,6 +190,25 @@ function HollowFluxPage() {
         現在のデッキ枚数:{' '}
         {cards.reduce((prev, current) => prev + current.count, 0)}
       </div>
+      <div>
+        {cards
+          .filter((card) => card.count > 0)
+          .flatMap((card) =>
+            new Array(card.count).fill(0).map(() => (
+              <span
+                style={{
+                  border: 'solid 1px #fff',
+                  display: 'inline-block',
+                  margin: '0.2rem',
+                  padding: '1px 5px',
+                  borderRadius: '5px',
+                }}
+              >
+                {card.name}
+              </span>
+            )),
+          )}
+      </div>
       <div
         style={{
           display: 'flex',
