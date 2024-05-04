@@ -8,4 +8,14 @@ export default defineConfig({
     // viteのホットリロードのために、/で始める必要がある。
     alias: [{ find: '@yakumi-components', replacement: '/src' }],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom', 'react/jsx-runtime'],
+          others: ['dompurify'],
+        },
+      },
+    },
+  },
 });

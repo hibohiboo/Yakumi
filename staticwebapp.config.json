@@ -1,0 +1,9 @@
+{
+  "routes": [
+    { "route": "/app/assets/*" },
+    {
+      "route": "/app/*",
+      "rewrite": "/app/index.html"
+    }
+  ]
+}

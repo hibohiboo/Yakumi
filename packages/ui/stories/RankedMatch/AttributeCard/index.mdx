@@ -1,0 +1,17 @@
+import { Meta, Story, Canvas } from '@storybook/blocks';
+import * as ComponentStories from './index.stories';
+
+<Meta title="RankedMatch/Card" of={ComponentStories} />
+
+# テキストカード
+
+- 1: カードの名前
+- 2: 効果の説明
+- 3: タイミング
+- 4: CP(キャラクターポイント)
+- 5: コスト
+- 6: タグ
+
+<Canvas>
+  <Story of={ComponentStories.Default} />
+</Canvas>

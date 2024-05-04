@@ -1,0 +1,38 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  gap: 0px;
+  height: 550px; /* (10+1) * 50px */
+  width: 550px; /* (10+1) * 50px */
+}
+
+.gridItem {
+  border: 1px solid black;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ddd;
+}
+/* 最初の11要素（上端） */
+.gridItem:nth-child(-n+11) {
+  background-color: var(--udonarium-map-border-bg-color);
+  color: var(--udonarium-map-border-color);
+}
+
+/* 左端 */
+.gridItem:nth-child(11n+1) {
+  background-color: var(--udonarium-map-border-bg-color);
+  color: var(--udonarium-map-border-color);
+}
+
+/* 2行目と3行目の背景色を灰色にする */
+.gridItem:nth-child(n+38):nth-child(-n+41),
+.gridItem:nth-child(n+49):nth-child(-n+52),
+/* 5行目と6行目の背景色を灰色にする */
+.gridItem:nth-child(n+82):nth-child(-n+85),
+.gridItem:nth-child(n+93):nth-child(-n+96)
+{
+  background-color: gray;
+}

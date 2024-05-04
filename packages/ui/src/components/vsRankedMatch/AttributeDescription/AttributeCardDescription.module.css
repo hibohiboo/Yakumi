@@ -1,0 +1,35 @@
+.dl dd {
+  margin-left: 1rem;
+}
+.dl dt {
+  font-weight: bold;
+}
+
+.rangeSample {
+  display: grid;
+  /* 5×5で並ぶようにする */
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  width: 100px;
+  height: 100px;;
+}
+.rangeSample div {
+  border: 1px solid #000;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rangeSample div:nth-child(8),
+.rangeSample div:nth-child(12),
+.rangeSample div:nth-child(13),
+.rangeSample div:nth-child(14),
+.rangeSample div:nth-child(16),
+.rangeSample div:nth-child(17),
+.rangeSample div:nth-child(18),
+.rangeSample div:nth-child(19),
+.rangeSample div:nth-child(20) {
+  background-color: #aaa;
+}

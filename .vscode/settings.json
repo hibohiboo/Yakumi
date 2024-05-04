@@ -7,6 +7,8 @@
     "typescript",
     "typescriptreact"
   ],
+  "eslint.useFlatConfig": true,
+  "eslint.useESLintClass": true,
   "files.eol": "\n",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
@@ -22,8 +24,16 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
   },
-  "eslint.useESLintClass": true,
   // デフォルトの設定はオフにしておく
   "typescript.format.enable": false,
   "javascript.format.enable": false,
+  "azureFunctions.deploySubpath": "api",
+  "azureFunctions.postDeployTask": "npm install (functions)",
+  "azureFunctions.projectLanguage": "TypeScript",
+  "azureFunctions.projectRuntime": "~4",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.projectLanguageModel": 4,
+  "azureFunctions.preDeployTask": "npm prune (functions)",
+  // モノレポの場合は、この設定を追加する
+  "jestrunner.configPath": "app/jest.config.json",
 }

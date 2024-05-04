@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-dupe-class-members */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import pkg from 'file-saver';
 const { saveAs } = pkg;
 import JSZip from 'jszip';
@@ -16,6 +15,10 @@ export class FileArchiver {
   save(files: any, zipName: string): void {
     if (!files) return;
 
+    this.generateBlob(files).then((blob) => saveAs(blob, zipName + '.zip'));
+  }
+
+  generateBlob(files: File[]): Promise<Blob> {
     const zip = new JSZip();
     const length = files.length;
     for (let i = 0; i < length; i++) {
@@ -23,18 +26,19 @@ export class FileArchiver {
       zip.file(file.name, file);
     }
 
-    zip
-      .generateAsync({
-        type: 'blob',
-        compression: 'DEFLATE',
-        compressionOptions: {
-          level: 6,
-        },
-      })
-      .then((blob) => saveAs(blob, zipName + '.zip'));
+    return zip.generateAsync({
+      type: 'blob',
+      compression: 'DEFLATE',
+      compressionOptions: {
+        level: 6,
+      },
+    });
   }
   saveText(file: File) {
     saveAs(file);
+  }
+  saveBlob(blob: Blob, zipName: string) {
+    saveAs(blob, zipName + '.zip');
   }
 }
 

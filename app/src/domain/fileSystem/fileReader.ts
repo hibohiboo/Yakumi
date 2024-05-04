@@ -29,7 +29,7 @@ export async function selectDirectory<T>(
   try {
     handle = await window.showDirectoryPicker();
   } catch (e) {
-    console.log(e);
+    console.warn(e);
     return;
   }
   return await accessDirectory(handle);

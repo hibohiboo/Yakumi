@@ -1,4 +1,5 @@
 import { Button } from '@blueprintjs/core';
+import { basePath } from '@yakumi-app/constants';
 import { csvToSettings } from '@yakumi-app/domain/card/csvToSettings';
 import { Settings, TextImageCardWithUrl } from '@yakumi-app/domain/card/types';
 import {
@@ -6,7 +7,7 @@ import {
   selectTextImageDirectory,
 } from '@yakumi-app/domain/fileSystem/textImageCardFileReader';
 import { createTextDeckToUdonarium } from '@yakumi-app/domain/textDeck/useUdonarium';
-import { basePath } from '@yakumi-app/router';
+
 import { AttributeCard, BackCard } from '@yakumi-components/index';
 import { createRef, useRef, useState } from 'react';
 
@@ -27,7 +28,7 @@ function TextImagePage() {
   return (
     <div>
       <h1>テキスト&画像カードデッキ作成</h1>
-      <a href={`/${basePath}/sample-text-image-deck.zip`}>
+      <a href={`/${basePath}/assets/rooms/sample-text-image-deck.zip`}>
         <Button icon="download">サンプルzipダウンロード</Button>
       </a>
       <span style={{ marginLeft: '10px' }}>
@@ -69,7 +70,7 @@ function TextImagePage() {
                 setFile(back);
                 setSetting(csvToSettings(settings));
               } catch (e) {
-                console.log(e);
+                console.warn(e);
               }
             }}
           >
@@ -83,7 +84,7 @@ function TextImagePage() {
       {file && (
         <div>
           <Button
-            icon="refresh"
+            icon="download"
             onClick={async () => {
               if (!listRefs.current) {
                 console.warn('listRefs is undefined');

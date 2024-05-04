@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+generator zod {
+  provider = "zod-prisma-types"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model YakumiCharacter {
+  id      String   @id
+  uid     String
+  data    String   @db.NVarChar(max)
+  created DateTime @default(now()) @db.DateTime
+  updated DateTime @default(now()) @updatedAt @db.DateTime
+}

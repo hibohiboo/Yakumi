@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "outDir": "dist",
+    "sourceMap": true,
+    "strict": true,
+    "paths": {
+      "@yakumi-api/*": ["./src/*"],
+      "@yakumi-prisma/*": ["../packages/prisma/*"],
+    }
+  }
+}

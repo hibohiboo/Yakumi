@@ -12,9 +12,11 @@ export default function AttributeCard(props: {
   id: string;
   type: string;
   src?: string;
+  selected?: boolean;
+  onClick?: () => void;
 }) {
   return (
-    <CardWrapper>
+    <CardWrapper selected={props.selected} onClick={props.onClick}>
       <CardName>{props.name}</CardName>
       {props.src && (
         <figure style={{ maxHeight: '150px', overflow: 'hidden' }}>

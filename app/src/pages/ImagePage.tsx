@@ -1,4 +1,5 @@
 import { Button } from '@blueprintjs/core';
+import { basePath } from '@yakumi-app/constants';
 import { csvToSettings } from '@yakumi-app/domain/card/csvToSettings';
 import { ImageCardWithFile, Settings } from '@yakumi-app/domain/card/types';
 import {
@@ -6,7 +7,7 @@ import {
   selectImageDirectory,
 } from '@yakumi-app/domain/fileSystem/imageCardFileReader';
 import { createImageDeckToUdonarium } from '@yakumi-app/domain/imageDeck/useUdonarium';
-import { basePath } from '@yakumi-app/router';
+
 import { useState } from 'react';
 
 function ImagePge() {
@@ -21,7 +22,7 @@ function ImagePge() {
   return (
     <div>
       <h1>ユドナリウム画像カード作成</h1>
-      <a href={`/${basePath}/sample-image-deck.zip`}>
+      <a href={`/${basePath}/assets/rooms/sample-image-deck.zip`}>
         <Button icon="download">サンプルzipダウンロード</Button>
       </a>
       <span style={{ marginLeft: '10px' }}>
@@ -57,13 +58,12 @@ function ImagePge() {
             onClick={async () => {
               try {
                 const result = await reOpenImageDirectory();
-                console.log(result);
                 if (!result) return;
                 const { settings, cardListWithFile } = result;
                 setItems(cardListWithFile);
                 setSetting(csvToSettings(settings));
               } catch (e) {
-                console.log(e);
+                console.warn(e);
               }
             }}
           >
@@ -77,7 +77,7 @@ function ImagePge() {
       {items.length !== 0 && (
         <div>
           <Button
-            icon="refresh"
+            icon="download"
             onClick={async () => {
               if (items.length === 0) return;
               await createImageDeckToUdonarium(items, setting);

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ImageCardWithFile, Settings } from '../card/types';
 import { calcSHA256Async } from '../udonarium/FileReaderUtil';
 import { createZip, getDoc } from '../udonarium/common';

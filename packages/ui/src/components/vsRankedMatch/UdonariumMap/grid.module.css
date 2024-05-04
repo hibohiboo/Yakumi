@@ -1,0 +1,49 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  gap: 0px;
+  height: 750px; /* 15 * 50px */
+  width: 1000px; /* 20 * 50px */
+}
+
+.gridItem {
+  border: 1px solid black;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.baseLayer {
+  grid-row: 2 / 15; /* マップの端のマスの内側を指定 */
+  grid-column: 2 / 20; /* マップの端のマスの内側を指定 */
+}
+
+:root {
+  --udonarium-map-border-bg-color: black;
+  --udonarium-map-border-color: white;
+}
+
+/* 最初の20要素（上端）に黄色の背景色を付ける */
+.gridItem:nth-child(-n+20) {
+  background-color: var(--udonarium-map-border-bg-color);
+  color: var(--udonarium-map-border-color);
+}
+
+/* 下端に黄色の背景色を付ける */
+.gridItem:nth-child(n+281) {
+  background-color: var(--udonarium-map-border-bg-color);
+  color: var(--udonarium-map-border-color);
+}
+
+/* 左端に黄色の背景色を付ける */
+.gridItem:nth-child(20n+1) {
+  background-color: var(--udonarium-map-border-bg-color);
+  color: var(--udonarium-map-border-color);
+}
+
+/* 右端に黄色の背景色を付ける */
+.gridItem:nth-child(20n) {
+  background-color: var(--udonarium-map-border-bg-color);
+  color: var(--udonarium-map-border-color);
+}

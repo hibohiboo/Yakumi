@@ -1,0 +1,35 @@
+{
+  "testEnvironment": "jest-environment-jsdom",
+  "roots": ["<rootDir>/tests"],
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  },
+  "testMatch": [
+    "**/__tests__/**/*.+(ts|tsx|js)",
+    "tests/**/?(*.)+(spec|test).+(ts|tsx|js)",
+    "**/?(*.)+(spec|test).+(ts|tsx|js)"
+  ],
+  "moduleDirectories": [
+    "node_modules",
+    "<rootDir>/"
+  ],
+  "moduleNameMapper": {
+    "\\.(css|less|scss)$": "identity-obj-proxy",
+    "^@yakumi-app/(.*)$": "<rootDir>/src/$1",
+    "^@yakumi-components/(.*)$": "<rootDir>/../packages/ui/src/$1",
+    "\\.(gif|ttf|eot|svg)$": "<rootDir>/tests/jest.fileMock.js"
+  },
+  "globals": {
+    "VITE_DEFINE_BASE_PATH": "app"
+  },
+  "reporters": [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        "publicPath": "../dist/public/jest-reports-editor",
+        "filename": "jest.html"
+      }
+    ]
+  ]
+}

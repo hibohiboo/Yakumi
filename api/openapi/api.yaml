@@ -1,0 +1,25 @@
+openapi: 3.1.0
+info:
+  version: 0.0.1
+  title: 薬味
+  description: 薬味用API
+
+  contact:
+    name: hibohiboo
+    url: https://twitter.com/hibohiboo
+
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:7071/api
+    description: ローカル実行
+
+paths:
+  /credentilas:
+    $ref: paths/credentilas.yml
+  /rank-character/{characterId}:
+    $ref: paths/rank-character.yml
+
+

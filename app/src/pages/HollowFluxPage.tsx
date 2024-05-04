@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import { Button } from '@blueprintjs/core';
 import { CARDS } from '@yakumi-app/domain/hollow/constants';
 import { createUdonariumZip } from '@yakumi-app/domain/hollow/createUdonariumZip';

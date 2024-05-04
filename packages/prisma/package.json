@@ -1,0 +1,26 @@
+{
+  "name": "@yakumi/prisma-zod",
+  "scripts": {
+    "bundle": "esbuild --bundle generated/zod/index.ts --outfile=dist/index.js --target=node20 --format=cjs",
+    "build": "prisma generate",
+    "generate": "prisma generate",
+    "push": "prisma db push",
+    "migration": "prisma migrate dev --create-only --name newMigration",
+    "deploy": "prisma migrate deploy",
+    "deploy-dev": "prisma migrate dev --name devMigration",
+    "pull": "prisma db pull",
+    "ncu": "ncu -u"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.13.0",
+    "zod": "^3.23.4"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.2",
+    "prisma": "^5.13.0",
+    "zod-prisma-types": "^3.1.6",
+    "@yakumi/tsconfig": "*"
+  }
+}

@@ -1,0 +1,26 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- CreateTable
+CREATE TABLE [dbo].[YakumiCharacter] (
+    [id] NVARCHAR(1000) NOT NULL,
+    [uid] NVARCHAR(1000) NOT NULL,
+    [data] NVARCHAR(1000) NOT NULL,
+    [created] DATETIME NOT NULL CONSTRAINT [YakumiCharacter_created_df] DEFAULT CURRENT_TIMESTAMP,
+    [updated] DATETIME NOT NULL CONSTRAINT [YakumiCharacter_updated_df] DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT [YakumiCharacter_pkey] PRIMARY KEY CLUSTERED ([id])
+);
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH

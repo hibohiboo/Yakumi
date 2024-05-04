@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { basePath } from './router';
+import { getImageSrc } from './domain/image/getImageSrc';
 
 function App() {
   return (
@@ -19,6 +19,16 @@ function App() {
         <li>
           <Link style={{ color: 'white' }} to={'/text-image/'}>
             テキスト&画像カードデッキ作成
+          </Link>
+        </li>
+        <li>
+          <Link style={{ color: 'white' }} to={'/spread-sheet/'}>
+            スプレッドシート
+          </Link>
+        </li>
+        <li>
+          <Link style={{ color: 'white' }} to={'/sheet-to-char/'}>
+            スプレッドシートキャラクターデッキ作成
           </Link>
         </li>
         <li>
@@ -50,7 +60,7 @@ function App() {
         <h2>使い方</h2>
         <p>1. デッキ用のフォルダが含まれたzipをダウンロードして解凍します</p>
         <img
-          src={`/${basePath}/images/sample-text-deck-01.png`}
+          src={`${getImageSrc('assets/images/sample-text-deck-01.png')}`}
           alt="ダウンロード参考用画像"
         />
         <p>
@@ -58,20 +68,23 @@ function App() {
           解凍したフォルダを選択してください。確認がでるので、フォルダ読取りの許可を与えてください。
         </p>
         <img
-          src={`/${basePath}/images/sample-text-deck-02.png`}
+          src={`${getImageSrc('assets/images/sample-text-deck-02.png')}`}
           alt="フォルダ選択参考用画像"
         />
-        <img src={`/${basePath}/images/sample-text-deck-04.png`} alt="許可" />
+        <img
+          src={`${getImageSrc('assets/images/sample-text-deck-04.png')}`}
+          alt="許可"
+        />
         <p>
           ※2回目の選択ではフォルダが最初から選択された状態になります。この状態ではファイルが表示されないですが、そのまま選択して大丈夫です。
         </p>
         <img
-          src={`/${basePath}/images/sample-text-deck-03.png`}
+          src={`${getImageSrc('assets/images/sample-text-deck-03.png')}`}
           alt="2回目以降のフォルダ選択参考用画像"
         />
         <p>3. Udonarium用カードダウンロードでUdonarium用のデッキを作成します</p>
         <img
-          src={`/${basePath}/images/sample-text-deck-05.png`}
+          src={`${getImageSrc('assets/images/sample-text-deck-05.png')}`}
           alt="Udonarium用カードダウンロード参考用画像"
         />
         <h3>テキストファイルの編集について</h3>
@@ -131,7 +144,7 @@ function App() {
           </tbody>
         </table>
         <img
-          src={`/${basePath}/images/sample-text-deck-06.png`}
+          src={`${getImageSrc('assets/images/sample-text-deck-06.png')}`}
           alt="テキストファイルの編集参考用画像"
         />
       </section>

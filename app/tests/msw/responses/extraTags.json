@@ -1,0 +1,20 @@
+{
+  "range": "Extraタグ!A3:E30",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "poison",
+      "▲状態",
+      "毒",
+      "手番の終わりのたび、{強度}点のダメージを与える。防御力無視。",
+      "icons/poison-bottle.png"
+    ],
+    [
+      "greese",
+      "■地形",
+      "滑る床",
+      "この地形から動くとき移動マスを-2(最低1)する",
+      "icons/banana-peel.png"
+    ]
+  ]
+}

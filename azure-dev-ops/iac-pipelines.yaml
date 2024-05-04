@@ -1,0 +1,18 @@
+trigger:
+  branches:
+    include:
+      - azure
+  paths:
+    include:
+      - infrastructure/*
+      - azure-dev-ops/iac-pipelines.yaml
+pool:
+  vmImage: ubuntu-latest
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'azure-dev-hobby'
+    scriptType: 'bash'
+    scriptLocation: 'scriptPath'
+    scriptPath : 'infrastructure/bin/create.bash'
+

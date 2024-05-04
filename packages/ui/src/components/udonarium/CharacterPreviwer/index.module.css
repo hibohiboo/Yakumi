@@ -1,0 +1,15 @@
+.wrapper {
+  background-color: black;
+  color: #eee;
+  padding: 10px;
+}
+
+.name {
+  border-bottom: solid 1px #eee;
+  padding: 5px;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}

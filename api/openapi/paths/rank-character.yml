@@ -1,0 +1,20 @@
+put:
+  operationId: put/rank-character
+  summary: キャラクター更新
+  description: >-
+    キャラクターを送付しDBとBlobに格納します。
+  parameters:
+    - in: path
+      name: characterId
+      schema:
+        type: string
+        example: 7d8bb386-0f86-4dff-be34-86bb2f55b366
+        description: UUID
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/rank-character.yml
+  responses:
+    200:
+      description: キャラクター作成・更新

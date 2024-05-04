@@ -21,3 +21,8 @@ export const Image: Story = {
     src: 'https://lostrpg-751c1.firebaseapp.com/assets/images/monster/debudori.png',
   },
 };
+export const Selected: Story = {
+  args: {
+    selected: true,
+  },
+};

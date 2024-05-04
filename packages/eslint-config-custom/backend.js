@@ -1,12 +1,27 @@
-module.exports = {
-  env: { es2020: true, node: true },
-  extends: [
-    "@yakumi/eslint-config-custom/defaults",
-    "turbo",
-    "prettier", // extends に複数設定している場合、後に書いた設定のルールが優先されるため、prettierは最後
-  ],
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import customConfig from '@yakumi/eslint-config-custom/defaults.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const compat = new FlatCompat({
+    baseDirectory: __dirname
+});
+
+export default tseslint.config({
+  files: ['**/*.ts', '**/*.tsx'],
+  ignores: ['dist', 'public'],
+  extends: [...customConfig, ...compat.extends('eslint-config-turbo'),  prettierConfig],
   rules: {
     "turbo/no-undeclared-env-vars": ["off"],
-  }
-
-};
+  },
+  languageOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+    globals: {
+      ...globals.node,
+      myCustomGlobal: 'readonly',
+    },
+  },
+});

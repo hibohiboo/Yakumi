@@ -1,0 +1,26 @@
+trigger:
+  branches:
+    include:
+      - azure
+      - bid/*
+  paths:
+    include:
+      - app/*
+      - packages/*
+      - azure-dev-ops/app-deploy-pipelines.yaml
+      - api/*
+      - infrastructure/db-config/*
+pool:
+  vmImage: ubuntu-latest
+steps:
+  - task: AzureStaticWebApp@0
+    name: DeployStaticWebApp
+    displayName: Deploy Static Web App
+    inputs:
+      app_location: /
+      output_location: dist
+      api_location: api
+      data_api_location: "infrastructure/db-config" 
+      api_build_command: 'npm run build'
+    env:
+      azure_static_web_apps_api_token: $(deployment_token)

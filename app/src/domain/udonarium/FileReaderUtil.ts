@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-redeclare */
-/* eslint-disable no-unused-vars */
 
 // buildしたときに TypeError: SHA256 is not a function のエラーがでるので CDNからインストール
 // import * as WordArray from 'crypto-js/lib-typedarrays.js';

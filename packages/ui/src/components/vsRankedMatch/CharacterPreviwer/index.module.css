@@ -1,0 +1,31 @@
+.wrapper {
+  background-color: black;
+  color: #eee;
+  padding: 10px;
+}
+
+.name {
+  border-bottom: solid 1px #eee;
+  padding: 5px;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.table {
+  border-collapse: collapse;
+  margin: 10px;
+}
+.table th,.table td {
+  border: solid 1px #eee;
+  padding: 5px;
+}
+.cardTable td:nth-child(1),.cardTable td:nth-child(4),.cardTable td:nth-child(5) {
+  text-align: center;
+  vertical-align: middle;
+}
+.table caption {
+  font-weight: bold;
+  white-space: nowrap;
+}

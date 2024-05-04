@@ -1,10 +1,14 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDotEnv": [".env"],
+  "globalEnv": ["SUB_DIR_PATH_BUILDER", "SPREAD_SHEET_KEY"],
   "pipeline": {
     "dev": {},
     "ncu": {},
-    "build": { "dependsOn": ["^build"],
-    "outputs": ["dist"] }
+    "build": {
+       "dependsOn": ["^build"],
+       "outputs": ["dist"],
+       "env": ["VITE_DATA_SERVER"]
+    }
   }
 }

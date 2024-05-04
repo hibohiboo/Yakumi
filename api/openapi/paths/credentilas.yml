@@ -1,0 +1,43 @@
+post:
+  operationId: post/credentials
+  summary: SASトークンを取得
+  description: >-
+    AzureStorageAccoutにファイルをアップロードするためのトークンを取得
+  parameters:
+    - in: query
+      name: file
+      schema:
+        type: string
+        example: icons%2Fflame.png
+        description: アップロードするファイル名。/は%2Fにエンコードすること。/はフォルダ名となる
+    - in: query
+      name: permission
+      schema:
+        type: string
+        example: w
+        description: " w: 書き込み"
+    - in: query
+      name: timerange
+      schema:
+        type: string
+        example: 5
+        description: 単位は分(minute)
+    - in: query
+      name: container
+      schema:
+        type: string
+        example: $web
+        description: ストレージアカウントのコンテナ名
+  responses:
+    200:
+      description: SASトークン
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              url:
+                type: string
+                description: SASトークン
+                example: https://hoge.blob.core.windows.net/%24web/icons/flame.png?sv=2023-11-03&spr=https&st=2024-04-27T12%3A26%3A19Z&se=2024-04-27T12%3A27%3A19Z&sr=b&sp=w&sig=3HcTPqW%2BRLWS0zZgHNSMKZBTwHDb3i33IDL1XCLFB04%3D
+

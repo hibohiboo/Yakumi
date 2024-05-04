@@ -1,0 +1,16 @@
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
+    container_name: mssql
+    ports:
+      - 127.0.0.1:1433:1433
+    environment:
+      - ACCEPT_EULA=Y # エンド ユーザー ライセンス契約を承諾
+      - MSSQL_SA_PASSWORD=MyPassword123
+      - MSSQL_PID=Developer # ライセンスタイプ. 無料でライセンスが付与される Developer Edition 
+      # - MSSQL_LCID=1041 # 言語ID
+      - MSSQL_COLLATION=Japanese_CI_AS
+    # volumes:
+    #   - ./db:/var/opt/mssql
+  

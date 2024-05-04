@@ -1,4 +1,3 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
 import path from 'path';
 import react from '@vitejs/plugin-react-swc';
 import dotenv from 'dotenv';
@@ -12,6 +11,7 @@ export default defineConfig({
   base: `/${process.env.SUB_DIR_PATH_BUILDER}/`,
   define: {
     VITE_DEFINE_BASE_PATH: JSON.stringify(process.env.SUB_DIR_PATH_BUILDER),
+    VITE_SPREAD_SHEET_KEY: JSON.stringify(process.env.SPREAD_SHEET_KEY),
   },
   resolve: {
     alias: {
@@ -20,16 +20,23 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: path.resolve(__dirname, '../dist/app'),
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
         manualChunks: {
           react: ['react', 'react-dom'],
+          reactSWC: ['react/jsx-runtime'],
           reactFamily: ['react-router-dom'],
-          others: ['date-fns', 'papaparse'],
+          redux: ['@reduxjs/toolkit', 'react-redux'],
+          others: ['date-fns', 'papaparse', 'lodash'],
           udon: ['file-saver', 'jszip'],
           canvas: ['html2canvas'],
           blueprint: ['@blueprintjs/core'],
+          yakumiUi: ['@yakumi-components/index'],
+          hollowCard: ['@yakumi-app/domain/hollow/constants'],
+          msw: ['msw'],
+          azure: ['@azure/storage-blob'],
         },
       },
     },
