@@ -1,16 +1,28 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
-// import unuserdPlugin from 'eslint-plugin-unused-imports';
+import unuserdPlugin from 'eslint-plugin-unused-imports';
 
 export default tseslint.config({
   extends: [js.configs.recommended, ...tseslint.configs.recommended],
   plugins: { import: importPlugin, 
-    // 'unused-imports': unuserdPlugin
+    'unused-imports': unuserdPlugin
   },
   rules: {
     semi: ['error', 'always'],
-    // 'unused-imports/no-unused-imports': 'warn',
+    // unuserd-importsのrecommended設定を適用
+    "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+    'unused-imports/no-unused-imports': 'warn',
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+          "vars": "all",
+          "varsIgnorePattern": "^_",
+          "args": "after-used",
+          "argsIgnorePattern": "^_",
+      },
+    ],
+    // ここまで unuserd-importsのrecommended設定を適用
     'import/order': [
       'warn',
       {

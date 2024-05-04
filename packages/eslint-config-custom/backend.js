@@ -1,5 +1,9 @@
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import { FlatCompat } from "@eslint/eslintrc";
+import path from "path";
+import { fileURLToPath } from "url";
+import prettierConfig from 'eslint-config-prettier';
 import customConfig from '@yakumi/eslint-config-custom/defaults.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -10,7 +14,7 @@ const compat = new FlatCompat({
 });
 
 export default tseslint.config({
-  files: ['**/*.ts', '**/*.tsx'],
+  files: ['**/*.ts'],
   ignores: ['dist', 'public'],
   extends: [...customConfig, ...compat.extends('eslint-config-turbo'),  prettierConfig],
   rules: {

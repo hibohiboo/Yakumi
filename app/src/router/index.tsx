@@ -53,18 +53,14 @@ export const createRouter = () =>
         element: <VSRankCharacterViewerPage />,
         loader: async ({ params }) => {
           if (!params.id) throw new Response('Not Found', { status: 404 });
-
-          const res = await fetch(
-            getStorageAccountFilePath(
-              `character-data/${params.uid}/${params.id}/character-data.json`,
-            ),
+          const zipUrl = getStorageAccountFilePath(
+            `character-data/${params.uid}/${params.id}/udonarium-character.zip`,
           );
+          const res = await fetch(getStorageAccountFilePath(zipUrl));
           const data = await res.json();
           return {
             data,
-            zipUrl: getStorageAccountFilePath(
-              `character-data/${params.uid}/${params.id}/udonarium-character.zip`,
-            ),
+            zipUrl,
           };
         },
       },
