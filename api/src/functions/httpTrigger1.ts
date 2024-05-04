@@ -18,13 +18,6 @@ export async function httpTrigger1(
     body: JSON.stringify({
       msg: `Hello, ${name}!`,
       time,
-      headers: JSON.stringify([...request.headers.entries()]),
-      url: JSON.stringify(request.url),
-      method: request.method,
-      Authorization: request.headers.get('Authorization'),
-      authorization: request.headers.get('authorization'),
-      query: JSON.stringify([...request.query.entries()]),
-      context: JSON.stringify(context),
     }),
   };
 }

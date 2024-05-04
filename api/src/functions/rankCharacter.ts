@@ -5,11 +5,12 @@ import {
   InvocationContext,
   output,
 } from '@azure/functions';
+import { connectionStringSetting } from '@yakumi-api/lib/constants';
 import type { YakumiCharacter } from '@yakumi-prisma/types';
 
 const sqlOutput = output.sql({
   commandText: '[dbo].[YakumiCharacter]',
-  connectionStringSetting: 'DATABASE_CONNECTION_STRING',
+  connectionStringSetting,
 });
 
 export async function rankCharacter(
