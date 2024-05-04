@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Udonarium支援ツール",
   "devDependencies": {
-    "eslint": "^9.1.1",
+    "@azure/static-web-apps-cli": "^1.1.7",
     "prettier": "^3.2.5",
     "turbo": "^1.13.3",
     "typescript": "^5.4.5"
@@ -14,7 +14,9 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "ncu": "turbo ncu",
-    "deploy": "cd infrastructure && npm run deploy"
+    "aws-deploy": "cd infrastructure && npm run deploy",
+    "preazure-deploy": "npm run build",
+    "azure-deploy": "swa deploy ./dist --env production --api-location ./api"
   },
   "engines": {
     "node": ">=18.x"
