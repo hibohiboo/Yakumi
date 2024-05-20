@@ -19,7 +19,7 @@ const createImageBlock = (doc: XMLDocument, imageIdentifier: string) => {
 const createCommonBlock = (
   doc: XMLDocument,
   name: string,
-  size: string = '1',
+  size = '1',
 ) => {
   const common = createElement(doc, 'data', [['name', 'common']]);
   const nameElement = createElement(doc, 'data', [['name', 'name']], name);

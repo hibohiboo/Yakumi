@@ -1,4 +1,8 @@
 import { basePath } from '@yakumi-app/constants';
+import { fallMagiaRouter } from '@yakumi-app/domain/fallMagia/router';
+import { Agreement } from '@yakumi-app/domain/project/static/Agreement';
+import { Materials } from '@yakumi-app/domain/project/static/Materials';
+import { PrivacyPolicy } from '@yakumi-app/domain/project/static/PrivacyPolicy';
 import { getStorageAccountFilePath } from '@yakumi-app/domain/storageAccount/getFilePath';
 import HollowFluxPage from '@yakumi-app/pages/HollowFluxPage';
 import ImagePge from '@yakumi-app/pages/ImagePage';
@@ -56,7 +60,11 @@ export const createRouter = () =>
           const zipUrl = getStorageAccountFilePath(
             `character-data/${params.uid}/${params.id}/udonarium-character.zip`,
           );
-          const res = await fetch(getStorageAccountFilePath(zipUrl));
+          const res = await fetch(
+            getStorageAccountFilePath(
+              `character-data/${params.uid}/${params.id}/character-data.json`,
+            ),
+          );
           const data = await res.json();
           return {
             data,
@@ -68,6 +76,10 @@ export const createRouter = () =>
         path: '/image-uploader',
         element: <ImageUploaderPage />,
       },
+      fallMagiaRouter,
+      { path: '/agreement', element: <Agreement /> },
+      { path: '/privacy-policy', element: <PrivacyPolicy /> },
+      { path: '/materials', element: <Materials /> },
     ],
     {
       basename: `/${basePath}`,

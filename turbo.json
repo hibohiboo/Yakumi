@@ -5,6 +5,7 @@
   "pipeline": {
     "dev": {},
     "ncu": {},
+    "lint": {},
     "build": {
        "dependsOn": ["^build"],
        "outputs": ["dist"],

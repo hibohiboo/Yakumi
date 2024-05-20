@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unified-signatures */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import pkg from 'file-saver';
 const { saveAs } = pkg;

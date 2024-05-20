@@ -20,6 +20,7 @@ export const createTextDeckToUdonarium = async (
   const files = await Promise.all(
     items.map(async (item, i) => {
       const ref = refList[i];
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const canvas = await html2canvas(ref.current!);
       const front = await canvasToFile(canvas);
       const props = [

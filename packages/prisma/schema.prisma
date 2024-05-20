@@ -20,3 +20,10 @@ model YakumiCharacter {
   created DateTime @default(now()) @db.DateTime
   updated DateTime @default(now()) @updatedAt @db.DateTime
 }
+model MagiaFallCharacterLog {
+  logId   String   @id
+  id      String
+  data    String   @db.NVarChar(max)
+  created DateTime @default(now()) @db.DateTimeOffset
+  updated DateTime @default(now()) @updatedAt @db.DateTimeOffset
+}

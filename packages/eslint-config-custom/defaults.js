@@ -4,8 +4,9 @@ import importPlugin from 'eslint-plugin-import';
 import unuserdPlugin from 'eslint-plugin-unused-imports';
 
 export default tseslint.config({
-  extends: [js.configs.recommended, ...tseslint.configs.recommended],
-  plugins: { import: importPlugin, 
+  extends: [js.configs.recommended, ...tseslint.configs.strict,...tseslint.configs.stylistic],
+  plugins: { 
+     import: importPlugin, 
     'unused-imports': unuserdPlugin
   },
   rules: {
@@ -32,5 +33,9 @@ export default tseslint.config({
         alphabetize: { order: 'asc' }, // グループ内のソート順
       },
     ],
+    // 追加設定: 複雑度
+    "complexity": ["error", 10],
+    // tseslint.configs.strict が厳しすぎるので
+    "@typescript-eslint/no-non-null-assertion": "warn"
   },
 });

@@ -41,6 +41,7 @@ export interface CharacterSheetPropsCard {
   effectType?: string; // cpOffの場合にCP計算の特殊処理を行う
   effectVariable?: string; // cpOffの対象タグ
   count: number;
+  memo?: string;
 }
 export interface CPOffCard {
   effectType: 'cpOff';

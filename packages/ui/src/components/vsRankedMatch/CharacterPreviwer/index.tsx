@@ -1,3 +1,4 @@
+import { rubyText } from '@yakumi-components/components/atoms/rubyText';
 import styles from './index.module.css';
 import {
   CPOffCard,
@@ -12,12 +13,14 @@ export default function CharacterPreviewer({
   cards,
   src,
   extraTags = [],
+  memo,
 }: {
   name: string;
   src: string;
   props: CharacterSheetDetailsProp[];
   cards: CharacterSheetPropsCard[];
   extraTags: ExtraTag[];
+  memo?: string;
 }) {
   // CP軽減を行う計算
   const hasCpOffCards = cards.flatMap((card) =>
@@ -35,7 +38,10 @@ export default function CharacterPreviewer({
   const minusCP = cards.filter((b) => b.cp < 0).reduce((a, b) => a + b.cp, 0);
   return (
     <div className={styles.wrapper}>
-      <h3 className={styles.name}>{name}</h3>
+      <h3
+        className={styles.name}
+        dangerouslySetInnerHTML={{ __html: rubyText(name) }}
+      />
       <img src={src} height={100} />
       {props.map((prop, x) => (
         <table className={styles.table} key={x}>
@@ -69,8 +75,17 @@ export default function CharacterPreviewer({
           {cards.map((card, i) => (
             <tr key={i}>
               <td>{card.cp}</td>
-              <td>{card.name}</td>
-              <td>{card.content}</td>
+              <td
+                style={{
+                  verticalAlign: 'center',
+                  lineHeight: '1.5',
+                  whiteSpace: 'nowrap',
+                }}
+                dangerouslySetInnerHTML={{ __html: rubyText(card.name) }}
+              />
+              <td
+                dangerouslySetInnerHTML={{ __html: rubyText(card.content) }}
+              />
               <td>{card.countdown}</td>
               <td>{card.cost}</td>
               <td>{card.tags.join(',')}</td>
@@ -88,6 +103,15 @@ export default function CharacterPreviewer({
               <p>{tag.effect}</p>
             </div>
           ))}
+        </div>
+      )}
+      {memo && (
+        <div>
+          <h4>設定</h4>
+          <p
+            style={{ whiteSpace: 'pre-wrap' }}
+            dangerouslySetInnerHTML={{ __html: rubyText(memo) }}
+          />
         </div>
       )}
     </div>

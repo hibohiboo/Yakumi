@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .wrapper > div:nth-child(1) {
+    min-width: 580px;
+    overflow: auto;
+    max-height: 80vh;
+  }
+  .wrapper > div:nth-child(2) {
+    overflow: auto;
+    max-height: 80vh;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .wrapper {
+    display: block;
+  }
+}

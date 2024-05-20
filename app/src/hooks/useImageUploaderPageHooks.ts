@@ -1,10 +1,9 @@
 import { uploadToStorageAccount } from '@yakumi-app/domain/storageAccount/uploadToStorageAccount';
 import { extraDownload } from '@yakumi-app/domain/vsRankCharacter/extraTags/extraDownload';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEventHandler, useState } from 'react';
 
 export const useImageUploaderPageHooks = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   const [uploadStatus, setUploadStatus] = useState<string>('');
 
   const handleFileSelection = (event: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +19,28 @@ export const useImageUploaderPageHooks = () => {
 
     setSelectedFile(target?.files[0]);
   };
+  const zipHandleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const zipFile = (form.get('zipFile') as File) || undefined;
 
+    if (!zipFile) {
+      alert('ユドナリウムのルームデータを選択してください');
+      return;
+    }
+    setUploadStatus('connecting to server...');
+    if (!zipFile) {
+      setUploadStatus('No file selected');
+      return;
+    }
+    const result = await uploadToStorageAccount(zipFile, zipFile.name, 'rooms');
+    if (result) {
+      setUploadStatus('Successfully finished upload');
+      return;
+    }
+
+    setUploadStatus('upload failed');
+  };
   const handleIconFileUpload = async () => {
     setUploadStatus('connecting to server...');
     if (!selectedFile) {
@@ -45,5 +65,6 @@ export const useImageUploaderPageHooks = () => {
     handleFileUpload: handleIconFileUpload,
     uploadStatus,
     extraDownload,
+    zipHandleSubmit,
   };
 };

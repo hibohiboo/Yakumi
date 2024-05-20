@@ -4,16 +4,16 @@
   "version": "0.1.0",
   "description": "Udonarium支援ツール",
   "devDependencies": {
-    "@azure/static-web-apps-cli": "^1.1.7",
     "prettier": "^3.2.5",
     "turbo": "^1.13.3",
     "typescript": "^5.4.5"
   },
   "scripts": {
     "prepare": "git config --local core.hooksPath .githooks && echo Changed hooks directory when npm install",
-    "build": "turbo build",
+    "build": "turbo build && cd udonarium && npm i && npm run build",
     "dev": "turbo dev",
     "ncu": "turbo ncu",
+    "lint": "turbo lint",
     "aws-deploy": "cd infrastructure && npm run deploy",
     "preazure-deploy": "npm run build",
     "azure-deploy": "swa deploy ./dist --env production --api-location ./api"
@@ -21,7 +21,7 @@
   "engines": {
     "node": ">=18.x"
   },
-  "packageManager": "npm@10.5.2",
+  "packageManager": "npm@10.8.0",
   "workspaces": [
     "packages/*",
     "app",

@@ -1,7 +1,7 @@
-import type { StorybookConfig } from '@storybook/react-vite';
 import path from 'path';
-import { loadConfigFromFile, mergeConfig } from 'vite';
 import remarkGfm from 'remark-gfm';
+import { loadConfigFromFile, mergeConfig } from 'vite';
+import type { StorybookConfig } from '@storybook/react-vite';
 
 const configEnvServe = {
   mode: 'development',
@@ -31,7 +31,7 @@ const storybookConfig: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  async viteFinal(config, { configType }) {
+  async viteFinal(config) {
     const f = await loadConfigFromFile(
       configEnvServe,
       path.resolve(__dirname, '../vite.config.ts'),

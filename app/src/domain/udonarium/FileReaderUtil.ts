@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unified-signatures */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // buildしたときに TypeError: SHA256 is not a function のエラーがでるので CDNからインストール

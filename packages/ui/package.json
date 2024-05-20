@@ -6,7 +6,7 @@
   "scripts": {
     "vite": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o ../../docs/astro/public/rinne-components",
@@ -16,24 +16,24 @@
     "ncu": "ncu -u"
   },
   "dependencies": {
-    "dompurify": "^3.1.1",
+    "dompurify": "^3.1.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.0.9",
-    "@storybook/addon-interactions": "^8.0.9",
-    "@storybook/addon-links": "^8.0.9",
-    "@storybook/addon-mdx-gfm": "^8.0.9",
-    "@storybook/addon-onboarding": "^8.0.9",
-    "@storybook/blocks": "^8.0.9",
-    "@storybook/react": "^8.0.9",
-    "@storybook/react-vite": "^8.0.9",
+    "@storybook/addon-essentials": "^8.1.1",
+    "@storybook/addon-interactions": "^8.1.1",
+    "@storybook/addon-links": "^8.1.1",
+    "@storybook/addon-mdx-gfm": "^8.1.1",
+    "@storybook/addon-onboarding": "^8.1.1",
+    "@storybook/blocks": "^8.1.1",
+    "@storybook/react": "^8.1.1",
+    "@storybook/react-vite": "^8.1.1",
     "@storybook/testing-library": "^0.2.2",
     "@types/dompurify": "^3.0.5",
     "@types/sanitize-html": "^2.11.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
-    "storybook": "^8.0.9"
+    "storybook": "^8.1.1"
   },
   "exports": {
     ".": "./src/index.ts",

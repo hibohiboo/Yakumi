@@ -5,8 +5,8 @@ function ImageUploaderPage() {
 
   return (
     <div style={{ margin: '1rem' }}>
-      <h1>画像アップロード</h1>
       <article>
+        <h1>画像アップロード</h1>
         <h2>アイコン</h2>
         <input
           type="file"
@@ -18,6 +18,20 @@ function ImageUploaderPage() {
         <button onClick={vm.handleFileUpload}>アップロード</button>
         {vm.uploadStatus}
         <button onClick={vm.extraDownload}>サンプルダウンロード</button>
+      </article>
+      <article>
+        <h1>ユドナリウムルームアップロード</h1>
+        <h2>アイコン</h2>
+        <form onSubmit={vm.zipHandleSubmit}>
+          <input
+            type="file"
+            accept="application/zip"
+            name="zipFile"
+            onChange={vm.handleFileSelection}
+          ></input>
+          <button type="submit">アップロード</button>
+          {vm.uploadStatus}
+        </form>
       </article>
     </div>
   );

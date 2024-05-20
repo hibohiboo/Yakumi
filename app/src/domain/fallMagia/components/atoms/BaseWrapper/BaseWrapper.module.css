@@ -1,0 +1,36 @@
+/**
+https://getbootstrap.jp/docs/5.3/layout/grid/
+
+xs <576px	
+sm ≥576px
+md ≥768px
+lg ≥992px
+xl ≥1200px
+xxl ≥1400px
+
+*/
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.main {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  color: var(--white);
+  position: relative;
+  overflow: auto;
+  padding: 1px; /* paddingがないと、子要素のmarginが親要素を突き抜ける現象が発生する */
+  padding-bottom: 2rem;
+}
+.agreementAndPolicy {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  background-color: #000;
+  a { color: gray; }
+}

@@ -2,16 +2,17 @@ import { TextImageCard } from '../card/types';
 import { CharacterClipboardData } from './types';
 
 export const itemsToCcfoliaJson = (
-  items: TextImageCard[],
+  items: Pick<TextImageCard, 'name' | 'content'>[],
   name: string,
-  id: string,
-  sheet: string,
+  externalUrl: string,
+  iconUrl: string | null = null,
 ): CharacterClipboardData => {
   return {
     kind: 'character',
     data: {
       name: name,
-      externalUrl: `https://gentle-smoke-0024c9c00.5.azurestaticapps.net/app/spread-sheet/?id=${id}&sheet=${sheet}`,
+      externalUrl,
+      iconUrl,
       params: [
         ...items.map((p, i) => ({
           label: `${i + 1}:${p.name}`,

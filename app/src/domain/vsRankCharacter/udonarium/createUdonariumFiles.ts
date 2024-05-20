@@ -16,8 +16,14 @@ export const createUdonariumFiles =
   ) =>
   async (item: CharacterSheetPropsCard & { index: number }) => {
     const ref = refList[item.index];
-    const canvas = await html2canvas(ref.current!);
+    if (!ref.current) {
+      console.warn('item', item);
+      throw Error('ref.current is undefined');
+    }
+
+    const canvas = await html2canvas(ref.current);
     const front = await canvasToFile(canvas);
+
     const props = [
       {
         title: item.name,
@@ -29,7 +35,6 @@ export const createUdonariumFiles =
       },
     ];
     const doc = getDoc();
-
     const card = createCardWithProp(
       doc,
       item.name,

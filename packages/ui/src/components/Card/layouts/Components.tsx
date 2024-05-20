@@ -1,4 +1,4 @@
-/* eslint-disable react-refresh/only-export-components */
+ 
 import { rubyText } from '@yakumi-components/components/atoms/rubyText';
 import React from 'react';
 import styles from './CardWrapper.module.css';

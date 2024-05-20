@@ -14,12 +14,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.13.0",
-    "zod": "^3.23.6"
+    "@prisma/client": "^5.14.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "esbuild": "^0.20.2",
-    "prisma": "^5.13.0",
+    "esbuild": "^0.21.3",
+    "prisma": "^5.14.0",
     "zod-prisma-types": "^3.1.6",
     "@yakumi/tsconfig": "*"
   }

@@ -95,8 +95,7 @@ export const useSpreadPageHooks = () => {
       itemsToCcfoliaJson(
         items,
         deckName,
-        state.spreadSheetId || '',
-        state.sheetName || '',
+        `https://gentle-smoke-0024c9c00.5.azurestaticapps.net/app/spread-sheet/?id=${state.spreadSheetId || ''}&sheet=${state.sheetName || ''}`,
       ),
     [itemsToCcfoliaJson, items, deckName, state.spreadSheetId, state.sheetName],
   );

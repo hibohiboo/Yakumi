@@ -16,7 +16,7 @@ const maxFileSize = 5 * 1024 * 1024; // 5M bytes
 export const uploadToStorageAccount = async (
   file: File,
   fileName: string,
-  directory: string = 'uploaded',
+  directory = 'uploaded',
 ) => {
   const filePath = `${directory}/${fileName}`;
   const sasToken = await getSasTokenUrl(filePath);

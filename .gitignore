@@ -35,3 +35,6 @@ yarn-error.log*
 # Turborepo
 .turbo
 .env
+
+# dist配下の.gitginoreに任せる
+!./dist

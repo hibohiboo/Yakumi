@@ -1,0 +1,26 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- CreateTable
+CREATE TABLE [dbo].[MagiaFallCharacterLog] (
+    [logId] NVARCHAR(1000) NOT NULL,
+    [id] NVARCHAR(1000) NOT NULL,
+    [data] NVARCHAR(max) NOT NULL,
+    [created] DATETIMEOFFSET NOT NULL CONSTRAINT [MagiaFallCharacterLog_created_df] DEFAULT CURRENT_TIMESTAMP,
+    [updated] DATETIMEOFFSET NOT NULL CONSTRAINT [MagiaFallCharacterLog_updated_df] DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT [MagiaFallCharacterLog_pkey] PRIMARY KEY CLUSTERED ([logId])
+);
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH

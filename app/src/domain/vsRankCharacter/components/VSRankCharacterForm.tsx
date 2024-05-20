@@ -29,7 +29,7 @@ const VSRankCharacterForm: React.FC<{
           <input
             name="characterName"
             onChange={vm.onCharacterNameChange}
-            defaultValue={vm.characterName}
+            value={vm.characterName}
           />
           <div>
             <label>

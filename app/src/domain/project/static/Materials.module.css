@@ -1,0 +1,9 @@
+.table {
+  border: solid 1px #ccc;
+}
+.table td {
+  padding: 5px;
+}
+.table a {
+  color: #ccc;
+}

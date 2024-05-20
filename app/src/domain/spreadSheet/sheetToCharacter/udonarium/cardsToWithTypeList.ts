@@ -1,11 +1,11 @@
 import { CharacterSheetPropsCard } from '../types';
 type PickedCard = Pick<CharacterSheetPropsCard, 'type'>;
 
-type CardsWithType<T extends PickedCard> = {
+interface CardsWithType<T extends PickedCard> {
   type: string;
   label: string;
   items: T[];
-};
+}
 
 export const cardsToWithTypeList = <T extends PickedCard>(
   cards: T[],

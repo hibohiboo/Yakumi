@@ -24,7 +24,10 @@ import {
 import { AppDispatch, RootState } from '..';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-type CardTypeWithLabel = { type: string; label: string };
+interface CardTypeWithLabel {
+  type: string;
+  label: string;
+}
 interface VSRankCharacterPageState {
   characterId: string;
   characterName: string;
@@ -220,7 +223,7 @@ export const selectedExtraTagsSelector = createSelector(
 );
 
 export const selectCharacterAction = createAsyncThunk<
-  void,
+  Promise<void>,
   string,
   {
     dispatch: AppDispatch;

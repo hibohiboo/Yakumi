@@ -91,11 +91,11 @@ export const generateSASUrl = async (
   }
 };
 
-type ListFilesInContainerResponse = {
+interface ListFilesInContainerResponse {
   error: boolean;
   errorMessage: string;
   data: string[];
-};
+}
 
 export const listFilesInContainer = async (
   serviceName: string,

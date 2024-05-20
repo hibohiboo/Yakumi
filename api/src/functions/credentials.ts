@@ -22,16 +22,10 @@ export async function getGenerateSasToken(
         jsonBody: 'Missing required app configuration',
       };
     }
-
-    const containerName = request.query.get('container') || 'images';
-    const fileName = request.query.get('file') || 'nonamefile';
-    const permissions = request.query.get('permission') || 'w';
-    const timerange = parseInt(request.query.get('timerange') || '10'); // 10 minutes
-
-    context.log(`containerName: ${containerName}`);
-    context.log(`fileName: ${fileName}`);
-    context.log(`permissions: ${permissions}`);
-    context.log(`timerange: ${timerange}`);
+    const { containerName, fileName, permissions } = getQueryParameters(
+      request,
+      context,
+    );
 
     const url = await generateSASUrl(
       process.env?.Azure_Storage_AccountName,
@@ -59,3 +53,21 @@ app.http('credentials', {
   authLevel: 'anonymous',
   handler: getGenerateSasToken,
 });
+
+function getQueryParameters(request: HttpRequest, context: InvocationContext) {
+  const containerName = request.query.get('container') || 'images';
+  const fileName = request.query.get('file') || 'nonamefile';
+  const permissions = request.query.get('permission') || 'w';
+  const timerange = parseInt(request.query.get('timerange') || '10'); // 10 minutes
+
+  context.log(`containerName: ${containerName}`);
+  context.log(`fileName: ${fileName}`);
+  context.log(`permissions: ${permissions}`);
+  context.log(`timerange: ${timerange}`);
+  return {
+    containerName,
+    fileName,
+    permissions,
+    timerange,
+  };
+}
