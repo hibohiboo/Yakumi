@@ -3,6 +3,12 @@ on:
   push:
     branches:
       - develop
+    paths:
+      - .github/workflows/**
+      - docs/**
+      - packages/ui/**
+      - app/**
+      - api/**
   workflow_dispatch:
 permissions:
   contents: read
