@@ -22,6 +22,8 @@
   "globals": {
     "VITE_DEFINE_BASE_PATH": "app"
   },
+  "collectCoverage": true,
+  "coverageDirectory": "../docs/public/jest-reports-app/coverage",
   "reporters": [
     "default",
     [
