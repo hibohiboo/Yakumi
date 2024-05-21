@@ -4,7 +4,7 @@ import { FlatCompat } from "@eslint/eslintrc";
 import path from "path";
 import { fileURLToPath } from "url";
 import prettierConfig from 'eslint-config-prettier';
-import customConfig from '@yakumi/eslint-config-custom/defaults.js';
+import customConfig from './defaults.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

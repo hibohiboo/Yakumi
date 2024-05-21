@@ -1,4 +1,4 @@
-import customConfig from '@yakumi/eslint-config-custom/defaults.js';
+import customConfig from './defaults.js';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import reactHooksConfig from 'eslint-plugin-react-hooks';
 import prettierConfig from 'eslint-config-prettier';
