@@ -19,6 +19,7 @@
   },
   "scripts": {
     "inspect": "npx @eslint/config-inspector",
+    "build": "npx @eslint/config-inspector build --base Yakumi/eslint-config-inspector &&  rm -rf ../../docs/public/eslint-config-inspector && cp -r .eslint-config-inspector ../../docs/public/eslint-config-inspector",
     "ncu": "ncu -u"
   }
 }
