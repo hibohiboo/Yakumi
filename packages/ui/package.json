@@ -9,7 +9,7 @@
     "lint": "eslint",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o ../../docs/public/kartagraph-components",
+    "build-storybook": "storybook build -o ../../docs/public/yakumi-components",
     "clean": "rm -rf .turbo",
     "test": "jest --config ./jest.config.json",
     "ncu": "ncu -u"
