@@ -1,2 +1,2 @@
-import customConfig from './frontend.js';
+import customConfig from '@yakumi/eslint-config-custom/frontend.js';
 export default customConfig;

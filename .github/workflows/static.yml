@@ -32,7 +32,11 @@ jobs:
       # #######################################
       # 共通設定
       # #######################################
-      # config-inspecto ビルド -> コピー
+      # config-inspector 準備
+      - name: Install dependencies  ESLint 
+        run: npm i
+        working-directory: packages/eslint-config-custom
+      # config-inspector ビルド -> コピー
       - name: Build ESLint Config Inspector
         run: npm run build
         working-directory: packages/eslint-config-custom
