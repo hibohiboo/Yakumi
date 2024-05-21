@@ -33,6 +33,9 @@ jobs:
       - name: Build Sample Storybook
         run: npm run build-storybook
         working-directory: packages/ui
+      # #######################################
+      # デプロイ
+      # #######################################
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

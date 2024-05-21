@@ -32,7 +32,8 @@
     "@types/dompurify": "^3.0.5",
     "@types/sanitize-html": "^2.11.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
-    "storybook": "^8.1.1"
+    "storybook": "^8.1.1",
+    "@yakumi/tsconfig": "*"
   },
   "exports": {
     ".": "./src/index.ts",
