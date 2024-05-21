@@ -27,7 +27,7 @@
     [
       "jest-html-reporters",
       {
-        "publicPath": "../dist/public/jest-reports-editor",
+        "publicPath": "../docs/public/jest-reports-app",
         "filename": "jest.html"
       }
     ]

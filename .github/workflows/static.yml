@@ -33,6 +33,14 @@ jobs:
       - name: Build Sample Storybook
         run: npm run build-storybook
         working-directory: packages/ui
+      # jest reports 準備
+      - name: App Unit Test Prepare
+        run: npm install
+        working-directory: app
+      # jest reports 作成
+      - name: App Unit Test
+        run: npm run test
+        working-directory: app
       # #######################################
       # デプロイ
       # #######################################
