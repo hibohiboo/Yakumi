@@ -42,6 +42,17 @@ jobs:
         run: npm run test
         working-directory: app
       # #######################################
+      # バックエンド
+      # #######################################
+      # 準備
+      - name: OpenAPI Schema Modules
+        run: npm  install
+        working-directory: api
+      # OpenAPI Document 作成
+      - name: OPEN API Schema Build
+        run: npm run openapi-build
+        working-directory: api
+      # #######################################
       # デプロイ
       # #######################################
       - name: Upload artifact

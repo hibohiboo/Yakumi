@@ -13,7 +13,8 @@
     "lint": "eslint",
     "test": "echo \"No tests yet...\"",
     "ncu": "ncu -u",
-    "openapi": "redocly preview-docs"
+    "openapi": "redocly preview-docs",
+    "openapi-build": "redocly build-docs core@v1 --disableGoogleFont -o ../docs/public/openapi/index.html"
   },
   "dependencies": {
     "@azure/functions": "^4.5.0",
