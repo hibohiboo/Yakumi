@@ -9,10 +9,9 @@
     "lint": "eslint",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o ../../docs/astro/public/rinne-components",
+    "build-storybook": "storybook build -o ../../docs/public/kartagraph-components",
     "clean": "rm -rf .turbo",
     "test": "jest --config ./jest.config.json",
-    "mv-jest-reports": "cp ./public/mockServiceWorker.js ../../docs/astro/public/ && mv ./__reports__ ../../docs/astro/public/jest-reports-components",
     "ncu": "ncu -u"
   },
   "dependencies": {
