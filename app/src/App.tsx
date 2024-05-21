@@ -32,27 +32,29 @@ function App() {
           </Link>
         </li>
         <li>
-          <a
-            style={{ color: 'white' }}
-            href="/yakumi-udonarium/udonarium/"
-            target="_blank"
-          >
+          <a style={{ color: 'white' }} href="/udonarium/" target="_blank">
             ユドナリウム
           </a>
         </li>
         <li>
-          <Link style={{ color: 'white' }} to={'/hollow/'}>
-            HollowΦFlux デッキ作成
+          <Link style={{ color: 'white' }} to={'/vs-rank-character/'}>
+            冒険者学校新入生ランク分け対人戦試験キャラクターデッキ作成
           </Link>
         </li>
+
         <li>
           <a
             style={{ color: 'white' }}
-            href="/yakumi-udonarium/udonarium/?room=hollow"
+            href="/udonarium/?room=vsrank"
             target="_blank"
           >
-            HollowΦFlux用ユドナリウム
+            冒険者学校新入生ランク分け対人戦試験ユドナリウム
           </a>
+        </li>
+        <li>
+          <Link style={{ color: 'white' }} to={'/fall-magia/character'}>
+            魔法少女フォールマギア
+          </Link>
         </li>
       </ul>
 

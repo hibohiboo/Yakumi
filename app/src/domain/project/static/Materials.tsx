@@ -23,13 +23,45 @@ export function Materials() {
           <tbody>
             <tr>
               <td>
-                <a href="https://game-icons.net/">Game-icons.net</a>
+                <a
+                  href="https://game-icons.net/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Game-icons.net
+                </a>
               </td>
               <td>アイコン素材</td>
               <td>
-                <a href="https://creativecommons.org/licenses/by/3.0/">
+                <a
+                  href="https://creativecommons.org/licenses/by/3.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   CC BY 3.0
                 </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://fontawesome.com/search?m=free&o=r"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Font Awesome
+                </a>
+              </td>
+              <td>アイコン素材</td>
+              <td>
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CC BY 4.0
+                </a>
+                <a href="https://fontawesome.com/license/free">MIT</a>
               </td>
             </tr>
           </tbody>
