@@ -12,13 +12,14 @@
     "dev": "func start --port 7071",
     "lint": "eslint",
     "test": "jest",
-    "prestepci-generate": "redocly bundle -o ./openapi/dist/bundle.yml",
+    "prestepci-generate": "npm run openapi-bundle",
     "stepci-generate": "cross-env STEPCI_DISABLE_ANALYTICS=0 npx stepci generate ./openapi/dist/bundle.yml ./tests/e2e/geranated.stepci.yml",
     "poststepci-generate": "npm run stepci-run",
     "stepci-run": "cross-env STEPCI_DISABLE_ANALYTICS=0 npx stepci run ./tests/e2e/geranated.stepci.yml",
     "ncu": "ncu -u",
     "openapi": "redocly preview-docs",
-    "openapi-build": "redocly build-docs core@v1 --disableGoogleFont -o ../docs/public/openapi/index.html"
+    "openapi-build": "redocly build-docs core@v1 --disableGoogleFont -o ../docs/public/openapi/index.html",
+    "openapi-bundle": "redocly bundle -o ./openapi/dist/bundle.yml"
   },
   "dependencies": {
     "@azure/functions": "^4.5.0",
