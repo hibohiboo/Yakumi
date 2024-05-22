@@ -1,0 +1,80 @@
+version: "1.0"
+name: 薬味
+config:
+  http:
+    baseURL: http://localhost:7071/api
+tests:
+  default:
+    name: Default
+    steps:
+      - id: post/credentials
+        name: SASトークンを取得
+        http:
+          url: /credentials
+          method: POST
+          params:
+            file: Lorem sed tempor
+            permission: w
+            timerange: "86"
+            container: $web
+          check:
+            status: 200
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: SASトークン
+                  example: >-
+                    https://hoge.blob.core.windows.net/%24web/icons/flame.png?sv=2023-11-03&spr=https&st=2024-04-27T12%3A26%3A19Z&se=2024-04-27T12%3A27%3A19Z&sr=b&sp=w&sig=3HcTPqW%2BRLWS0zZgHNSMKZBTwHDb3i33IDL1XCLFB04%3D
+      - id: put/rank-character
+        name: キャラクター更新
+        http:
+          url: /rank-character/68b388bd-e455-b12a-f953-a3359c62599c
+          method: PUT
+          headers:
+            Content-Type: application/json
+            accept: application/json
+          json:
+            id: 0075e73a-4a20-5315-518a-64dcda749ec4
+            uid: 48dfdfc6-ed82-c53a-d84e-eab789c005bc
+            data: ullamco Excepteur velit officia
+          check:
+            status: 200
+      - id: get/character-cards-by-id
+        name: キャラクターのカード一覧取得
+        http:
+          url: /get-character-cards/magna
+          method: GET
+          check:
+            status: 200
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  Id:
+                    type: string
+                  CharacterName:
+                    type: string
+                  CardName:
+                    type: string
+components:
+  schemas:
+    rank-character:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: キャラクターID
+          example: 7d8bb386-0f86-4dff-be34-86bb2f55b366
+        uid:
+          type: string
+          format: uuid
+          description: ユーザーID
+          example: 8d9cf132-0f86-4dff-be34-86bb2f55b399
+        data:
+          type: string
+          description: キャラクターJSON
+          example: "{\"name\":\"\"キャラクター名\",\"rank\":\"S\"}"

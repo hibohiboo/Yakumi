@@ -1,0 +1,27 @@
+{
+  "roots": ["<rootDir>/tests"],
+  "transform": {
+    "^.+\\.ts?$": "ts-jest"
+  },
+  "testMatch": ["**/*.test.ts"],
+  "moduleDirectories": ["node_modules", "<rootDir>/"],
+  "moduleNameMapper": {
+    "@yakumi-api/*": ["<rootDir>/src/$1"],
+    "@yakumi-prisma/*": ["<rootDir>/../packages/prisma/$1"]
+  },
+  "globals": {
+   
+  },
+  "collectCoverage": true,
+  "coverageDirectory": "../docs/public/jest-reports-api/coverage",
+  "reporters": [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        "publicPath": "../docs/public/jest-reports-api",
+        "filename": "index.html"
+      }
+    ]
+  ]
+}

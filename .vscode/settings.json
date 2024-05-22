@@ -36,4 +36,9 @@
   "azureFunctions.preDeployTask": "npm prune (functions)",
   // モノレポの場合は、この設定を追加する
   "jestrunner.configPath": "app/jest.config.json",
+  // stepciのYaml補完設定
+  "yaml.completion": true,
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/stepci/stepci/main/schema.json": "*.stepci.yml"
+  }
 }

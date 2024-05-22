@@ -8,8 +8,9 @@ put:
       name: characterId
       schema:
         type: string
-        example: 7d8bb386-0f86-4dff-be34-86bb2f55b366
+        format: uuid
         description: UUID
+        example: 7d8bb386-0f86-4dff-be34-86bb2f55b366
   requestBody:
     content:
       application/json:
@@ -18,3 +19,4 @@ put:
   responses:
     200:
       description: キャラクター作成・更新
+

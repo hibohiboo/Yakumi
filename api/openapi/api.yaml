@@ -17,9 +17,9 @@ servers:
     description: ローカル実行
 
 paths:
-  /credentilas:
+  /credentials:
     $ref: paths/credentilas.yml
   /rank-character/{characterId}:
     $ref: paths/rank-character.yml
-
-
+  /get-character-cards/{id}:
+    $ref: paths/get-character-cards.yml

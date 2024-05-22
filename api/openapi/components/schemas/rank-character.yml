@@ -2,10 +2,12 @@ type: object
 properties:
   id:
     type: string
+    format: uuid
     description: キャラクターID
     example: 7d8bb386-0f86-4dff-be34-86bb2f55b366
   uid:
     type: string
+    format: uuid
     description: ユーザーID
     example: 8d9cf132-0f86-4dff-be34-86bb2f55b399
   data:

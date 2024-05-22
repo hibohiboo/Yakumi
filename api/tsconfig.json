@@ -8,6 +8,7 @@
     "paths": {
       "@yakumi-api/*": ["./src/*"],
       "@yakumi-prisma/*": ["../packages/prisma/*"],
-    }
+    },
+    "esModuleInterop": true
   }
 }

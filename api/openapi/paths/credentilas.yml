@@ -8,24 +8,27 @@ post:
       name: file
       schema:
         type: string
-        example: icons%2Fflame.png
         description: アップロードするファイル名。/は%2Fにエンコードすること。/はフォルダ名となる
+        example: icons%2Fflame.png
     - in: query
       name: permission
       schema:
         type: string
+        enum: [w]
         example: w
         description: " w: 書き込み"
     - in: query
       name: timerange
       schema:
         type: string
+        pattern: '^\d+$'
         example: 5
         description: 単位は分(minute)
     - in: query
       name: container
       schema:
         type: string
+        enum: [$web]
         example: $web
         description: ストレージアカウントのコンテナ名
   responses:

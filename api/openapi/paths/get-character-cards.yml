@@ -1,0 +1,26 @@
+get:
+  operationId: get/character-cards-by-id
+  summary: キャラクターのカード一覧取得
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      description: The ID of the character
+  responses:
+    '200':
+      description: A list of character cards
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                Id:
+                  type: string
+                CharacterName:
+                  type: string
+                CardName:
+                  type: string

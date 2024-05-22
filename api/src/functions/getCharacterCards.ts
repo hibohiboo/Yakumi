@@ -6,6 +6,7 @@ import {
 } from '@azure/functions';
 import { connectionString } from '@yakumi-api/lib/constants';
 import Database from '@yakumi-api/lib/database';
+import { okResponse } from '@yakumi-api/lib/httpResponses';
 import * as sql from 'mssql';
 
 const db = new Database(connectionString);
@@ -41,7 +42,7 @@ export async function getCharacterCards(
     logger: (args) => context.log(args),
   });
 
-  return { body: JSON.stringify(ret) };
+  return okResponse(ret);
 }
 
 app.http('getCharacterCards', {

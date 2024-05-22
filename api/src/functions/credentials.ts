@@ -5,6 +5,7 @@ import {
   app,
 } from '@azure/functions';
 import { generateSASUrl } from '@yakumi-api/lib/azure-storage.js';
+import { errorResponse, okResponse } from '@yakumi-api/lib/httpResponses';
 
 export async function getGenerateSasToken(
   request: HttpRequest,
@@ -35,16 +36,9 @@ export async function getGenerateSasToken(
       permissions,
     );
 
-    return {
-      jsonBody: {
-        url,
-      },
-    };
+    return okResponse({ url });
   } catch (error) {
-    return {
-      status: 500,
-      jsonBody: error,
-    };
+    return errorResponse(error);
   }
 }
 
