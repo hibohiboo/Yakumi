@@ -50,7 +50,7 @@ function FallMagiaCharacterViewerPage() {
       <h1>魔法少女フォールマギア</h1>
       <div>
         {data.uid === vm.uid && (
-          <Link to="/fall-magia/character/tutorial/6">
+          <Link to="/fall-magia/character/tutorial/main">
             <Button icon="edit">編集</Button>
           </Link>
         )}

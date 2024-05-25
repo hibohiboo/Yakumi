@@ -1,7 +1,7 @@
-import { Button } from '@blueprintjs/core';
 import { FallMagiaAttributeCardDescription } from '@yakumi-components/index';
 import { Link } from 'react-router-dom';
 import BaseWrapper from '../../components/atoms/BaseWrapper/BaseWrapper';
+import NextButton from '../../components/atoms/NextButton';
 
 const centerStyle = {
   width: '100%',
@@ -23,9 +23,11 @@ function FallMagiaTutorial5() {
           >
             {`
 
-「これからキミが使える魔法を選んでもらう」
+「キミが使える魔法について説明しておくよ」
 
-「今回のトーナメントでのCPは合計50以内のレギュレーションだ」
+「CPというポイントで使える魔法を取得するんだ」
+
+「今回のトーナメントでのCPは合計50以内のレギュレーションとさせてもらう」
 
 「変身前と変身後の変化が大きいギャップがあるとCPを抑えることができる」
 
@@ -34,7 +36,7 @@ function FallMagiaTutorial5() {
           </div>
           <div style={centerStyle}>
             <Link to="/fall-magia/character/tutorial/6">
-              <Button text="魔法を選ぶ" />
+              <NextButton text="魔法を選ぶ" />
             </Link>
           </div>
           <div

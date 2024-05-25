@@ -1,6 +1,6 @@
-import { Button } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import BaseWrapper from '../../components/atoms/BaseWrapper/BaseWrapper';
+import NextButton from '../../components/atoms/NextButton';
 
 const centerStyle = {
   width: '100%',
@@ -27,7 +27,7 @@ function FallMagiaTutorial1Prologue() {
 
           <div style={centerStyle}>
             <Link to="/fall-magia/character/tutorial/2">
-              <Button text="話を聞く" />
+              <NextButton text="話を聞く" />
             </Link>
           </div>
           <div

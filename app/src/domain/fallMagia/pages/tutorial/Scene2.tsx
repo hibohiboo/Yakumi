@@ -1,6 +1,6 @@
-import { Button } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import BaseWrapper from '../../components/atoms/BaseWrapper/BaseWrapper';
+import NextButton from '../../components/atoms/NextButton';
 import { useFallMagiaScene2Hooks } from '../../hooks/scene2Hooks';
 
 const centerStyle = {
@@ -32,7 +32,7 @@ function FallMagiaTutorial2() {
           </div>
           <div style={centerStyle}>
             <Link to="/fall-magia/character/tutorial/3">
-              <Button text="魔法少女になる" />
+              <NextButton text="魔法少女になる" />
             </Link>
           </div>
           <div

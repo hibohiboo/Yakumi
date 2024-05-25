@@ -1,8 +1,8 @@
-import { Button } from '@blueprintjs/core';
 import { useAppDispatch, useAppSelector } from '@yakumi-app/store/hooks';
 import { ChangeEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import BaseWrapper from '../../components/atoms/BaseWrapper/BaseWrapper';
+import NextButton from '../../components/atoms/NextButton';
 import {
   characterNameSelector,
   setCharacterName,
@@ -42,7 +42,7 @@ function FallMagiaTutorial3() {
           </div>
           <div style={centerStyle}>
             <Link to="/fall-magia/character/tutorial/4">
-              <Button text="次へ" />
+              <NextButton text="次へ" />
             </Link>
           </div>
           <div

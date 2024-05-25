@@ -34,16 +34,22 @@ export const createVSRankChearacterDeck = async (
     common.map((f) => f.card),
     setting,
   );
-  const deckAlways = createDeck(
-    `${setting.deckName} (常時タイミング)`,
-    always.map((f) => f.card),
-    setting,
-  );
-  const deckNoBattle = createDeck(
-    `${setting.deckName} (戦闘外)`,
-    noBattle.map((f) => f.card),
-    setting,
-  );
+  const deckAlways =
+    always.length === 0
+      ? undefined
+      : createDeck(
+          `${setting.deckName} (常時タイミング)`,
+          always.map((f) => f.card),
+          setting,
+        );
+  const deckNoBattle =
+    noBattle.length === 0
+      ? undefined
+      : createDeck(
+          `${setting.deckName} (戦闘外)`,
+          noBattle.map((f) => f.card),
+          setting,
+        );
 
   return {
     deck,

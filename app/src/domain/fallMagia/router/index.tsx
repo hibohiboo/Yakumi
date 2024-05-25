@@ -8,6 +8,8 @@ import FallMagiaTutorial2 from '../pages/tutorial/Scene2';
 import FallMagiaTutorial3 from '../pages/tutorial/Scene3';
 import FallMagiaTutorial4 from '../pages/tutorial/Scene4';
 import FallMagiaTutorial5 from '../pages/tutorial/Scene5';
+import FallMagiaTutorial6 from '../pages/tutorial/Scene6';
+import FallMagiaTutorial7 from '../pages/tutorial/Scene7';
 import FallMagiaTutorialMain from '../pages/tutorial/Scenemain';
 
 export const fallMagiaRouter = {
@@ -34,7 +36,9 @@ export const fallMagiaRouter = {
           element: <FallMagiaTutorial4 />,
         },
         { path: '5', element: <FallMagiaTutorial5 /> },
-        { path: '6', element: <FallMagiaTutorialMain /> },
+        { path: '6', element: <FallMagiaTutorial6 /> },
+        { path: '7', element: <FallMagiaTutorial7 /> },
+        { path: 'main', element: <FallMagiaTutorialMain /> },
       ],
     },
     {

@@ -185,7 +185,7 @@ export const spreadSheetCardListSelector = createSelector(
       })),
 );
 export const selectedCards = createSelector(
-  fallMagiaCharacterPageSlice.selectors.spreadSheetCardListSelector,
+  spreadSheetCardListSelector,
   characterCardIdsSelector,
   (cardList, cards) => cardList.filter((card) => cards.includes(card.id)),
 );
@@ -193,10 +193,22 @@ export const characterParameters = createSelector(selectedCards, (cardList) =>
   cardsToParameters(cardList),
 );
 
-export const cardListWithTypeSelector = createSelector(
+const cardListWithTypeBaseSelector = createSelector(
   spreadSheetCardListSelector,
   spreadSheetCardTypeListSelector,
   (cardList, typeList) => cardsToWithTypeList(cardList, typeList),
+);
+export const cardListWithTypeSelector = createSelector(
+  cardListWithTypeBaseSelector,
+  (list) => list.filter((item) => item.label !== 'ギャップ'),
+);
+export const cardListFlatSelector = createSelector(
+  cardListWithTypeSelector,
+  (list) => list.flatMap((item) => item.items),
+);
+export const cardListGapSelector = createSelector(
+  cardListWithTypeBaseSelector,
+  (list) => list.filter((item) => item.label === 'ギャップ'),
 );
 
 const stateSelector = (state: {

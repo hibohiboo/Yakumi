@@ -1,4 +1,4 @@
-import { CharacterPreviewer } from '@yakumi-components/index';
+import { FallMagiaCharacterPreviewer } from '@yakumi-components/index';
 import { FallMagiaCharacterPageViewModel } from '../../hooks/fallMagiaCharacterPageHooks';
 import FallMagiaCharacterForm from './FallMagiaCharacterForm';
 import styles from './FallMagiaCharacterForm.module.css';
@@ -14,7 +14,7 @@ export function FallMagiaContent({
         <FallMagiaCharacterForm vm={vm} />
       </div>
       <div>
-        <CharacterPreviewer
+        <FallMagiaCharacterPreviewer
           {...{
             name: vm.characterName,
             src:
@@ -26,6 +26,7 @@ export function FallMagiaContent({
             props: vm.params,
             extraTags: vm.selectedExtraTags,
             memo: vm.characterMemo,
+            faction: vm.characterFaction?.tag || '幻獣界',
           }}
         />
       </div>

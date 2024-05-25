@@ -1,19 +1,27 @@
-import { Button, Dialog, DialogBody, TextArea } from '@blueprintjs/core';
 import {
+  Button,
+  Dialog,
+  DialogBody,
+  Switch,
+  TextArea,
+} from '@blueprintjs/core';
+import {
+  AttributeSimpleCard,
   BackCard,
   FallMagiaAttributeCardDescription,
   UdonariumMap,
-  VSAttributeCard,
 } from '@yakumi-components/index';
-import { createRef, useCallback, useState } from 'react';
+import { createRef, useCallback, useId, useState } from 'react';
 import { FallMagiaCharacterPageViewModel } from '../../hooks/fallMagiaCharacterPageHooks';
 import { Factions } from '../molecules/Factions';
+import { CardList } from './components/CardList';
+import { FlatCardList } from './components/FlatCardList';
 
 const VSRankCharacterForm: React.FC<{
   vm: FallMagiaCharacterPageViewModel;
 }> = ({ vm }) => {
-  vm.items.forEach((_, i) => {
-    vm.listRefs.current[i] = createRef<HTMLDivElement>();
+  vm.items.forEach((item) => {
+    vm.listRefs.current[item.index] = createRef<HTMLDivElement>();
   });
   const [isOpened, setIsOpened] = useState(false);
   const handleButtonClick = useCallback(
@@ -22,6 +30,9 @@ const VSRankCharacterForm: React.FC<{
   );
   const handleClose = useCallback(() => setIsOpened(false), []);
   const buttonRef = createRef<HTMLButtonElement>();
+
+  const [isFlat, setIsFlat] = useState(false);
+  const switchId = useId();
   return (
     <div style={{ margin: '1rem' }}>
       <form onSubmit={vm.handleSubmit}>
@@ -57,6 +68,41 @@ const VSRankCharacterForm: React.FC<{
             setItem={vm.setFactionHandler}
           />
         </div>
+        {vm.cardListGap.map((obj) => {
+          return (
+            <div key={obj.type}>
+              <h3>{obj.label}</h3>
+              <details open={false}>
+                <summary>一覧</summary>
+                <div
+                  style={{
+                    background: 'white',
+                    color: 'black',
+                    display: 'flex',
+                    gap: '1rem',
+                    padding: '1rem',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {obj.items.map((item) => (
+                    <div
+                      ref={vm.listRefs.current[item.index]}
+                      key={item.index}
+                      style={{ width: 'fit-content' }}
+                    >
+                      <AttributeSimpleCard
+                        {...item}
+                        onClick={() => vm.onCardClick(item.name)}
+                        selected={item.count > 0 && !vm.isLoading}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </details>
+            </div>
+          );
+        })}
+
         <div>
           <div>設定</div>
           <TextArea
@@ -80,41 +126,26 @@ const VSRankCharacterForm: React.FC<{
           Udonarium用コマ&デッキダウンロード
         </Button>
       </form>
+      <div style={{ display: 'flex' }}>
+        <label htmlFor={switchId}>カードで見る</label>
+        <Switch
+          id={switchId}
+          style={{ marginLeft: '0.5rem' }}
+          label="表で見る"
+          onChange={(e) => {
+            setIsFlat(e.target.checked);
+          }}
+        />
+      </div>
 
-      {vm.itemsWithTypes.map((obj) => {
-        return (
-          <div key={obj.type}>
-            <h3>{obj.label}</h3>
-            <details open={true}>
-              <summary>カード一覧</summary>
-              <div
-                style={{
-                  background: 'white',
-                  color: 'black',
-                  display: 'flex',
-                  gap: '1rem',
-                  padding: '1rem',
-                  flexWrap: 'wrap',
-                }}
-              >
-                {obj.items.map((item) => (
-                  <div
-                    ref={vm.listRefs.current[item.index]}
-                    key={item.index}
-                    style={{ width: 'fit-content' }}
-                  >
-                    <VSAttributeCard
-                      {...item}
-                      onClick={() => vm.onCardClick(item.name)}
-                      selected={item.count > 0 && !vm.isLoading}
-                    />
-                  </div>
-                ))}
-              </div>
-            </details>
-          </div>
-        );
-      })}
+      {isFlat && <FlatCardList vm={vm} />}
+      <div
+        style={
+          isFlat ? { width: '1px', height: '1px', overflow: 'hidden' } : {}
+        }
+      >
+        <CardList vm={vm} />
+      </div>
       <Button
         icon="download"
         type="submit"
@@ -152,7 +183,6 @@ const VSRankCharacterForm: React.FC<{
           <UdonariumMap />
         </div>
       </details>
-
       <Dialog isOpen={isOpened} onClose={handleClose} style={{ width: '80vw' }}>
         <DialogBody>
           <div style={{ color: '#000' }}>

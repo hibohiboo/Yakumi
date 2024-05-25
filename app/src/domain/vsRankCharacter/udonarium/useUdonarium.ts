@@ -58,20 +58,17 @@ export const createVSRankCharasheetAndDeckToUdonarium = async (
     cards,
   );
   const extra = await createUdonariumTokens(extraTags);
-
-  await createZip(
-    [
-      back.file,
-      ...files.map((f) => f.file),
-      char,
-      file,
-      deckNoBattle,
-      deckAlways,
-      deck,
-      ...extra,
-    ],
-    setting.deckName,
-  );
+  const ret = [
+    back.file,
+    ...files.map((f) => f.file),
+    char,
+    file,
+    deck,
+    ...extra,
+  ];
+  if (deckNoBattle) ret.push(deckNoBattle);
+  if (deckAlways) ret.push(deckAlways);
+  await createZip(ret, setting.deckName);
 };
 
 export const createVSRankCharasheetAndDeckToUdonariumBlob = async (
@@ -96,15 +93,15 @@ export const createVSRankCharasheetAndDeckToUdonariumBlob = async (
     cards,
   );
   const extra = await createUdonariumTokens(extraTags);
-
-  return FileArchiver.instance.generateBlob([
+  const ret = [
     back.file,
     ...files.map((f) => f.file),
     char,
     file,
-    deckNoBattle,
-    deckAlways,
     deck,
     ...extra,
-  ]);
+  ];
+  if (deckNoBattle) ret.push(deckNoBattle);
+  if (deckAlways) ret.push(deckAlways);
+  return FileArchiver.instance.generateBlob(ret);
 };

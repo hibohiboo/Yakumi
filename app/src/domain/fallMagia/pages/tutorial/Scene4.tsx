@@ -1,6 +1,6 @@
-import { Button } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import BaseWrapper from '../../components/atoms/BaseWrapper/BaseWrapper';
+import NextButton from '../../components/atoms/NextButton';
 import { Factions } from '../../components/molecules/Factions';
 import { useFallMagiaScene4Hooks } from '../../hooks/scene4Hooks';
 
@@ -50,7 +50,7 @@ function FallMagiaTutorial4() {
           </div>
           <div style={centerStyle}>
             <Link to="/fall-magia/character/tutorial/5">
-              <Button text="次へ" />
+              <NextButton text="次へ" />
             </Link>
           </div>
           <div
