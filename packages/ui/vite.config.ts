@@ -9,11 +9,15 @@ export default defineConfig({
     alias: [{ find: '@yakumi-components', replacement: '/src' }],
   },
   build: {
+    chunkSizeWarningLimit: 700,
     rollupOptions: {
       output: {
         manualChunks: {
           react: ['react', 'react-dom', 'react/jsx-runtime'],
+          icons: ['react-icons'],
           others: ['dompurify'],
+          storybook: ['@storybook/react'],
+          storybookFamily: ['@storybook/blocks'], // 696.34kb
         },
       },
     },
