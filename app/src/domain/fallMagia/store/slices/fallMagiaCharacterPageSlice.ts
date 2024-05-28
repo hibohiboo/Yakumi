@@ -10,19 +10,18 @@ import { cardsToWithTypeList } from '@yakumi-app/domain/spreadSheet/sheetToChara
 import { getStorageAccountFilePath } from '@yakumi-app/domain/storageAccount/getFilePath';
 import { uploadToStorageAccount } from '@yakumi-app/domain/storageAccount/uploadToStorageAccount';
 import { uniqExtraList } from '@yakumi-app/domain/vsRankCharacter/extraTags/uniqExtraList';
-
 import {
   CharacterIdListItem,
-  CharacterSheetPropsCard,
   ExtraTag,
 } from '@yakumi-app/domain/vsRankCharacter/types';
 import { AppDispatch, RootState } from '@yakumi-app/store';
 import { setCharacterId } from '@yakumi-app/store/slices/vsRankCharacterPageSlice';
-import { storageAccountPrefix } from '../../constants';
+import { DEFAULT_CHAR_IMG, storageAccountPrefix } from '../../constants';
 import {
   SaveFallMagiaCharacterArgs,
   saveCharacter,
 } from '../../services/persistent/saveCharacter';
+import { FallMagiaCharacterSheetPropsCard } from '../../types';
 import fallMagiaCharacterSlice, {
   characterCardIdsSelector,
   characterFactionSelector,
@@ -39,7 +38,7 @@ interface FallMagiaCharacterPageState {
   spreadSheetId: string;
   sheetName: string;
   range: string;
-  cardList: CharacterSheetPropsCard[];
+  cardList: FallMagiaCharacterSheetPropsCard[];
   cardTypeList: CardTypeWithLabel[];
   extraTags: ExtraTag[];
   characterList: CharacterIdListItem[];
@@ -48,19 +47,30 @@ interface FallMagiaCharacterPageState {
 const searchParams = new URLSearchParams(window.location.search);
 
 const initialState: FallMagiaCharacterPageState = {
-  characterSrc: getImageSrc(
-    'assets/images/udonarium/outline_person_outline_black_24dp.png',
-  ),
+  characterSrc: getImageSrc(DEFAULT_CHAR_IMG),
   spreadSheetId:
     searchParams.get('id') || '1lRoDfjaU3MZW7z0KYrAxIHwIren-QNQU9w36_l6WgNI',
   sheetName: searchParams.get('sheet') || 'カード一覧',
-  range: 'A4:R100',
+  range: 'A4:S200',
   cardList: [],
   cardTypeList: [],
   extraTags: [],
   characterList: [],
 };
+const getSrc = (
+  data: SaveFallMagiaCharacterArgs,
+  state: RootState,
+  image?: File,
+) => {
+  if (image)
+    return getStorageAccountFilePath(
+      `${storageAccountPrefix}/${data.uid}/${data.characterId}/character-image.png`,
+    );
+  const characterSrc = state.fallMagiaCharacterSlice.src;
+  if (characterSrc) return characterSrc;
 
+  return '';
+};
 export const saveFallMagiaCharacterAction = createAsyncThunk<
   Promise<void>,
   { data: SaveFallMagiaCharacterArgs; blob: Blob; image?: File },
@@ -82,20 +92,12 @@ export const saveFallMagiaCharacterAction = createAsyncThunk<
     'udonarium-character.zip',
     directory,
   );
-  const src = (() => {
-    if (image)
-      return getStorageAccountFilePath(
-        `${storageAccountPrefix}/${data.uid}/${data.characterId}/character-image.png`,
-      );
-    const characterSrc = thunk.getState().fallMagiaCharacterPage.characterSrc;
-    if (characterSrc) return characterSrc;
 
-    return '';
-  })();
   const saveCharacterData = {
     ...data,
-    src,
+    src: getSrc(data, thunk.getState(), image),
   };
+
   // ストレージアカウントにキャラクターデータを保存
   await uploadToStorageAccount(
     new File(
@@ -110,13 +112,13 @@ export const saveFallMagiaCharacterAction = createAsyncThunk<
     'character-data.json',
     directory,
   );
-  // RDBに保存 / ローカルストレージにキャラクターを保存
-  await saveCharacter(saveCharacterData);
-  if (image) {
+  if (image && saveCharacterData.src) {
     thunk.dispatch(
       fallMagiaCharacterSlice.actions.setSrc(saveCharacterData.src),
     );
   }
+  // RDBに保存 / ローカルストレージにキャラクターを保存
+  await saveCharacter(saveCharacterData);
 });
 
 const fallMagiaCharacterPageSlice = createSlice({
@@ -136,7 +138,10 @@ const fallMagiaCharacterPageSlice = createSlice({
       state.sheetName = action.payload.sheetName;
       state.range = action.payload.range;
     },
-    setCardList: (state, action: PayloadAction<CharacterSheetPropsCard[]>) => {
+    setCardList: (
+      state,
+      action: PayloadAction<FallMagiaCharacterSheetPropsCard[]>,
+    ) => {
       state.cardList = action.payload;
     },
     setCharacterSrc: (state, action: PayloadAction<string>) => {

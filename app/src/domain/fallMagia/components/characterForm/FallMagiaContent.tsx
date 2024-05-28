@@ -3,6 +3,16 @@ import { FallMagiaCharacterPageViewModel } from '../../hooks/fallMagiaCharacterP
 import FallMagiaCharacterForm from './FallMagiaCharacterForm';
 import styles from './FallMagiaCharacterForm.module.css';
 
+function getSrc(characterSrc?: string, characterSavedSrc?: string) {
+  if (characterSrc?.includes('blob')) {
+    return characterSrc;
+  }
+  if (characterSavedSrc) {
+    return characterSavedSrc;
+  }
+  return characterSrc || '';
+}
+
 export function FallMagiaContent({
   vm,
 }: {
@@ -17,11 +27,7 @@ export function FallMagiaContent({
         <FallMagiaCharacterPreviewer
           {...{
             name: vm.characterName,
-            src:
-              vm.characterSrc.includes('outline_person_outline_black_24dp') &&
-              vm.characterSavedSrc
-                ? vm.characterSavedSrc
-                : vm.characterSrc,
+            src: getSrc(vm.characterSrc, vm.characterSavedSrc),
             cards: vm.selectedItems,
             props: vm.params,
             extraTags: vm.selectedExtraTags,

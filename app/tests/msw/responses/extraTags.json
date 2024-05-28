@@ -1,20 +1,34 @@
 {
-  "range": "Extraタグ!A3:E30",
+  "range": "'Extraタグ'!A3:E30",
   "majorDimension": "ROWS",
   "values": [
-    [
-      "poison",
-      "▲状態",
-      "毒",
-      "手番の終わりのたび、{強度}点のダメージを与える。防御力無視。",
-      "icons/poison-bottle.png"
-    ],
-    [
-      "greese",
-      "■地形",
-      "滑る床",
-      "この地形から動くとき移動マスを-2(最低1)する",
-      "icons/banana-peel.png"
-    ]
+      [
+          "poison",
+          "▲状態",
+          "毒",
+          "手番の終わりのたび、{強度}点のダメージ。防御力無視。",
+          "icons/poison-bottle.png"
+      ],
+      [
+          "greese",
+          "■地形",
+          "滑る床",
+          "この地形から動くとき移動マスを-2(最低1)する",
+          "icons/banana-peel.png"
+      ],
+      [
+          "framearea",
+          "■地形",
+          "炎の床",
+          "この地形の上にいると1カウントのたび防御力を無視して1ダメージを受ける。これは火タグがついた効果として扱う。",
+          "icons/firewall.png"
+      ],
+      [
+          "overloadarea",
+          "■地形",
+          "精霊の宴",
+          "地形設置時にタグを１つ指定する。この地形の上の対象は指定タグを持つものとして扱い、さらに対象が使用する魔法は指定タグがついたものとして扱う。",
+          "icons/mushrooms-cluster.png"
+      ]
   ]
 }

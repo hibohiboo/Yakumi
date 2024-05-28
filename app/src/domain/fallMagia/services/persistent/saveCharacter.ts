@@ -4,7 +4,7 @@ import {
   CharacterSheetDetailsProp,
   CharacterSheetPropsCard,
 } from '@yakumi-components/components/vsRankedMatch/CharacterPreviwer/types';
-
+const CHARACTER_KEY = 'FALLMAGIA_CHARACTER_KEY';
 export interface SaveFallMagiaCharacterArgs {
   characterId: string;
   uid: string;
@@ -16,6 +16,9 @@ export interface SaveFallMagiaCharacterArgs {
   extraTags: CharacterExtraTag[];
   memo: string;
 }
+export const setCharacter = (item: SaveFallMagiaCharacterArgs): void => {
+  localStorage.setItem(CHARACTER_KEY, JSON.stringify(item));
+};
 
 export const saveCharacter = async (args: SaveFallMagiaCharacterArgs) => {
   const id = args.characterId;
@@ -24,18 +27,14 @@ export const saveCharacter = async (args: SaveFallMagiaCharacterArgs) => {
     uid: args.uid,
     data: JSON.stringify(args),
   });
-  if (ret.statusText !== 'OK') throw new Error('Failed to save character');
+  if (ret.status !== 200) throw new Error('Failed to save character');
   return setCharacter(args);
 };
-const CHARACTER_KEY = 'FALLMAGIA_CHARACTER_KEY';
+
 export const getCharacter = (): SaveFallMagiaCharacterArgs | null => {
   const local = localStorage.getItem(CHARACTER_KEY);
   if (!local) {
     return null;
   }
   return JSON.parse(local);
-};
-
-export const setCharacter = (item: SaveFallMagiaCharacterArgs): void => {
-  localStorage.setItem(CHARACTER_KEY, JSON.stringify(item));
 };

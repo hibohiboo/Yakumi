@@ -20,6 +20,7 @@ export function FlatCardList({
             <th>カード名</th>
             <th>タイミング</th>
             <th>CT</th>
+            <th>対象</th>
             <th>射程</th>
             <th>コスト</th>
             <th>追加能力値</th>
@@ -41,6 +42,7 @@ export function FlatCardList({
                 <td dangerouslySetInnerHTML={{ __html: rubyText(item.name) }} />
                 <td>{item.timing}</td>
                 <td>{item.countdown}</td>
+                <td>{item.target}</td>
                 <td>{item.range}</td>
                 <td>{item.cost}</td>
                 <td>

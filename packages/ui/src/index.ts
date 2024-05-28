@@ -1,6 +1,7 @@
 import AttributeCard from './components/Card/templates/Attribute/AttributeCard';
 import BackCard from './components/Card/templates/Back/BackCard';
 import { rubyText } from './components/atoms/rubyText';
+import FallMagiaAttributeCard from './components/fallMagia/Attribute/AttributeCard';
 import FallMagiaAttributeCardDescription from './components/fallMagia/AttributeDescription/AttributeCardDescription';
 import AttributeSimpleCard from './components/fallMagia/AttributeSimple/AttributeSimpleCard';
 import FallMagiaCharacterPreviewer from './components/fallMagia/CharacterPreviwer';
@@ -20,4 +21,5 @@ export {
   FallMagiaCharacterPreviewer,
   AttributeSimpleCard,
   rubyText,
+  FallMagiaAttributeCard,
 };

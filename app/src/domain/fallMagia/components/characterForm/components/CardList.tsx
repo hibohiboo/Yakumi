@@ -1,5 +1,5 @@
 import { FallMagiaCharacterPageViewModel } from '@yakumi-app/domain/fallMagia/hooks/fallMagiaCharacterPageHooks';
-import { VSAttributeCard } from '@yakumi-components/index';
+import { FallMagiaAttributeCard } from '@yakumi-components/index';
 
 export function CardList({
   vm,
@@ -31,7 +31,7 @@ export function CardList({
                 key={item.index}
                 style={{ width: 'fit-content' }}
               >
-                <VSAttributeCard
+                <FallMagiaAttributeCard
                   {...item}
                   onClick={() => vm.onCardClick(item.name)}
                   selected={item.count > 0 && !vm.isLoading}

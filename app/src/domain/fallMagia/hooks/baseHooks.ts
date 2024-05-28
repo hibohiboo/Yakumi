@@ -20,7 +20,6 @@ import {
 } from '@yakumi-app/domain/fallMagia/store/slices/fallMagiaCharacterPageSlice';
 import { convertExtraTagsFromSpreadsheet } from '@yakumi-app/domain/vsRankCharacter/extraTags/extraTagsFromSpreadsheet';
 import { createVSRankUdonariumMap } from '@yakumi-app/domain/vsRankCharacter/map/downLoadMap';
-import { valuesToCharacterSheetPropsCard } from '@yakumi-app/domain/vsRankCharacter/sheetToCharacter/valuesToCharacterSheetPropsCard';
 import {
   createVSRankCharasheetAndDeckToUdonarium,
   createVSRankCharasheetAndDeckToUdonariumBlob,
@@ -31,12 +30,14 @@ import { uidSelector } from '@yakumi-app/store/slices/userSlice';
 import {
   ChangeEvent,
   FormEventHandler,
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from 'react';
 import { useSelector } from 'react-redux';
 import { Scene4SelectItem } from '../services/scene4Items';
+import { valuesToFallMagiaCharacterSheetPropsCard } from '../services/sheetToCharacter/valuesToCharacterSheetPropsCard';
 import {
   addCard,
   characterCardIdsSelector,
@@ -72,6 +73,7 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
   const [isLoading, setIsloading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const handleClose = useCallback(() => setIsSaved(false), []);
   const [characterImageFile, setCharacterImageFile] = useState<
     File | undefined
   >();
@@ -82,7 +84,7 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
 
   useEffect(() => {
     const values = data?.values || [];
-    const list = valuesToCharacterSheetPropsCard(values);
+    const list = valuesToFallMagiaCharacterSheetPropsCard(values);
 
     // 初期作成の場合は自動取得カードを登録
     if (selectedCardIds.length === 0) {
@@ -197,7 +199,10 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
   const downloadMap = () => {
     createVSRankUdonariumMap(mapRef);
   };
-  const saveCharacterHandler = async () => {
+  const saveCharacterHandler = async (
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
     setIsSaving(true);
     const image = characterImageFile;
     setIsloading(true); // CSS漏れでカードが黄色くなること対策
@@ -271,5 +276,6 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
     characterMemo,
     memoHandler,
     characterSavedSrc,
+    handleClose,
   };
 };

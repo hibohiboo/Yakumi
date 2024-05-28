@@ -1,12 +1,11 @@
-import { Button, Dialog, DialogBody } from '@blueprintjs/core';
-import {
-  FallMagiaAttributeCardDescription,
-  VSAttributeCard,
-} from '@yakumi-components/index';
-import { useCallback, useState } from 'react';
+import { Button, Dialog, DialogBody, Switch } from '@blueprintjs/core';
+import { FallMagiaAttributeCardDescription } from '@yakumi-components/index';
+import { useCallback, useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BaseWrapper from '../../components/atoms/BaseWrapper/BaseWrapper';
 import NextButton from '../../components/atoms/NextButton';
+import { CardList } from '../../components/characterForm/components/CardList';
+import { FlatCardList } from '../../components/characterForm/components/FlatCardList';
 import { useFallMagiaCharacterPageHooks } from '../../hooks/fallMagiaCharacterPageHooks';
 
 const centerStyle = {
@@ -36,10 +35,13 @@ function FallMagiaTutorial6() {
       return card.cp;
     });
   const cp = cpList.reduce((a, b) => a + b, 0);
+
+  const [isFlat, setIsFlat] = useState(false);
+  const switchId = useId();
   return (
     <BaseWrapper>
       <div style={centerStyle}>
-        <div>
+        <div style={{ position: 'relative', width: '100%' }}>
           <div
             style={{
               whiteSpace: 'pre-wrap',
@@ -68,40 +70,33 @@ function FallMagiaTutorial6() {
           />
           <div>CP: {cp}</div>
           <div style={{ marginBottom: '1rem', marginTop: '1rem' }}>
-            {vm.itemsWithTypes.map((obj) => {
-              return (
-                <div key={obj.type}>
-                  <h3>{obj.label}</h3>
-                  <details open={false}>
-                    <summary>カード一覧</summary>
-                    <div
-                      style={{
-                        background: 'white',
-                        color: 'black',
-                        display: 'flex',
-                        gap: '1rem',
-                        padding: '1rem',
-                        flexWrap: 'wrap',
-                      }}
-                    >
-                      {obj.items.map((item) => (
-                        <div
-                          ref={vm.listRefs.current[item.index]}
-                          key={item.index}
-                          style={{ width: 'fit-content' }}
-                        >
-                          <VSAttributeCard
-                            {...item}
-                            onClick={() => vm.onCardClick(item.name)}
-                            selected={item.count > 0 && !vm.isLoading}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </details>
-                </div>
-              );
-            })}
+            <div style={{ display: 'flex' }}>
+              <label htmlFor={switchId}>カードで見る</label>
+              <Switch
+                id={switchId}
+                style={{ marginLeft: '0.5rem' }}
+                label="表で見る"
+                onChange={(e) => {
+                  setIsFlat(e.target.checked);
+                }}
+              />
+            </div>
+            <div
+              style={{ overflowX: 'auto', width: '100%', position: 'relative' }}
+            >
+              <div style={{ width: 'fix-content', padding: '10px' }}>
+                {isFlat && <FlatCardList vm={vm} />}
+              </div>
+            </div>
+            <div
+              style={
+                isFlat
+                  ? { width: '1px', height: '1px', overflow: 'hidden' }
+                  : {}
+              }
+            >
+              <CardList vm={vm} />
+            </div>
           </div>
 
           <div

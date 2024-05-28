@@ -1,7 +1,7 @@
 import CardWrapper from './CardWrapper';
-import { CardContent, CardName, CardProp, TagArea } from './Components';
+import { CardCP, CardContent, CardName, CardProp, TagArea } from './Components';
 
-export default function AttributeCard(props: {
+export default function FallMagiaAttributeCard(props: {
   name: string;
   content: string;
   timing: string;
@@ -11,6 +11,7 @@ export default function AttributeCard(props: {
   range: string;
   flavor: string;
   tags: string[];
+  target: string;
   id?: string;
   type?: string;
   src?: string;
@@ -19,7 +20,11 @@ export default function AttributeCard(props: {
 }) {
   return (
     <CardWrapper selected={props.selected} onClick={props.onClick}>
+      <CardCP>
+        <strong>{props.cp}</strong>CP
+      </CardCP>
       <CardName>{props.name}</CardName>
+
       {props.src && (
         <>
           <figure
@@ -43,12 +48,12 @@ export default function AttributeCard(props: {
           {props.timing}
         </CardProp>
         <CardProp
-          label="CP"
+          label="対象"
           style={{ borderLeft: 'none' }}
           contentStyle={{ width: '45px' }}
           labelStyle={{ width: '25px' }}
         >
-          {props.cp}
+          {props.target}
         </CardProp>
       </div>
       <div style={{ display: 'flex', borderTop: 'solid 1px #000' }}>

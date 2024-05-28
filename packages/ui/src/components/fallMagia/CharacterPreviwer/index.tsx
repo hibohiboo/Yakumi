@@ -63,7 +63,7 @@ export default function FallMagiaCharacterPreviewer({
           <caption>{prop.name}</caption>
           <tbody>
             {prop.items.map((item) => (
-              <tr key={name}>
+              <tr key={item.name}>
                 <th>{item.name}</th>
                 <td>{item.value}</td>
               </tr>
@@ -72,21 +72,28 @@ export default function FallMagiaCharacterPreviewer({
         </table>
       ))}
       <h3>取得カード (CP:{cp} )</h3>
-      <p style={{ paddingLeft: '1rem' }}>
-        使用CP: <strong>{plusCp}</strong>CP
-      </p>
-      <FallMagiaCardTable cards={useCards} />
+      {useCards.length > 0 && (
+        <>
+          <p style={{ paddingLeft: '1rem' }}>
+            使用CP: <strong>{plusCp}</strong>CP
+          </p>
+          <FallMagiaCardTable cards={useCards} />
+        </>
+      )}
 
-      <p style={{ paddingLeft: '1rem' }}>戦闘外</p>
-      <FallMagiaCardTable cards={flavorCards} />
+      {flavorCards.length > 0 && (
+        <>
+          <p style={{ paddingLeft: '1rem' }}>戦闘外</p>
+          <FallMagiaCardTable cards={flavorCards} />
+        </>
+      )}
 
       {minusCP < 0 && (
         <p style={{ paddingLeft: '1rem' }}>
           ギャップ : <strong>{minusCP}</strong>CP
         </p>
       )}
-      <FallMagiaCardTable cards={gapCards} />
-
+      {gapCards.length > 0 && <FallMagiaCardTable cards={gapCards} />}
       {extraTags.length > 0 && (
         <div>
           <h3>補足</h3>

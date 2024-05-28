@@ -1,10 +1,12 @@
 import { Button, Dialog, DialogBody, Spinner } from '@blueprintjs/core';
 import { useFallMagiaCharacterPageHooks } from '@yakumi-app/domain/fallMagia/hooks/fallMagiaCharacterPageHooks';
+
 import { Link } from 'react-router-dom';
 import { FallMagiaContent } from '../../components/characterForm/FallMagiaContent';
 
 function FallMagiaTutorialMain() {
   const vm = useFallMagiaCharacterPageHooks();
+
   return (
     <div style={{ margin: '1rem' }}>
       <h1>フォールマギアキャラクターデッキ作成</h1>
@@ -20,12 +22,14 @@ function FallMagiaTutorialMain() {
           icon="download"
           style={{ marginLeft: '5px' }}
           onClick={vm.downloadMap}
+          type="button"
         >
           マップDL
         </Button>
         <Button
           icon="floppy-disk"
           style={{ marginLeft: '5px' }}
+          type="button"
           onClick={vm.saveCharacterHandler}
         >
           保存
@@ -46,7 +50,7 @@ function FallMagiaTutorialMain() {
           <span style={{ color: '#000' }}>キャラクターシート保存中...</span>
         </DialogBody>
       </Dialog>
-      <Dialog isOpen={vm.isSaved}>
+      <Dialog isOpen={vm.isSaved} onClose={vm.handleClose}>
         <DialogBody useOverflowScrollContainer={false}>
           <p style={{ color: '#000' }}>保存が完了しました。</p>
           <a
