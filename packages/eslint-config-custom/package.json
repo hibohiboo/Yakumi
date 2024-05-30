@@ -15,7 +15,7 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "eslint-plugin-unused-imports": "^4.0.0",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.10.0"
+    "typescript-eslint": "^7.11.0"
   },
   "scripts": {
     "inspect": "npx @eslint/config-inspector",
