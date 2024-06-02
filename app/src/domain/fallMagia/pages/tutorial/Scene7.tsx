@@ -32,6 +32,8 @@ function FallMagiaTutorial7() {
 
 「魔法少女の姿を決めてほしい」
 
+「変身前後の変化が大きいほど強くなれる」
+
 「変更は後からでも受け付けるよ」
 
 ${cp < -50 ? '「トーナメントのレギュレーションでは-50までだよ」' : ''}
@@ -44,40 +46,37 @@ ${cp < -50 ? '「トーナメントのレギュレーションでは-50までだ
           </div>
           <div>CP: {cp}</div>
           <div style={{ marginBottom: '1rem', marginTop: '1rem' }}>
-            {vm.cardListGap.map((obj) => {
-              return (
-                <div key={obj.type}>
-                  <h3>{obj.label}</h3>
-                  <details open={true}>
-                    <summary>一覧</summary>
+            <div>
+              <h3>ギャップ</h3>
+
+              <details open={true}>
+                <summary>一覧</summary>
+                <div
+                  style={{
+                    background: 'white',
+                    color: 'black',
+                    display: 'flex',
+                    gap: '1rem',
+                    padding: '1rem',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {vm.cardListGap.map((item) => (
                     <div
-                      style={{
-                        background: 'white',
-                        color: 'black',
-                        display: 'flex',
-                        gap: '1rem',
-                        padding: '1rem',
-                        flexWrap: 'wrap',
-                      }}
+                      ref={vm.listRefs.current[item.index]}
+                      key={item.index}
+                      style={{ width: 'fit-content' }}
                     >
-                      {obj.items.map((item) => (
-                        <div
-                          ref={vm.listRefs.current[item.index]}
-                          key={item.index}
-                          style={{ width: 'fit-content' }}
-                        >
-                          <AttributeSimpleCard
-                            {...item}
-                            onClick={() => vm.onCardClick(item.name)}
-                            selected={item.count > 0 && !vm.isLoading}
-                          />
-                        </div>
-                      ))}
+                      <AttributeSimpleCard
+                        {...item}
+                        onClick={() => vm.onCardClick(item.name)}
+                        selected={item.count > 0 && !vm.isLoading}
+                      />
                     </div>
-                  </details>
+                  ))}
                 </div>
-              );
-            })}
+              </details>
+            </div>
           </div>
 
           <div

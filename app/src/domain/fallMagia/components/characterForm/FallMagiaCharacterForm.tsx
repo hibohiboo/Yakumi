@@ -68,41 +68,37 @@ const VSRankCharacterForm: React.FC<{
             setItem={vm.setFactionHandler}
           />
         </div>
-        {vm.cardListGap.map((obj) => {
-          return (
-            <div key={obj.type}>
-              <h3>{obj.label}</h3>
-              <details open={false}>
-                <summary>一覧</summary>
-                <div
-                  style={{
-                    background: 'white',
-                    color: 'black',
-                    display: 'flex',
-                    gap: '1rem',
-                    padding: '1rem',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  {obj.items.map((item) => (
-                    <div
-                      ref={vm.listRefs.current[item.index]}
-                      key={item.index}
-                      style={{ width: 'fit-content' }}
-                    >
-                      <AttributeSimpleCard
-                        {...item}
-                        onClick={() => vm.onCardClick(item.name)}
-                        selected={item.count > 0 && !vm.isLoading}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </details>
-            </div>
-          );
-        })}
+        <div>
+          <h3>ギャップ</h3>
 
+          <details open={false}>
+            <summary>一覧</summary>
+            <div
+              style={{
+                background: 'white',
+                color: 'black',
+                display: 'flex',
+                gap: '1rem',
+                padding: '1rem',
+                flexWrap: 'wrap',
+              }}
+            >
+              {vm.cardListGap.map((item) => (
+                <div
+                  ref={vm.listRefs.current[item.index]}
+                  key={item.index}
+                  style={{ width: 'fit-content' }}
+                >
+                  <AttributeSimpleCard
+                    {...item}
+                    onClick={() => vm.onCardClick(item.name)}
+                    selected={item.count > 0 && !vm.isLoading}
+                  />
+                </div>
+              ))}
+            </div>
+          </details>
+        </div>
         <div>
           <div>設定</div>
           <TextArea

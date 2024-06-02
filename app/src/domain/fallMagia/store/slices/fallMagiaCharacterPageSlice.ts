@@ -16,11 +16,13 @@ import {
 } from '@yakumi-app/domain/vsRankCharacter/types';
 import { AppDispatch, RootState } from '@yakumi-app/store';
 import { setCharacterId } from '@yakumi-app/store/slices/vsRankCharacterPageSlice';
+import { partition } from 'lodash';
 import { DEFAULT_CHAR_IMG, storageAccountPrefix } from '../../constants';
 import {
   SaveFallMagiaCharacterArgs,
   saveCharacter,
 } from '../../services/persistent/saveCharacter';
+import { createCharacterTwitterCard } from '../../services/persistent/saveCharacterTwitterCard';
 import { FallMagiaCharacterSheetPropsCard } from '../../types';
 import fallMagiaCharacterSlice, {
   characterCardIdsSelector,
@@ -117,6 +119,33 @@ export const saveFallMagiaCharacterAction = createAsyncThunk<
       fallMagiaCharacterSlice.actions.setSrc(saveCharacterData.src),
     );
   }
+  // ストレージアカウントにTwitterCardを保存
+  await uploadToStorageAccount(
+    new File(
+      [
+        new Blob(
+          [
+            createCharacterTwitterCard({
+              url: `https://${location.hostname}/app/fall-magia/character/viewer/${saveCharacterData.uid}/${saveCharacterData.characterId}`,
+              title: saveCharacterData.name,
+              src: saveCharacterData.src,
+              description: saveCharacterData.memo,
+            }),
+          ],
+          { type: 'text/html' },
+        ),
+      ],
+      'twitter-card.html',
+      { type: 'text/html' },
+    ),
+    'twitter-card.html',
+    directory,
+    {
+      blobHTTPHeaders: {
+        blobContentType: 'text/html',
+      },
+    },
+  );
   // RDBに保存 / ローカルストレージにキャラクターを保存
   await saveCharacter(saveCharacterData);
 });
@@ -197,23 +226,44 @@ export const selectedCards = createSelector(
 export const characterParameters = createSelector(selectedCards, (cardList) =>
   cardsToParameters(cardList),
 );
-
-const cardListWithTypeBaseSelector = createSelector(
+const TYPE_GAP = 'C';
+const TIMING_FLAVOR = '戦闘外';
+const cardListNotGapSelector = createSelector(
   spreadSheetCardListSelector,
+  (list) => list.filter((item) => item.type !== TYPE_GAP),
+);
+export const cardListGapSelector = createSelector(
+  spreadSheetCardListSelector,
+  (list) => list.filter((item) => item.type === TYPE_GAP),
+);
+const cardListNotFlavorSelector = createSelector(
+  cardListNotGapSelector,
+  (list) => list.filter((item) => item.timing !== TIMING_FLAVOR),
+);
+const cardListFlavorSelector = createSelector(cardListNotGapSelector, (list) =>
+  list.filter((item) => item.timing === TIMING_FLAVOR),
+);
+const cardListWithTypeBaseSelector = createSelector(
+  cardListNotFlavorSelector,
   spreadSheetCardTypeListSelector,
-  (cardList, typeList) => cardsToWithTypeList(cardList, typeList),
+  cardListFlavorSelector,
+  (cardList, typeList, flavors) => [
+    ...cardsToWithTypeList(cardList, typeList),
+    {
+      type: 'flavor',
+      label: '戦闘外',
+      items: flavors,
+    },
+  ],
 );
 export const cardListWithTypeSelector = createSelector(
   cardListWithTypeBaseSelector,
-  (list) => list.filter((item) => item.label !== 'ギャップ'),
+  (list) => list,
 );
 export const cardListFlatSelector = createSelector(
-  cardListWithTypeSelector,
-  (list) => list.flatMap((item) => item.items),
-);
-export const cardListGapSelector = createSelector(
-  cardListWithTypeBaseSelector,
-  (list) => list.filter((item) => item.label === 'ギャップ'),
+  cardListNotGapSelector,
+  // 戦闘外のカードを後半に持ってくる
+  (list) => [...partition(list, (a) => a.timing !== TIMING_FLAVOR).flat()],
 );
 
 const stateSelector = (state: {

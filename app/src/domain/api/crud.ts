@@ -1,3 +1,5 @@
+import { putAndRetry } from './util';
+
 // eslint-disable-next-line turbo/no-undeclared-env-vars
 const baseUrl = `${import.meta.env.VITE_API_SERVER ?? ''}/api`;
 const apiBaseUrl = '/data-api/rest'; // 'https://gentle-smoke-0024c9c00.5.azurestaticapps.net/data-api/rest';
@@ -28,14 +30,8 @@ export const putCharacter = async (args: {
   data: Json;
 }) => {
   const requestUrl = `${baseUrl}/rank-character/${args.id}`;
-  const response = await fetch(requestUrl, {
-    method: 'PUT',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(args),
-  });
+
+  const response = await putAndRetry({ requestUrl, data: args }, 3);
   return response;
 };
 

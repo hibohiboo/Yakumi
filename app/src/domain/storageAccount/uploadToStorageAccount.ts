@@ -1,4 +1,7 @@
-import { BlockBlobClient } from '@azure/storage-blob';
+import {
+  BlockBlobClient,
+  BlockBlobParallelUploadOptions,
+} from '@azure/storage-blob';
 import { postSASToken } from '../api/crud';
 import { convertFileToArrayBuffer } from './convert-file-to-arraybuffer';
 
@@ -17,6 +20,7 @@ export const uploadToStorageAccount = async (
   file: File,
   fileName: string,
   directory = 'uploaded',
+  option?: BlockBlobParallelUploadOptions,
 ) => {
   const filePath = `${directory}/${fileName}`;
   const sasToken = await getSasTokenUrl(filePath);
@@ -37,7 +41,8 @@ export const uploadToStorageAccount = async (
     }
 
     const blockBlobClient = new BlockBlobClient(sasToken);
-    await blockBlobClient.uploadData(fileArrayBuffer);
+
+    await blockBlobClient.uploadData(fileArrayBuffer, option);
     return true;
   } catch (error) {
     if (error instanceof Error) {

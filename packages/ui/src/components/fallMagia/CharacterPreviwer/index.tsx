@@ -96,7 +96,7 @@ export default function FallMagiaCharacterPreviewer({
       {gapCards.length > 0 && <FallMagiaCardTable cards={gapCards} />}
       {extraTags.length > 0 && (
         <div>
-          <h3>補足</h3>
+          <h3>キーワード</h3>
           {extraTags.map((tag, i) => (
             <div key={i}>
               <img src={tag.icon} style={{ width: '50px', height: '50px' }} />

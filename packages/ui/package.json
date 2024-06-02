@@ -15,7 +15,7 @@
     "ncu": "ncu -u"
   },
   "dependencies": {
-    "dompurify": "^3.1.4",
+    "dompurify": "^3.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1"

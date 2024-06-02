@@ -1,8 +1,10 @@
 import { Button, Dialog, DialogBody, Spinner } from '@blueprintjs/core';
 import { useFallMagiaCharacterPageHooks } from '@yakumi-app/domain/fallMagia/hooks/fallMagiaCharacterPageHooks';
 
+import { getStorageAccountFilePath } from '@yakumi-app/domain/storageAccount/getFilePath';
 import { Link } from 'react-router-dom';
 import { FallMagiaContent } from '../../components/characterForm/FallMagiaContent';
+import { storageAccountPrefix } from '../../constants';
 
 function FallMagiaTutorialMain() {
   const vm = useFallMagiaCharacterPageHooks();
@@ -54,7 +56,7 @@ function FallMagiaTutorialMain() {
         <DialogBody useOverflowScrollContainer={false}>
           <p style={{ color: '#000' }}>保存が完了しました。</p>
           <a
-            href={`https://twitter.com/intent/tweet?button_hashtag=魔法少女フォールマギア&ref_src=twsrc%5Etfw&url=${`https://${location.hostname}/app/fall-magia/character/viewer/${vm.uid}/${vm.characterId}`.replace(/\//g, '%2F').replace(':', '%3A')}&text=魔法少女「 ${vm.characterName} 」 を作成しました。 &nbsp;`}
+            href={`https://twitter.com/intent/tweet?button_hashtag=魔法少女フォールマギア&ref_src=twsrc%5Etfw&url=${getStorageAccountFilePath(`${storageAccountPrefix}/${vm.uid}/${vm.characterId}/twitter-card.html`).replace(/\//g, '%2F').replace(':', '%3A')}&text=魔法少女「 ${vm.characterName} 」 を作成しました。 &nbsp;`}
             target="_blank"
           >
             Twitterでシェア
