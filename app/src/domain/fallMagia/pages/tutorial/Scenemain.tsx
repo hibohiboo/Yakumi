@@ -3,6 +3,7 @@ import { useFallMagiaCharacterPageHooks } from '@yakumi-app/domain/fallMagia/hoo
 
 import { getStorageAccountFilePath } from '@yakumi-app/domain/storageAccount/getFilePath';
 import { Link } from 'react-router-dom';
+import NextButton from '../../components/atoms/NextButton';
 import { FallMagiaContent } from '../../components/characterForm/FallMagiaContent';
 import { storageAccountPrefix } from '../../constants';
 
@@ -36,6 +37,9 @@ function FallMagiaTutorialMain() {
         >
           保存
         </Button>
+        <Link to="/fall-magia/character/tutorial/udon">
+          <NextButton text="ユドナリウムのチュートリアル" />
+        </Link>
       </div>
 
       <FallMagiaContent vm={vm} />

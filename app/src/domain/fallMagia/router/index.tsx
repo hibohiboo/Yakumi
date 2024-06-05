@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { getStorageAccountFilePath } from '@yakumi-app/domain/storageAccount/getFilePath';
-import { storageAccountPrefix } from '../constants';
 import FallMagiaCharacterPage from '../pages/FallMagiaCharacterPage';
 import FallMagiaCharacterViewerPage from '../pages/FallMagiaCharacterViewerPage';
 import FallMagiaTutorial1Prologue from '../pages/tutorial/Scene1';
@@ -10,7 +7,9 @@ import FallMagiaTutorial4 from '../pages/tutorial/Scene4';
 import FallMagiaTutorial5 from '../pages/tutorial/Scene5';
 import FallMagiaTutorial6 from '../pages/tutorial/Scene6';
 import FallMagiaTutorial7 from '../pages/tutorial/Scene7';
+import SceneUdonarium from '../pages/tutorial/SceneUdonarium';
 import FallMagiaTutorialMain from '../pages/tutorial/Scenemain';
+import { characterLoader } from './loader';
 
 export const fallMagiaRouter = {
   path: '/fall-magia/character',
@@ -39,27 +38,13 @@ export const fallMagiaRouter = {
         { path: '6', element: <FallMagiaTutorial6 /> },
         { path: '7', element: <FallMagiaTutorial7 /> },
         { path: 'main', element: <FallMagiaTutorialMain /> },
+        { path: 'udon', element: <SceneUdonarium /> },
       ],
     },
     {
       path: 'viewer/:uid/:id',
       element: <FallMagiaCharacterViewerPage />,
-      loader: async ({ params }: any) => {
-        if (!params.id) throw new Response('Not Found', { status: 404 });
-        const zipUrl = getStorageAccountFilePath(
-          `${storageAccountPrefix}/${params.uid}/${params.id}/udonarium-character.zip`,
-        );
-        const res = await fetch(
-          getStorageAccountFilePath(
-            `${storageAccountPrefix}/${params.uid}/${params.id}/character-data.json`,
-          ),
-        );
-        const data = await res.json();
-        return {
-          data,
-          zipUrl,
-        };
-      },
+      loader: characterLoader,
     },
   ],
 };

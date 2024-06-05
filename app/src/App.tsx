@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { UDONARIUM_URL } from './domain/fallMagia/services/udonarium/const';
 import { getImageSrc } from './domain/image/getImageSrc';
 
 function App() {
@@ -55,6 +56,11 @@ function App() {
           <Link style={{ color: 'white' }} to={'/fall-magia/character'}>
             魔法少女フォールマギア
           </Link>
+        </li>
+        <li>
+          <a style={{ color: 'white' }} href={UDONARIUM_URL} target="_blank">
+            魔法少女フォールマギア用ユドナリウム
+          </a>
         </li>
       </ul>
 

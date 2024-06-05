@@ -22,12 +22,18 @@ export const setCharacter = (item: SaveFallMagiaCharacterArgs): void => {
 
 export const saveCharacter = async (args: SaveFallMagiaCharacterArgs) => {
   const id = args.characterId;
-  const ret = await putCharacter({
-    id,
-    uid: args.uid,
-    data: JSON.stringify(args),
-  });
-  if (ret.status !== 200) throw new Error('Failed to save character');
+
+  // 保存処理を非同期にする(putがよく失敗するため。サーバ側でBlobトリガーでの保存に切り替えてもいいかも（TODO))
+  setTimeout(async () => {
+    const ret = await putCharacter({
+      id,
+      uid: args.uid,
+      data: JSON.stringify(args),
+    });
+    if (ret.status !== 200) console.warn('Failed to save character');
+    // if (ret.status !== 200) throw new Error('Failed to save character');
+  }, 0);
+
   return setCharacter(args);
 };
 

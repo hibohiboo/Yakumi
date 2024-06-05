@@ -206,11 +206,15 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
     setIsSaving(true);
     const image = characterImageFile;
     setIsloading(true); // CSS漏れでカードが黄色くなること対策
+
+    const deckName = `${characterName}デッキ`;
+    const description = `${characterName}のデッキ`;
+
     const blob = await createVSRankCharasheetAndDeckToUdonariumBlob(
       listRefs.current,
       selectedItems,
       backRef,
-      setting,
+      { ...setting, deckName, description },
       { name: characterName, image, params },
       selectedExtraTags,
     );

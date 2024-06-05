@@ -1,8 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDotEnv": [".env"],
   "globalEnv": ["SUB_DIR_PATH_BUILDER", "SPREAD_SHEET_KEY"],
-  "pipeline": {
+  "tasks": {
     "dev": {},
     "ncu": {},
     "lint": {},

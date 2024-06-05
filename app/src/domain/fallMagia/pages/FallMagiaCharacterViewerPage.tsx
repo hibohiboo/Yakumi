@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { useFallMagiaCharacterPageHooks } from '../hooks/fallMagiaCharacterPageHooks';
 import { fallMagiaItemsToCcfoliaJson } from '../services/ccfolia/convertCardToCommand';
+import { UDONARIUM_URL } from '../services/udonarium/const';
 // function toBase64Async(blob: Blob): Promise<string> {
 //   return new Promise((resolve, reject) => {
 //     const reader = new FileReader();
@@ -77,7 +78,7 @@ function FallMagiaCharacterViewerPage() {
         </a>
 
         <a
-          href="/udonarium/?room=vsrank"
+          href={UDONARIUM_URL}
           target="_blank"
           style={{ color: '#fff', marginLeft: '5px' }}
         >
@@ -98,6 +99,23 @@ function FallMagiaCharacterViewerPage() {
           </button>
           <p>
             ※ココフォリア用JSONはクリップボードにコピー後、ココフォリアのルームで貼り付けてください
+          </p>
+        </div>
+      </details>
+      <details style={{ margin: '10px' }}>
+        <summary>ユドナリウム用ロードコマンド</summary>
+        <div>
+          <input value={`/load ${zipUrl}`} readOnly />
+          <button
+            onClick={() => {
+              if (navigator.clipboard)
+                navigator.clipboard.writeText(`/load ${zipUrl}`);
+            }}
+          >
+            クリップボードにcopy
+          </button>
+          <p>
+            ※クリップボードにコピー後、ユドナリウムのチャットに入力してください
           </p>
         </div>
       </details>

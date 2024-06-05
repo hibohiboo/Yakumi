@@ -57,7 +57,7 @@ export default function FallMagiaCharacterPreviewer({
           dangerouslySetInnerHTML={{ __html: rubyText(name) }}
         />
       </div>
-      <img src={src} height={100} />
+      <img src={src} height={100} crossOrigin="anonymous" />
       {props.map((prop, x) => (
         <table className={styles.table} key={x}>
           <caption>{prop.name}</caption>

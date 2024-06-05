@@ -12,7 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@azure/storage-blob": "^12.18.0",
+    "@azure/storage-blob": "^12.23.0",
     "@blueprintjs/core": "^5.10.3",
     "@reduxjs/toolkit": "^2.2.5",
     "@yakumi/ui": "*",
@@ -42,7 +42,7 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-html-reporters": "^3.1.7",
-    "msw": "^2.3.0",
+    "msw": "^2.3.1",
     "ts-jest": "^29.1.4",
     "vite": "^5.2.12"
   },

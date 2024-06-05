@@ -48,7 +48,7 @@ export const handlers = [
     },
   ),
   http.get(
-    'http://localhost:5173/data-api/rest/YakumiCharacter/id/:id?$select=data',
+    'http://localhost:5173/data-api/rest/YakumiCharacter/id/:id', // ?$select=data
     () => {
       return new HttpResponse(JSON.stringify(charater), {
         status: 200,
