@@ -137,7 +137,7 @@ export const useVSRankCharacterPageHooks = () => {
         size,
         description,
       },
-      { name: characterName, image: characterImage, params },
+      { name: characterName, image: characterImage, params, src: characterSrc },
       selectedExtraTags,
     );
     setIsloading(false);
@@ -184,7 +184,7 @@ export const useVSRankCharacterPageHooks = () => {
       selectedItems,
       backRef,
       setting,
-      { name: characterName, image, params },
+      { name: characterName, image, params, src: characterSrc },
       selectedExtraTags,
     );
     setIsloading(false);

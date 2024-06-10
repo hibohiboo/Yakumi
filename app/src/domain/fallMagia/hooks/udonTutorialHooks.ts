@@ -4,10 +4,6 @@ import { sendUdonariumChatMessage } from '../store/actions/sendUdonariumChatMess
 
 function* tutorilalGeneratorLocal() {
   yield {
-    msg: `チュートリアルの間はUdonariumをロックさせてもらうね`,
-    cmd: '',
-  };
-  yield {
     msg: `まずはキャラクターを読み込もう。zipファイルをドラッグ&ドロップするか、コマンドで行うよ`,
     cmd: '/load http://localhost:4200/assets/data/test_magia.zip',
   };
@@ -25,7 +21,7 @@ function* tutorilalGeneratorLocal() {
     cmd: '/move_cardstack ココルティアデッキ (常時タイミング),-160,540',
   };
   yield {
-    msg: 'デッキを右クリックして「カード一覧」を選ぶとデッキ内のカードを確認できるよ',
+    msg: 'デッキを右クリックして「カード一覧」を選ぶとデッキ内のカードを確認できるよ。スマホの場合は右クリックを「タップ長押し」と読み替えてね',
     cmd: '',
   };
   yield {
@@ -221,7 +217,7 @@ const gen = import.meta.env.DEV
   : tutorilalGenerator();
 export const useUdonTurorialHooks = () => {
   const [msg, setMsg] = useState<string>(
-    'チュートリアルを始めるよ。「次へ」ボタンを押してね',
+    'チュートリアルを始めるよ。「次へ」ボタンを押してね。チュートリアルの間はUdonariumをロックさせてもらうね',
   );
   const dispatch = useAppDispatch();
   const [isGeneratorEnd, setIsGenEnd] = useState<boolean>(false);

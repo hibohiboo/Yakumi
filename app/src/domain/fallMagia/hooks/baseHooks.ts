@@ -36,6 +36,7 @@ import {
   useState,
 } from 'react';
 import { useSelector } from 'react-redux';
+import { getSrc } from '../services/image/getSrc';
 import { Scene4SelectItem } from '../services/scene4Items';
 import { valuesToFallMagiaCharacterSheetPropsCard } from '../services/sheetToCharacter/valuesToCharacterSheetPropsCard';
 import {
@@ -163,7 +164,12 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
         size,
         description,
       },
-      { name: characterName, image: characterImage, params },
+      {
+        name: characterName,
+        image: characterImage,
+        params,
+        src: getSrc(characterSrc, characterSavedSrc),
+      },
       selectedExtraTags,
     );
     setIsloading(false);
@@ -215,7 +221,12 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
       selectedItems,
       backRef,
       { ...setting, deckName, description },
-      { name: characterName, image, params },
+      {
+        name: characterName,
+        image,
+        params,
+        src: getSrc(characterSrc, characterSavedSrc),
+      },
       selectedExtraTags,
     );
     setIsloading(false);
@@ -230,6 +241,7 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
       faction: characterFaction?.tag || '',
       memo: characterMemo,
     };
+
     await dispatch(saveFallMagiaCharacterAction({ data, blob, image }));
     setIsSaving(false);
     setIsSaved(true);

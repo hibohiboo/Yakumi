@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Settings } from '@yakumi-app/domain/card/types';
+import { DEFAULT_CHAR_IMG } from '@yakumi-app/domain/fallMagia/constants';
 import { getImageSrc } from '@yakumi-app/domain/image/getImageSrc';
 import { CharacterSheetDetailsProp } from '@yakumi-app/domain/spreadSheet/sheetToCharacter/types';
 import { calcSHA256Async } from '@yakumi-app/domain/udonarium/FileReaderUtil';
@@ -10,22 +11,19 @@ import { CharacterSheetPropsCard, ExtraTag } from '../types';
 import { createCharacter } from './characterFile';
 import { createVSRankChearacterDeck } from './createCharacterDeck';
 
-const getBlob = async (image: File | undefined) => {
+const getBlob = async (image: File | undefined, src: string) => {
   if (image && image.size > 0) {
     return image;
   }
-  // getDefaultBlob
-  const defaultImageFileDataUrl = getImageSrc(
-    'assets/images/udonarium/outline_person_outline_black_24dp.png',
-  );
-  const res = await fetch(defaultImageFileDataUrl);
 
+  const defaultImageFileDataUrl = src ? src : getImageSrc(DEFAULT_CHAR_IMG);
+  const res = await fetch(defaultImageFileDataUrl, { mode: 'cors' });
   const blob = await res.blob();
   return blob;
 };
 
-const createCharacterImage = async (image: File | undefined) => {
-  const blob = await getBlob(image);
+const createCharacterImage = async (image: File | undefined, src: string) => {
+  const blob = await getBlob(image, src);
 
   const identifier = await calcSHA256Async(blob);
   return {
@@ -36,7 +34,7 @@ const createCharacterImage = async (image: File | undefined) => {
   };
 };
 
-export const createVSRankCharasheetAndDeckToUdonarium = async (
+const _createVSRankCharasheetAndDeckToUdonarium = async (
   refList: React.RefObject<HTMLDivElement>[],
   cards: CharacterSheetPropsCard[],
   backRef: any,
@@ -45,12 +43,16 @@ export const createVSRankCharasheetAndDeckToUdonarium = async (
     name: string;
     image: File | undefined;
     params: CharacterSheetDetailsProp[];
+    src: string;
   },
   extraTags: ExtraTag[],
 ) => {
   const { deck, back, files, deckAlways, deckNoBattle } =
     await createVSRankChearacterDeck(refList, cards, backRef, setting);
-  const { file, identifier } = await createCharacterImage(character.image);
+  const { file, identifier } = await createCharacterImage(
+    character.image,
+    character.src,
+  );
   const char = createCharacter(
     character.name,
     character.params,
@@ -68,6 +70,29 @@ export const createVSRankCharasheetAndDeckToUdonarium = async (
   ];
   if (deckNoBattle) ret.push(deckNoBattle);
   if (deckAlways) ret.push(deckAlways);
+  return ret;
+};
+export const createVSRankCharasheetAndDeckToUdonarium = async (
+  refList: React.RefObject<HTMLDivElement>[],
+  cards: CharacterSheetPropsCard[],
+  backRef: any,
+  setting: Settings,
+  character: {
+    name: string;
+    image: File | undefined;
+    params: CharacterSheetDetailsProp[];
+    src: string;
+  },
+  extraTags: ExtraTag[],
+) => {
+  const ret = await _createVSRankCharasheetAndDeckToUdonarium(
+    refList,
+    cards,
+    backRef,
+    setting,
+    character,
+    extraTags,
+  );
   await createZip(ret, setting.deckName);
 };
 
@@ -80,28 +105,17 @@ export const createVSRankCharasheetAndDeckToUdonariumBlob = async (
     name: string;
     image: File | undefined;
     params: CharacterSheetDetailsProp[];
+    src: string;
   },
   extraTags: ExtraTag[],
 ) => {
-  const { deck, back, files, deckAlways, deckNoBattle } =
-    await createVSRankChearacterDeck(refList, cards, backRef, setting);
-  const { file, identifier } = await createCharacterImage(character.image);
-  const char = createCharacter(
-    character.name,
-    character.params,
-    identifier,
+  const ret = await _createVSRankCharasheetAndDeckToUdonarium(
+    refList,
     cards,
+    backRef,
+    setting,
+    character,
+    extraTags,
   );
-  const extra = await createUdonariumTokens(extraTags);
-  const ret = [
-    back.file,
-    ...files.map((f) => f.file),
-    char,
-    file,
-    deck,
-    ...extra,
-  ];
-  if (deckNoBattle) ret.push(deckNoBattle);
-  if (deckAlways) ret.push(deckAlways);
   return FileArchiver.instance.generateBlob(ret);
 };

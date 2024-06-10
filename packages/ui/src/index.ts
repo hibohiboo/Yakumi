@@ -5,6 +5,7 @@ import FallMagiaAttributeCard from './components/fallMagia/Attribute/AttributeCa
 import FallMagiaAttributeCardDescription from './components/fallMagia/AttributeDescription/AttributeCardDescription';
 import AttributeSimpleCard from './components/fallMagia/AttributeSimple/AttributeSimpleCard';
 import FallMagiaCharacterPreviewer from './components/fallMagia/CharacterPreviwer';
+import { GameFrame } from './components/fallMagia/GameFrame';
 import VSAttributeCard from './components/vsRankedMatch/Attribute/AttributeCard';
 import AttributeCardDescription from './components/vsRankedMatch/AttributeDescription/AttributeCardDescription';
 import CharacterPreviewer from './components/vsRankedMatch/CharacterPreviwer';
@@ -22,4 +23,5 @@ export {
   AttributeSimpleCard,
   rubyText,
   FallMagiaAttributeCard,
+  GameFrame,
 };

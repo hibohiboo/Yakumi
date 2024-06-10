@@ -71,18 +71,34 @@ function FallMagiaCharacterViewerPage() {
         >
           マップDL
         </Button>
-        <a href={zipUrl}>
-          <Button icon="download" style={{ marginLeft: '5px' }}>
-            ユドナリウム用ZipDL
-          </Button>
-        </a>
+
+        <Button
+          icon="download"
+          style={{ marginLeft: '5px' }}
+          onClick={async () => {
+            const res = await fetch(`${zipUrl}`, { mode: 'cors' });
+            const blob = await res.blob();
+            // ファイルをダウンロードさせる
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${data.name}.zip`;
+            a.click();
+          }}
+        >
+          ユドナリウム用ZipDL
+        </Button>
 
         <a
           href={UDONARIUM_URL}
           target="_blank"
-          style={{ color: '#fff', marginLeft: '5px' }}
+          style={{
+            color: '#fff',
+            marginLeft: '5px',
+            textDecoration: 'underline',
+          }}
         >
-          ユドナリウム
+          ユドナリウム（Chrome推奨）
         </a>
       </div>
       <details style={{ margin: '10px' }}>

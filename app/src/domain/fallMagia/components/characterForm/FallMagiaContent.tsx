@@ -1,17 +1,8 @@
 import { FallMagiaCharacterPreviewer } from '@yakumi-components/index';
 import { FallMagiaCharacterPageViewModel } from '../../hooks/fallMagiaCharacterPageHooks';
+import { getSrc } from '../../services/image/getSrc';
 import FallMagiaCharacterForm from './FallMagiaCharacterForm';
 import styles from './FallMagiaCharacterForm.module.css';
-
-function getSrc(characterSrc?: string, characterSavedSrc?: string) {
-  if (characterSrc?.includes('blob')) {
-    return characterSrc;
-  }
-  if (characterSavedSrc) {
-    return characterSavedSrc;
-  }
-  return characterSrc || '';
-}
 
 export function FallMagiaContent({
   vm,
