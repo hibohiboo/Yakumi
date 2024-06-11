@@ -29,7 +29,7 @@
     "mssql": "^10.0.2"
   },
   "devDependencies": {
-    "@redocly/cli": "^1.14.0",
+    "@redocly/cli": "^1.15.0",
     "@stepci/runner": "^2.0.5",
     "@types/jest": "^29.5.12",
     "@types/mssql": "^9.1.5",
