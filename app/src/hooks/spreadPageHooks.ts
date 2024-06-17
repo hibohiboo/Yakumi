@@ -44,7 +44,7 @@ export const useSpreadPageHooks = () => {
     スプレッドシートから読み込んだデッキです。`,
     state: '0',
   });
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const deckName = (form.get('deckName') as string) || '';
@@ -60,14 +60,14 @@ export const useSpreadPageHooks = () => {
     }
 
     if (isRandom) {
-      await createDiceSymbolZip(listRefs.current, items, {
+      createDiceSymbolZip(listRefs.current, items, {
         ...setting,
         deckName,
         size,
         description,
       });
     } else {
-      await createTextDeckToUdonarium(listRefs.current, items, backRef, {
+      createTextDeckToUdonarium(listRefs.current, items, backRef, {
         ...setting,
         deckName,
         size,

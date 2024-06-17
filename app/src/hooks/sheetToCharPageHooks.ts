@@ -51,7 +51,7 @@ export const useSheetToCharPageHooks = () => {
     スプレッドシートから読み込んだデッキです。`,
     state: '0',
   });
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const deckName = (form.get('deckName') as string) || '';
@@ -78,7 +78,7 @@ export const useSheetToCharPageHooks = () => {
       return;
     }
     setIsloading(true);
-    await createCharasheetAndDeckToUdonarium(
+    createCharasheetAndDeckToUdonarium(
       listRefs.current,
       selectedItems,
       backRef,
@@ -89,8 +89,7 @@ export const useSheetToCharPageHooks = () => {
         description,
       },
       { name: characterName, image: characterImage, params },
-    );
-    setIsloading(false);
+    ).finally(() => setIsloading(false));
   };
   const sheetInfoSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();

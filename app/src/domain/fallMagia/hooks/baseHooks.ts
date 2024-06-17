@@ -127,7 +127,7 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
     スプレッドシートから読み込んだデッキです。`,
     state: '0',
   });
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const characterName = (form.get('characterName') as string) || '';
@@ -154,7 +154,7 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
       return;
     }
     setIsloading(true);
-    await createVSRankCharasheetAndDeckToUdonarium(
+    createVSRankCharasheetAndDeckToUdonarium(
       listRefs.current,
       selectedItems,
       backRef,
@@ -171,10 +171,11 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
         src: getSrc(characterSrc, characterSavedSrc),
       },
       selectedExtraTags,
-    );
-    setIsloading(false);
+    ).finally(() => setIsloading(false));
+
+    return;
   };
-  const sheetInfoSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const sheetInfoSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const spreadSheetId = (form.get('spreadSheetId') as string) || '';

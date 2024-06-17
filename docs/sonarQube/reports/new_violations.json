@@ -7,7 +7,7 @@
       "metric": "new_violations",
       "period": {
         "index": 1,
-        "value": "12",
+        "value": "5",
         "bestValue": false
       }
     }

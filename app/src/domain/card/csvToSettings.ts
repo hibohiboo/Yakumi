@@ -10,7 +10,7 @@ export function csvToSettings(csv: string): Settings {
     .data as any[];
 
   // 配列からマップを作成
-  const map = new Map(lines);
+  const map = new Map<string, string>(lines);
   return {
     deckName: `${map.get('デッキ名')}`,
     state: map.get('表裏') === '裏' ? '1' : '0',

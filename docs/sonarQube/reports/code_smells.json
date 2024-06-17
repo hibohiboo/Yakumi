@@ -5,7 +5,7 @@
   "measures": [
     {
       "metric": "code_smells",
-      "value": "74",
+      "value": "72",
       "bestValue": false
     }
   ]

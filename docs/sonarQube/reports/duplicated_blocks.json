@@ -5,7 +5,7 @@
   "measures": [
     {
       "metric": "duplicated_blocks",
-      "value": "48",
+      "value": "45",
       "bestValue": false
     }
   ]

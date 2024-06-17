@@ -100,7 +100,7 @@ export const useVSRankCharacterPageHooks = () => {
     スプレッドシートから読み込んだデッキです。`,
     state: '0',
   });
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const characterName = (form.get('characterName') as string) || '';
@@ -127,7 +127,7 @@ export const useVSRankCharacterPageHooks = () => {
       return;
     }
     setIsloading(true);
-    await createVSRankCharasheetAndDeckToUdonarium(
+    createVSRankCharasheetAndDeckToUdonarium(
       listRefs.current,
       selectedItems,
       backRef,
@@ -139,8 +139,7 @@ export const useVSRankCharacterPageHooks = () => {
       },
       { name: characterName, image: characterImage, params, src: characterSrc },
       selectedExtraTags,
-    );
-    setIsloading(false);
+    ).finally(() => setIsloading(false));
   };
   const sheetInfoSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
