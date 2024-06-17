@@ -1,0 +1,12 @@
+{
+  "key": "Yakumi",
+  "name": "Yakumi",
+  "qualifier": "TRK",
+  "measures": [
+    {
+      "metric": "cognitive_complexity",
+      "value": "11",
+      "bestValue": false
+    }
+  ]
+}

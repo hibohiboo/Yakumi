@@ -1,0 +1,12 @@
+{
+  "key": "Yakumi",
+  "name": "Yakumi",
+  "qualifier": "TRK",
+  "measures": [
+    {
+      "metric": "code_smells",
+      "value": "74",
+      "bestValue": false
+    }
+  ]
+}

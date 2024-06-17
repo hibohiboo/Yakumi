@@ -1,0 +1,15 @@
+{
+  "key": "Yakumi",
+  "name": "Yakumi",
+  "qualifier": "TRK",
+  "measures": [
+    {
+      "metric": "new_violations",
+      "period": {
+        "index": 1,
+        "value": "12",
+        "bestValue": false
+      }
+    }
+  ]
+}

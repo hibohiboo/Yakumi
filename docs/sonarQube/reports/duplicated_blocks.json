@@ -1,0 +1,12 @@
+{
+  "key": "Yakumi",
+  "name": "Yakumi",
+  "qualifier": "TRK",
+  "measures": [
+    {
+      "metric": "duplicated_blocks",
+      "value": "48",
+      "bestValue": false
+    }
+  ]
+}

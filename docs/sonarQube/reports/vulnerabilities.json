@@ -1,0 +1,12 @@
+{
+  "key": "Yakumi",
+  "name": "Yakumi",
+  "qualifier": "TRK",
+  "measures": [
+    {
+      "metric": "vulnerabilities",
+      "value": "0",
+      "bestValue": true
+    }
+  ]
+}

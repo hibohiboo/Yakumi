@@ -1,0 +1,12 @@
+{
+  "key": "Yakumi",
+  "name": "Yakumi",
+  "qualifier": "TRK",
+  "measures": [
+    {
+      "metric": "bugs",
+      "value": "13",
+      "bestValue": false
+    }
+  ]
+}
