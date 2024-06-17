@@ -19,7 +19,7 @@ export const useImageUploaderPageHooks = () => {
 
     setSelectedFile(target?.files[0]);
   };
-  const zipHandleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const zipHandleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const zipFile = (form.get('zipFile') as File) || undefined;
@@ -33,13 +33,11 @@ export const useImageUploaderPageHooks = () => {
       setUploadStatus('No file selected');
       return;
     }
-    const result = await uploadToStorageAccount(zipFile, zipFile.name, 'rooms');
-    if (result) {
-      setUploadStatus('Successfully finished upload');
-      return;
-    }
-
-    setUploadStatus('upload failed');
+    uploadToStorageAccount(zipFile, zipFile.name, 'rooms')
+      .then(() => {
+        setUploadStatus('Successfully finished upload');
+      })
+      .finally(() => setUploadStatus('upload failed'));
   };
   const handleIconFileUpload = async () => {
     setUploadStatus('connecting to server...');

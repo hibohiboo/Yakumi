@@ -172,8 +172,6 @@ export const useFallMagiaCharacterPageBaseHooks = () => {
       },
       selectedExtraTags,
     ).finally(() => setIsloading(false));
-
-    return;
   };
   const sheetInfoSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();

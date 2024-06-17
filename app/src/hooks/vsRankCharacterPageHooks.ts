@@ -141,7 +141,7 @@ export const useVSRankCharacterPageHooks = () => {
       selectedExtraTags,
     ).finally(() => setIsloading(false));
   };
-  const sheetInfoSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const sheetInfoSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const spreadSheetId = (form.get('spreadSheetId') as string) || '';
