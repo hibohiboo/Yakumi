@@ -9,8 +9,7 @@
     "lint": "eslint",
     "preview": "vite preview",
     "ncu": "ncu -u",
-    "test": "jest",
-    "depcruise": "depcruise src --include-only \"^src\"  --output-type mermaid > ../dist/dependency-graph.md"
+    "test": "jest"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.23.0",
