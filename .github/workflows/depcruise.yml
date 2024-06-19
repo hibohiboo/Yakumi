@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 依存関係確認
-        uses: MH4GF/dependency-cruiser-report-action@v2.5
+        uses: MH4GF/dependency-cruiser-report-action@v2.5.0
         with:        
           package-manager: 'npm'
           working-directory: app
