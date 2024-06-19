@@ -10,7 +10,7 @@
   },
   "scripts": {
     "prepare": "git config --local core.hooksPath .githooks && echo Changed hooks directory when npm install",
-    "build": "turbo build && cd udonarium && npm i && npm run build",
+    "build": "turbo build",
     "dev": "turbo dev",
     "ncu": "turbo ncu",
     "lint": "turbo lint",
