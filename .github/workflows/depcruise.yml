@@ -11,5 +11,5 @@ jobs:
       - name: 依存関係確認
         uses: MH4GF/dependency-cruiser-report-action@v2
         with:        
-          package-manager: npm
+          package-manager: 'npm'
           working-directory: app
