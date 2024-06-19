@@ -1,0 +1,14 @@
+name: 'depcruise'
+on:
+  pull_request:
+
+jobs:
+  report:
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: MH4GF/dependency-cruiser-report-action@v2
+        with:        
+          working-directory: app
+          package-manager: npm
