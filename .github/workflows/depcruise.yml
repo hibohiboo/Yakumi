@@ -8,7 +8,8 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: MH4GF/dependency-cruiser-report-action@v2
+      - name: 依存関係確認
+        uses: MH4GF/dependency-cruiser-report-action@v2
         with:        
-          working-directory: app
           package-manager: npm
+          working-directory: app
