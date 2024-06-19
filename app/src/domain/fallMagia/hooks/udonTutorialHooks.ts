@@ -173,7 +173,7 @@ function* tutorilalGenerator() {
     cmd: '/move_terrain 先行,260,50',
   };
   yield {
-    msg: `効果の解決が終わったら、使ったカードは捨て札となるよ。`,
+    msg: `効果の解決が終わったら、使ったカードは使用済となるよ。`,
     cmd: '/move_card 一般射撃魔法《シュート》,1050,450',
   };
   yield {
