@@ -12,4 +12,4 @@ jobs:
         uses: MH4GF/dependency-cruiser-report-action@v2
         with:        
           package-manager: npm
-
+          working-directory: app
