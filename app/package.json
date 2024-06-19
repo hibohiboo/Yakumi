@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "ncu": "ncu -u",
     "test": "jest",
-    "depcruise": "depcruise src --include-only \"^src\" --output-type dot | dot -T svg > dependency-graph.svg"
+    "depcruise": "depcruise src --include-only \"^src\"  --output-type mermaid > ../dist/dependency-graph.md"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.23.0",
