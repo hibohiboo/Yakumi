@@ -62,6 +62,20 @@ function App() {
             魔法少女フォールマギア用ユドナリウム
           </a>
         </li>
+        <li>
+          <Link style={{ color: 'white' }} to={'/hollow/'}>
+            HollowΦFlux デッキ作成
+          </Link>
+        </li>
+        <li>
+          <a
+            style={{ color: 'white' }}
+            href="/udonarium/?room=hollow"
+            target="_blank"
+          >
+            HollowΦFlux用ユドナリウム
+          </a>
+        </li>
       </ul>
 
       <section>

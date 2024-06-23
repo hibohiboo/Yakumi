@@ -1,0 +1,140 @@
+# ブランチポリシーにより起動させる
+
+trigger: none
+pr: none
+jobs:
+- job: check
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+    - task: UseNode@1
+      inputs:
+        version: '20.14.0'
+      displayName: 'Install Node.js'
+    - task: Npm@1
+      inputs:
+        command: custom
+        customCommand: 'install -g npm@10.8.1'
+      displayName: 'Upgrade npm to latest version'
+    - task: Npm@1
+      name: npm_install
+      inputs:
+        command: custom
+        customCommand: 'install --ignore-scripts'
+        workingDir: $(Build.SourcesDirectory)
+    - task: Bash@3
+      displayName: 'POST PR Comment'
+      inputs:
+        workingDirectory: $(Build.SourcesDirectory)/app
+        targetType: 'inline'
+        script: |
+          # 変数準備
+          PROJECT_NAME_ENCODED=$(echo -n "$(System.TeamProject)" | perl -MURI::Escape -ne 'print uri_escape($_)')
+          ADO_API_BASE=$(echo "$(System.CollectionUri)${PROJECT_NAME_ENCODED}/_apis/git/repositories/$(Build.Repository.Name)")
+          ADO_API_VERSION=$(echo "api-version=7.2-preview.1")
+
+          # PRに含まれるファイルを取得
+          BRANCH1="$(System.PullRequest.TargetBranch)"
+          BRANCH2="$(System.PullRequest.SourceBranch)"
+         
+          BASE_BRANCH=${BRANCH1#refs/heads/}
+          
+          TARGET_BRANCH=${BRANCH2#refs/heads/}
+
+          # azure
+          BASE_BRANCH_ENCODED=${BASE_BRANCH//\//%2F}
+          echo "BASE_BRANCH: ${BASE_BRANCH_ENCODED}"
+
+          # bid%2F474%2FazurePipeline
+          TARGET_BRANCH_ENCODED=${TARGET_BRANCH//\//%2F}
+          echo "TARGET_BRANCH: ${TARGET_BRANCH_ENCODED}"
+
+          ADO_DIFF_API=$(echo "${ADO_API_BASE}/diffs/commits?baseVersion=${BASE_BRANCH_ENCODED}&targetVersion=${TARGET_BRANCH_ENCODED}&${ADO_API_VERSION}")
+          CHANGED_FILES=$(curl "$ADO_DIFF_API" \
+            --header "Accept: application/json" \
+            --header "Authorization: Bearer $SYSTEM_ACCESSTOKEN")
+          echo $CHANGED_FILES
+          CHANGED_FILES_CSV=$(echo $CHANGED_FILES | jq -r '.changes[] | select(.item.isFolder != true and (.item.path | type == "string" and startswith("/app/src") )   ) | .item.path' | sed 's/\/app\///g' | tr '\n' ',')
+          IFS=',' read -ra FILES <<< "$CHANGED_FILES_CSV"
+
+          # npm 準備
+          npm install
+          # dependency-cruiserで解析した結果をmermaid形式で出力
+          MERMAID_OUTUPUT=$(npm run depcruise -- "${FILES[@]}")
+          # 先頭2行を削除. --silent だとmermaidの出力が消えてしまった
+          # （ >app@0.0.0 depcruise と >depcruise --include-only "^src" --config ./.dependency-cruiser.cjs --output-type mermaid src/pages/HollowFluxPage.tsx)
+          MERMAID_OUTUPUT=$(echo "${MERMAID_OUTUPUT}" | tail -n +4)
+
+          # AzureDevOps用のmermaidの内容を作成
+          MERMAID_CONTENT=$(echo -e ":::mermaid \n\n ${MERMAID_OUTUPUT} \n\n :::")        
+
+          # wiki更新用のJSONを作成
+          WIKI_CONTENT_JSON=$(jq --arg comment "$MERMAID_CONTENT" '.content = $comment' <<< '{"content": ""}')
+
+          # ブランチ名(bid/バックログ番号/hogeのルール)からバックログ番号を取り出す
+          bid=$(echo  "$TARGET_BRANCH_ENCODED" | awk -F'%2F' '{print $2}')
+          echo "$TARGET_BRANCH_ENCODED" 
+          echo "bid: ${bid}"
+
+          WIKI_PATH="pullrequests%2Fbid%2F${bid}"
+          echo "WIKI_PATH: ${WIKI_PATH}"
+          AZURE_URL=$(echo "$(System.CollectionUri)${PROJECT_NAME_ENCODED}")
+          WIKI_API_PAGE_URL=$(echo "${AZURE_URL}/_apis/wiki/wikis/%E8%96%AC%E5%91%B3/pages?path=${WIKI_PATH}&api-version=7.1-preview.1")
+          auth="Authorization: Bearer $SYSTEM_ACCESSTOKEN"
+          ct="Content-Type: application/json"
+
+          echo "WIKI_API_PAGE_URL: ${WIKI_API_PAGE_URL}"
+
+          # curlでレスポンスヘッダを取得し、grepでETagを抽出、条件に応じて変数に格納
+          # i オプションでヘッダを変数に書き出す
+          EXISTS_CHEKCK_RESPONSE=$(curl -XGET -s -H "$auth" -i "$WIKI_API_PAGE_URL")
+          echo "$EXISTS_CHEKCK_RESPONSE"
+          # grepでETagとStatusCodeを抽出
+          { read -r status_line; read -r etag_line; } < <( echo "$EXISTS_CHEKCK_RESPONSE" | grep -i -P '^(HTTP/|ETag:)' )
+          echo "status_line: ${status_line}"
+          echo "etag_line: ${etag_line}"
+
+          # ETagが取得できた場合、If-Matchヘッダを作成
+          if [[ $status_line =~ ^HTTP/[0-9.]+\ 200 ]]; then
+              # ページが存在する場合は更新
+              etag_value=$(echo "$etag_line" | awk '{print $2}' | tr -d '\r')
+              ifmatch="If-Match: ${etag_value}"
+              echo "ifmatch: ${ifmatch}"
+              response_wiki_page=$(curl -XPUT -s -H "$auth" -H "$ct" -H "$ifmatch" "${WIKI_API_PAGE_URL}&versionDescriptor.version=${BASE_BRANCH_ENCODED}" --data "${WIKI_CONTENT_JSON}")
+          else
+              # ページが存在しない場合は新規作成
+              echo "status_line: ${status_line}"
+              echo "WIKI_CONTENT_JSON"
+              echo "${WIKI_API_PAGE_URL}&versionDescriptor.version=${BASE_BRANCH_ENCODED}"
+              response_wiki_page=$(curl -XPUT -s -H "$auth" -H "$ct" "${WIKI_API_PAGE_URL}&versionDescriptor.version=${BASE_BRANCH_ENCODED}" --data "${WIKI_CONTENT_JSON}")
+
+
+              # 新規作成時のみ、プルリクエストコメントを投稿する
+
+              echo "response_wiki_page: ${response_wiki_page}"
+
+              # 更新したWIKIのIDを取得
+              WIKI_ID=$(echo "$response_wiki_page" | jq -r '.id')
+
+              echo "WIKI_ID: ${WIKI_ID}"
+
+              # PRコメント
+              COMMENT=$(echo -e "[mermaid](${AZURE_URL}/_wiki/wikis/%E8%96%AC%E5%91%B3/${WIKI_ID})")
+
+              ADO_API=$(echo "${ADO_API_BASE}/pullRequests/$(System.PullRequest.PullRequestId)/threads?${ADO_API_VERSION}")
+
+              # PRコメントを投稿
+              PR_COMMENT=$(jq --arg comment "$COMMENT" '.comments[0].content = $comment' <<< '{"comments": [{"parentCommentId": 0,"content": "","commentType": 1}],"status": 1}')
+
+              curl "$ADO_API" \
+              --header "Content-Type: application/json" \
+              --header "Accept: application/json" \
+              --header "Authorization: Bearer $SYSTEM_ACCESSTOKEN" \
+              --data "$PR_COMMENT" \
+              --verbose
+
+          fi
+
+
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
