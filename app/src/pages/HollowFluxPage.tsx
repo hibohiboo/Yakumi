@@ -191,7 +191,7 @@ function HollowFluxPage() {
       </div>
       <div>
         <label>
-          カード名のみ表示{' '}
+          カード名のみ表示
           <input
             type="checkbox"
             checked={isDisplayCardNameOnly}
