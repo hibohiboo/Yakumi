@@ -1,0 +1,120 @@
+get:
+  operationId: get/magia-character
+  summary: キャラクター取得
+  parameters:
+    - in: path
+      name: uid
+      required: true
+      schema:
+        type: string
+      description: The User ID of the character
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      description: The ID of the character
+  responses:
+    '200':
+      description: A character data
+      content:
+        application/json:
+          schema:
+             $ref: '#/components/schemas/Character'
+
+components:
+  schemas:
+    Character:
+      type: object
+      properties:
+        uid:
+          type: string
+        characterId:
+          type: string
+        name:
+          type: string
+        src:
+          type: string
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Card'
+        props:
+          type: array
+          items:
+            $ref: '#/components/schemas/Prop'
+        extraTags:
+          type: array
+          items:
+            type: string
+        faction:
+          type: string
+        memo:
+          type: string
+    Card:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        cp:
+          type: integer
+        name:
+          type: string
+        timing:
+          type: string
+        countdown:
+          type: string
+        target:
+          type: string
+        range:
+          type: string
+        cost:
+          type: string
+        content:
+          type: string
+        flavor:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        sheetPropsName:
+          type: string
+        sheetPropsResourceName:
+          type: string
+        sheetPropsValue:
+          type: string
+        sheetPropsResourceType:
+          type: string
+        effectType:
+          type: string
+        effectVariable:
+          type: string
+        currentValue:
+          type: integer
+        count:
+          type: integer
+        index:
+          type: integer
+    Prop:
+      type: object
+      properties:
+        name:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropItem'
+    PropItem:
+      type: object
+      properties:
+        name:
+          type: string
+        sheetPropsResourceType:
+          type: string
+        value:
+          type: string
+        currentValue:
+          type: integer

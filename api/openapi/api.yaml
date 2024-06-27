@@ -23,3 +23,5 @@ paths:
     $ref: paths/rank-character.yml
   /get-character-cards/{id}:
     $ref: paths/get-character-cards.yml
+  /magia-character/{uid}/{id}:
+    $ref: paths/magia-character.yml
