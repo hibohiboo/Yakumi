@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@redocly/cli": "^1.16.0",
-    "@stepci/runner": "^2.0.5",
+    "@stepci/runner": "^2.0.6",
     "@types/jest": "^29.5.12",
     "@types/mssql": "^9.1.5",
     "@types/node": "^20.x",
