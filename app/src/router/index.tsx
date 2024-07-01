@@ -1,5 +1,6 @@
 import { basePath } from '@yakumi-app/constants';
 import { fallMagiaRouter } from '@yakumi-app/domain/fallMagia/router';
+import { hollowRouter } from '@yakumi-app/domain/hollow/router';
 import { Agreement } from '@yakumi-app/domain/project/static/Agreement';
 import { Materials } from '@yakumi-app/domain/project/static/Materials';
 import { PrivacyPolicy } from '@yakumi-app/domain/project/static/PrivacyPolicy';
@@ -77,6 +78,7 @@ export const createRouter = () =>
         element: <ImageUploaderPage />,
       },
       fallMagiaRouter,
+      hollowRouter,
       { path: '/agreement', element: <Agreement /> },
       { path: '/privacy-policy', element: <PrivacyPolicy /> },
       { path: '/materials', element: <Materials /> },
