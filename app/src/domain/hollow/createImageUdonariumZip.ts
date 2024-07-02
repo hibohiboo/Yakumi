@@ -159,3 +159,59 @@ export const createImageUdonariumZip = async (
   decs.push(back.file);
   await createZip(decs, deckName);
 };
+
+const createIAllPackdonariumDeck = async (
+  items: { name: string; deck: number; guard: number; index: number }[],
+  deckName: string,
+  refList: React.RefObject<HTMLImageElement>[],
+  back: {
+    file: File;
+    identifier: string;
+  },
+) => {
+  const list = await Promise.all(
+    items.flatMap(async (item) => {
+      const doc = getDoc();
+      const ref = refList[item.index];
+      if (!ref.current) throw Error('ref.current is undefined');
+      const canvas = await html2canvas(ref.current);
+      const front = await canvasToFile(canvas);
+      const card = createCardWithProp(doc, item.name, front, back);
+      return { card, front: front.file };
+    }),
+  );
+  const deck = createDeck(
+    deckName,
+    list.map((i) => i.card),
+    {
+      deckName,
+      state: '0',
+      size: '2',
+      description: '',
+    },
+  );
+  return [deck, ...list.map((i) => i.front)];
+};
+
+export const createImageAllPackUdonariumZip = async (
+  items: { name: string; deck: number; guard: number; index: number }[],
+  deckName: string,
+  refList: React.RefObject<HTMLImageElement>[],
+  backRef: React.RefObject<HTMLImageElement>,
+) => {
+  const decs = [];
+  if (!backRef.current) throw new Error('backRef is undefined');
+  const canvas = await html2canvas(backRef.current);
+  const back = await canvasToFile(canvas);
+  decs.push(
+    ...(await createIAllPackdonariumDeck(
+      items,
+      `${deckName}全部入りデッキ`,
+      refList,
+      back,
+    )),
+  );
+
+  decs.push(back.file);
+  await createZip(decs, deckName);
+};

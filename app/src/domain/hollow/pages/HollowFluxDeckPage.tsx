@@ -1,5 +1,4 @@
 import { Button, Dialog, DialogBody } from '@blueprintjs/core';
-import React from 'react';
 import { HollowInputArea } from '../components/HollowInputArea';
 import { HollowRule } from '../components/HollowRule';
 import { HollowSelectedCards } from '../components/HollowSelectedCards';
@@ -17,6 +16,13 @@ function HollowFluxDeckPage() {
         </Button>
         <Button style={{ marginLeft: '2rem' }} onClick={vm.clearStorage}>
           デッキ初期化
+        </Button>
+        <Button
+          style={{ marginLeft: '2rem' }}
+          icon="download"
+          onClick={vm.downloadAllPack}
+        >
+          全カードパック
         </Button>
       </div>
       <div style={{ padding: '1rem' }}>

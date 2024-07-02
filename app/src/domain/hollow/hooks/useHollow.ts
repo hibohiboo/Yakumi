@@ -1,6 +1,9 @@
 import React, { createRef, useCallback, useRef, useState } from 'react';
 import { CARDS } from '../constants';
-import { createImageUdonariumZip } from '../createImageUdonariumZip';
+import {
+  createImageAllPackUdonariumZip,
+  createImageUdonariumZip,
+} from '../createImageUdonariumZip';
 const LOCAL_STORAGE_KEY = 'hollowCards';
 const getFirstCards = () => {
   const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -68,6 +71,14 @@ export const useHollow = () => {
     }
     createImageUdonariumZip(cards, 'HollowΦFlux', listRefs.current, backRef);
   };
+  const downloadAllPack = () => {
+    createImageAllPackUdonariumZip(
+      cards,
+      'HollowΦFlux全カード',
+      listRefs.current,
+      backRef,
+    );
+  };
   return {
     cards,
     downloadUdonarium,
@@ -83,6 +94,7 @@ export const useHollow = () => {
     clearStorage,
     listRefs,
     backRef,
+    downloadAllPack,
   };
 };
 
