@@ -30,7 +30,7 @@
     "mssql": "^11.0.0"
   },
   "devDependencies": {
-    "@redocly/cli": "^1.16.0",
+    "@redocly/cli": "^1.17.0",
     "@stepci/runner": "^2.0.6",
     "@types/jest": "^29.5.12",
     "@types/mssql": "^9.1.5",
@@ -41,7 +41,7 @@
     "rimraf": "^5.0.7",
     "ts-jest": "^29.1.5",
     "tsc-alias": "^1.8.10",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.3"
   },
   "main": "dist/api/src/functions/*.js"
 }
