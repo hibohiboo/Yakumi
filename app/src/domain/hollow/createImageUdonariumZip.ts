@@ -2,7 +2,9 @@ import html2canvas from 'html2canvas';
 import { canvasToFile } from '../udonarium/canvas';
 import { createZip, getDoc } from '../udonarium/common';
 import { createElement } from '../udonarium/fileArchiver';
+import { imageSrcToFile } from '../udonarium/image';
 import { createDeck } from '../udonarium/udonariumZip';
+import { getHollowImageSrc } from './image/getHollowImageSrc';
 const createCardBase = ({
   doc,
   cardName: cardName,
@@ -163,7 +165,6 @@ export const createImageUdonariumZip = async (
 const createIAllPackdonariumDeck = async (
   items: { name: string; deck: number; guard: number; index: number }[],
   deckName: string,
-  refList: React.RefObject<HTMLImageElement>[],
   back: {
     file: File;
     identifier: string;
@@ -172,10 +173,9 @@ const createIAllPackdonariumDeck = async (
   const list = await Promise.all(
     items.flatMap(async (item) => {
       const doc = getDoc();
-      const ref = refList[item.index];
-      if (!ref.current) throw Error('ref.current is undefined');
-      const canvas = await html2canvas(ref.current);
-      const front = await canvasToFile(canvas);
+      const front = await imageSrcToFile(
+        getHollowImageSrc(`/assets/images/hollowFlux/cards/${item.name}.png`),
+      );
       const card = createCardWithProp(doc, item.name, front, back);
       return { card, front: front.file };
     }),
@@ -196,18 +196,16 @@ const createIAllPackdonariumDeck = async (
 export const createImageAllPackUdonariumZip = async (
   items: { name: string; deck: number; guard: number; index: number }[],
   deckName: string,
-  refList: React.RefObject<HTMLImageElement>[],
-  backRef: React.RefObject<HTMLImageElement>,
 ) => {
   const decs = [];
-  if (!backRef.current) throw new Error('backRef is undefined');
-  const canvas = await html2canvas(backRef.current);
-  const back = await canvasToFile(canvas);
+
+  const back = await imageSrcToFile(
+    getHollowImageSrc(`/assets/images/hollowFlux/card_back.png`),
+  );
   decs.push(
     ...(await createIAllPackdonariumDeck(
       items,
       `${deckName}全部入りデッキ`,
-      refList,
       back,
     )),
   );

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Settings } from '@yakumi-app/domain/card/types';
-import { DEFAULT_CHAR_IMG } from '@yakumi-app/domain/fallMagia/constants';
-import { getImageSrc } from '@yakumi-app/domain/image/getImageSrc';
+import { getImageBlob } from '@yakumi-app/domain/image/getImageBlob';
 import { CharacterSheetDetailsProp } from '@yakumi-app/domain/spreadSheet/sheetToCharacter/types';
 import { calcSHA256Async } from '@yakumi-app/domain/udonarium/FileReaderUtil';
 import { createZip } from '@yakumi-app/domain/udonarium/common';
@@ -11,19 +10,8 @@ import { CharacterSheetPropsCard, ExtraTag } from '../types';
 import { createCharacter } from './characterFile';
 import { createVSRankChearacterDeck } from './createCharacterDeck';
 
-const getBlob = async (image: File | undefined, src: string) => {
-  if (image && image.size > 0) {
-    return image;
-  }
-
-  const defaultImageFileDataUrl = src ? src : getImageSrc(DEFAULT_CHAR_IMG);
-  const res = await fetch(defaultImageFileDataUrl, { mode: 'cors' });
-  const blob = await res.blob();
-  return blob;
-};
-
 const createCharacterImage = async (image: File | undefined, src: string) => {
-  const blob = await getBlob(image, src);
+  const blob = await getImageBlob(image, src);
 
   const identifier = await calcSHA256Async(blob);
   return {

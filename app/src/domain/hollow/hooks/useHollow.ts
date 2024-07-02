@@ -81,12 +81,7 @@ export const useHollow = () => {
   };
   const downloadAllPack = async () => {
     setIsDownloading(true);
-    await createImageAllPackUdonariumZip(
-      cards,
-      'HollowΦFlux全カード',
-      listRefs.current,
-      backRef,
-    );
+    await createImageAllPackUdonariumZip(cards, 'HollowΦFlux全カード');
     setIsDownloading(false);
   };
   return {

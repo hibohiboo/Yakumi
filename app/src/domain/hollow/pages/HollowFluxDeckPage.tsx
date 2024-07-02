@@ -68,7 +68,7 @@ function HollowFluxDeckPage() {
             src={getHollowImageSrc(
               `/assets/images/hollowFlux/cards/${vm.clickedCardName}.png`,
             )}
-            width={350}
+            width={868}
             style={{ margin: '0 auto' }}
             alt={vm.clickedCardName}
           />
