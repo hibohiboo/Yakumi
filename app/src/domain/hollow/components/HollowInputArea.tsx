@@ -3,7 +3,7 @@ import { getHollowImageSrc } from '../image/getHollowImageSrc';
 
 export function HollowInputArea({ vm }: { vm: UseHollowViewModel }) {
   return (
-    <div style={{ height: '80vh', overflow: 'auto' }}>
+    <div style={{ height: '50vh', overflow: 'auto' }}>
       {vm.cards.map((card) => (
         <div key={card.name} style={{ width: '360px' }}>
           <img
