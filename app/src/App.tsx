@@ -76,6 +76,11 @@ function App() {
             HollowΦFlux用ユドナリウム
           </a>
         </li>
+        <li>
+          <Link style={{ color: 'white' }} to={'/hollow-flux/'}>
+            HollowΦFlux 画像同梱デッキ作成
+          </Link>
+        </li>
       </ul>
 
       <section>

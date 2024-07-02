@@ -8,6 +8,7 @@ function HollowFluxPage() {
   const [cards, setCards] = React.useState(
     CARDS.map((card) => ({ ...card, count: 0 })),
   );
+
   const [isDisplayCardNameOnly, setIsDisplayCardNameOnly] =
     React.useState(false);
   const [deckName, setDeckName] = React.useState('HollowFluxデッキ');
