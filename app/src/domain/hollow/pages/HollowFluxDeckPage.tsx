@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogBody } from '@blueprintjs/core';
+import { Button, Dialog, DialogBody, Spinner } from '@blueprintjs/core';
 import { HollowInputArea } from '../components/HollowInputArea';
 import { HollowRule } from '../components/HollowRule';
 import { HollowSelectedCards } from '../components/HollowSelectedCards';
@@ -45,7 +45,7 @@ function HollowFluxDeckPage() {
         </div>
         <HollowInputArea vm={vm} />
       </div>
-      <div>
+      <div style={{ width: '1px', height: '1px', overflow: 'hidden' }}>
         <img
           ref={vm.backRef}
           src={getHollowImageSrc(`/assets/images/hollowFlux/card_back.png`)}
@@ -72,6 +72,12 @@ function HollowFluxDeckPage() {
             style={{ margin: '0 auto' }}
             alt={vm.clickedCardName}
           />
+        </DialogBody>
+      </Dialog>
+      <Dialog isOpen={vm.isDownloading}>
+        <DialogBody useOverflowScrollContainer={false}>
+          <Spinner intent="primary" size={50} />
+          <span style={{ color: '#000' }}>デッキ出力中...</span>
         </DialogBody>
       </Dialog>
     </div>

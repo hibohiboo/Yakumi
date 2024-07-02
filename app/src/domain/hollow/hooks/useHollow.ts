@@ -63,21 +63,31 @@ export const useHollow = () => {
     (item) => (listRefs.current[item.index] = createRef<HTMLImageElement>()),
   );
   const backRef = useRef<HTMLImageElement>(null);
-  const downloadUdonarium = () => {
+  const [isDownloading, setIsDownloading] = useState(false);
+  const downloadUdonarium = async () => {
     const list = cards.filter((card) => card.deck > 0);
     if (list.length === 0) {
       alert('カードを選択してください');
       return;
     }
-    createImageUdonariumZip(cards, 'HollowΦFlux', listRefs.current, backRef);
+    setIsDownloading(true);
+    await createImageUdonariumZip(
+      cards,
+      'HollowΦFlux',
+      listRefs.current,
+      backRef,
+    );
+    setIsDownloading(false);
   };
-  const downloadAllPack = () => {
-    createImageAllPackUdonariumZip(
+  const downloadAllPack = async () => {
+    setIsDownloading(true);
+    await createImageAllPackUdonariumZip(
       cards,
       'HollowΦFlux全カード',
       listRefs.current,
       backRef,
     );
+    setIsDownloading(false);
   };
   return {
     cards,
@@ -95,6 +105,7 @@ export const useHollow = () => {
     listRefs,
     backRef,
     downloadAllPack,
+    isDownloading,
   };
 };
 
