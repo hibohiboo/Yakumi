@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { createRef, useCallback, useRef, useState } from 'react';
 import { CARDS } from '../constants';
+import { createImageUdonariumZip } from '../createImageUdonariumZip';
 const LOCAL_STORAGE_KEY = 'hollowCards';
 const getFirstCards = () => {
   const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -53,12 +54,19 @@ export const useHollow = () => {
     setClickedCardName(card.name);
     setIsModelShow(true);
   };
+
+  const listRefs = useRef<React.RefObject<HTMLImageElement>[]>([]);
+  cards.forEach(
+    (item) => (listRefs.current[item.index] = createRef<HTMLImageElement>()),
+  );
+  const backRef = useRef<HTMLImageElement>(null);
   const downloadUdonarium = () => {
     const list = cards.filter((card) => card.deck > 0);
     if (list.length === 0) {
       alert('カードを選択してください');
       return;
     }
+    createImageUdonariumZip(cards, 'HollowΦFlux', listRefs.current, backRef);
   };
   return {
     cards,
@@ -73,6 +81,8 @@ export const useHollow = () => {
     handleClose,
     cardClickHandler,
     clearStorage,
+    listRefs,
+    backRef,
   };
 };
 

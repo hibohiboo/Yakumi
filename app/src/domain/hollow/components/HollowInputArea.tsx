@@ -37,7 +37,6 @@ export function HollowInputArea({ vm }: { vm: UseHollowViewModel }) {
               onChange={vm.changeGuardHandler(card)}
             />
           </label>
-
           <strong>{card.name}</strong>
         </div>
       ))}

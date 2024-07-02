@@ -39,6 +39,23 @@ function HollowFluxDeckPage() {
         </div>
         <HollowInputArea vm={vm} />
       </div>
+      <div>
+        <img
+          ref={vm.backRef}
+          src={getHollowImageSrc(`/assets/images/hollowFlux/card_back.png`)}
+          width="350"
+        />
+        {vm.cards.map((card, index) => (
+          <img
+            key={card.name}
+            ref={vm.listRefs.current[index]}
+            src={getHollowImageSrc(
+              `/assets/images/hollowFlux/cards/${card.name}.png`,
+            )}
+            width="350"
+          />
+        ))}
+      </div>
       <Dialog isOpen={vm.isModelShow} onClose={vm.handleClose}>
         <DialogBody useOverflowScrollContainer={true}>
           <img
