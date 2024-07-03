@@ -49,7 +49,7 @@ function HollowFluxDeckPage() {
         <img
           ref={vm.backRef}
           src={getHollowImageSrc(`/assets/images/hollowFlux/card_back.png`)}
-          width="350"
+          width="868"
         />
         {vm.cards.map((card, index) => (
           <img
@@ -58,7 +58,7 @@ function HollowFluxDeckPage() {
             src={getHollowImageSrc(
               `/assets/images/hollowFlux/cards/${card.name}.png`,
             )}
-            width="350"
+            width="868"
           />
         ))}
       </div>
@@ -68,7 +68,7 @@ function HollowFluxDeckPage() {
             src={getHollowImageSrc(
               `/assets/images/hollowFlux/cards/${vm.clickedCardName}.png`,
             )}
-            width={868}
+            width={350}
             style={{ margin: '0 auto' }}
             alt={vm.clickedCardName}
           />

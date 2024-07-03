@@ -27,6 +27,7 @@ export const useHollow = () => {
         return c;
       });
       setCards(updateCards);
+      setLocalStorage(updateCards);
     };
   const changeGuardHandler =
     (card: { name: string }) => (e: React.ChangeEvent<HTMLInputElement>) => {
