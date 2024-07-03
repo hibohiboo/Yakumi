@@ -1,23 +1,13 @@
 import React, { createRef, useCallback, useRef, useState } from 'react';
-import { CARDS } from '../constants';
 import {
   createImageAllPackUdonariumZip,
   createImageUdonariumZip,
 } from '../createImageUdonariumZip';
-const LOCAL_STORAGE_KEY = 'hollowCards';
-const getFirstCards = () => {
-  const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-  if (savedData) {
-    return JSON.parse(savedData) as {
-      name: string;
-      cost: number;
-      deck: number;
-      guard: number;
-      index: number;
-    }[];
-  }
-  return CARDS.map((card, index) => ({ ...card, deck: 0, guard: 0, index }));
-};
+import {
+  clearLocalStorage,
+  getFirstCards,
+  setLocalStorage,
+} from '../persistant/local';
 
 export const useHollow = () => {
   const [cards, setCards] = React.useState(getFirstCards());
@@ -25,7 +15,7 @@ export const useHollow = () => {
     if (!window.confirm('デッキを初期化しますか？')) {
       return;
     }
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    clearLocalStorage();
     setCards(getFirstCards());
   };
   const changeHandler =
@@ -37,7 +27,6 @@ export const useHollow = () => {
         return c;
       });
       setCards(updateCards);
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updateCards));
     };
   const changeGuardHandler =
     (card: { name: string }) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +37,7 @@ export const useHollow = () => {
         return c;
       });
       setCards(updateCards);
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updateCards));
+      setLocalStorage(updateCards);
     };
   const [isModelShow, setIsModelShow] = useState(false);
   const [clickedCardName, setClickedCardName] = useState('');
