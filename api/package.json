@@ -23,25 +23,25 @@
   },
   "dependencies": {
     "@azure/functions": "^4.5.0",
-    "@azure/identity": "^4.3.0",
-    "@azure/storage-blob": "^12.23.0",
+    "@azure/identity": "^4.4.1",
+    "@azure/storage-blob": "^12.24.0",
     "@neondatabase/serverless": "^0.9.4",
     "date-fns": "^3.6.0",
-    "mssql": "^11.0.0"
+    "mssql": "^11.0.1"
   },
   "devDependencies": {
-    "@redocly/cli": "^1.16.0",
-    "@stepci/runner": "^2.0.6",
+    "@redocly/cli": "^1.19.0",
+    "@stepci/runner": "^2.0.7",
     "@types/jest": "^29.5.12",
     "@types/mssql": "^9.1.5",
-    "@types/node": "^20.x",
+    "@types/node": "^22.x",
     "cross-env": "^7.0.3",
     "jest": "^29.7.0",
     "jest-html-reporters": "^3.1.7",
-    "rimraf": "^5.0.7",
-    "ts-jest": "^29.1.5",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.2.4",
     "tsc-alias": "^1.8.10",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.4"
   },
   "main": "dist/api/src/functions/*.js"
 }

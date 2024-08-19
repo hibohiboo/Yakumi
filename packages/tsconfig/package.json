@@ -3,7 +3,7 @@
     "private": true,
     "version": "0.0.0",
     "devDependencies": {
-        "@types/node": "^20.14.9",
-        "typescript": "^5.5.2"
+        "@types/node": "^22.4.1",
+        "typescript": "^5.5.4"
     },"scripts": {"ncu": "ncu -u"}
 }

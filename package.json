@@ -4,9 +4,9 @@
   "version": "0.2.0",
   "description": "Udonarium支援ツール",
   "devDependencies": {
-    "prettier": "^3.3.2",
-    "turbo": "^2.0.6",
-    "typescript": "^5.5.3"
+    "prettier": "^3.3.3",
+    "turbo": "^2.0.14",
+    "typescript": "^5.5.4"
   },
   "scripts": {
     "prepare": "git config --local core.hooksPath .githooks && echo Changed hooks directory when npm install",

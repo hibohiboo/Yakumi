@@ -15,26 +15,26 @@
     "ncu": "ncu -u"
   },
   "dependencies": {
-    "dompurify": "^3.1.5",
+    "dompurify": "^3.1.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^5.2.1"
+    "react-icons": "^5.3.0"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.1.11",
-    "@storybook/addon-interactions": "^8.1.11",
-    "@storybook/addon-links": "^8.1.11",
-    "@storybook/addon-mdx-gfm": "^8.1.11",
-    "@storybook/addon-onboarding": "^8.1.11",
-    "@storybook/blocks": "^8.1.11",
-    "@storybook/react": "^8.1.11",
-    "@storybook/react-vite": "^8.1.11",
+    "@storybook/addon-essentials": "^8.2.9",
+    "@storybook/addon-interactions": "^8.2.9",
+    "@storybook/addon-links": "^8.2.9",
+    "@storybook/addon-mdx-gfm": "^8.2.9",
+    "@storybook/addon-onboarding": "^8.2.9",
+    "@storybook/blocks": "^8.2.9",
+    "@storybook/react": "^8.2.9",
+    "@storybook/react-vite": "^8.2.9",
     "@storybook/testing-library": "^0.2.2",
     "@types/dompurify": "^3.0.5",
-    "@types/sanitize-html": "^2.11.0",
+    "@types/sanitize-html": "^2.13.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "@yakumi/tsconfig": "*",
-    "storybook": "^8.1.11"
+    "storybook": "^8.2.9"
   },
   "exports": {
     ".": "./src/index.ts",
