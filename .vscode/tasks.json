@@ -7,9 +7,9 @@
 			"command": "host start",
 			"problemMatcher": "$func-node-watch",
 			"isBackground": true,
-			"dependsOn": "npm build (functions)",
+			"dependsOn": "npm watch (functions)",
 			"options": {
-				"cwd": "${workspaceFolder}/api"
+				"cwd": "${workspaceFolder}/packages/batch-functions"
 			}
 		},
 		{
@@ -47,6 +47,22 @@
 			"dependsOn": "npm install (functions)",
 			"options": {
 				"cwd": "${workspaceFolder}/api"
+			}
+		},
+
+		{
+			"type": "shell",
+			"label": "npm watch (functions)",
+			"command": "npm run watch",
+			"dependsOn": "npm clean (functions)",
+			"problemMatcher": "$tsc-watch",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"isBackground": true,
+			"options": {
+				"cwd": "${workspaceFolder}/packages/batch-functions"
 			}
 		}
 	]
