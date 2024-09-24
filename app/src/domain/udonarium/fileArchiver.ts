@@ -1,9 +1,22 @@
 /* eslint-disable @typescript-eslint/unified-signatures */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { BlobReader, BlobWriter, ZipWriter } from '@zip.js/zip.js';
 import pkg from 'file-saver';
-const { saveAs } = pkg;
-import JSZip from 'jszip';
 import { getCanvasBlob } from './canvas';
+const { saveAs } = pkg;
+interface MetaData {
+  percent: number;
+  currentFile: string;
+}
+type UpdateCallback = (metadata: MetaData) => void;
+function toArrayOfFileList(fileList: FileList): File[] {
+  const files: File[] = [];
+  const length = fileList.length;
+  for (let i = 0; i < length; i++) {
+    files.push(fileList[i]);
+  }
+  return files;
+}
 
 export class FileArchiver {
   private static _instance: FileArchiver;
@@ -19,21 +32,37 @@ export class FileArchiver {
     this.generateBlob(files).then((blob) => saveAs(blob, zipName + '.zip'));
   }
 
-  generateBlob(files: File[]): Promise<Blob> {
-    const zip = new JSZip();
-    const length = files.length;
-    for (let i = 0; i < length; i++) {
-      const file = files[i];
-      zip.file(file.name, file);
-    }
+  async generateBlob(
+    files: File[],
+    updateCallback?: UpdateCallback,
+  ): Promise<Blob> {
+    const saveFiles: File[] =
+      files instanceof FileList ? toArrayOfFileList(files) : files;
 
-    return zip.generateAsync({
-      type: 'blob',
-      compression: 'DEFLATE',
-      compressionOptions: {
-        level: 6,
-      },
+    const zipWriter = new ZipWriter(new BlobWriter('application/zip'), {
+      bufferedWrite: true,
     });
+
+    let sumProgress = 0;
+    let sumTotal = 0;
+    await Promise.all(
+      Array.from(saveFiles).map(async (file) => {
+        let prevProgress = 0;
+        sumTotal += file.size;
+        zipWriter.add(file.name, new BlobReader(file), {
+          async onprogress(progress) {
+            sumProgress += progress - prevProgress;
+            prevProgress = progress;
+            const percent = (sumProgress * 100) / sumTotal;
+            if (!updateCallback) return;
+            updateCallback({ percent: percent, currentFile: file.name });
+          },
+        });
+      }),
+    );
+    const blob = await zipWriter.close();
+
+    return blob;
   }
   saveText(file: File) {
     saveAs(file);

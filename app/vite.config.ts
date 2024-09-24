@@ -30,7 +30,7 @@ export default defineConfig({
           reactFamily: ['react-router-dom', 'react-icons'],
           redux: ['@reduxjs/toolkit', 'react-redux'],
           others: ['date-fns', 'papaparse', 'lodash'],
-          udon: ['file-saver', 'jszip'],
+          udon: ['file-saver', '@zip.js/zip.js'],
           canvas: ['html2canvas'],
           blueprint: ['@blueprintjs/core'],
           yakumiUi: ['@yakumi-components/index'],
