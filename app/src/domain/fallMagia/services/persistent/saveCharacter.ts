@@ -1,4 +1,3 @@
-import { putCharacter } from '@yakumi-app/domain/api/crud';
 import { CharacterExtraTag } from '@yakumi-app/domain/vsRankCharacter/types';
 import {
   CharacterSheetDetailsProp,
@@ -21,18 +20,17 @@ export const setCharacter = (item: SaveFallMagiaCharacterArgs): void => {
 };
 
 export const saveCharacter = async (args: SaveFallMagiaCharacterArgs) => {
-  const id = args.characterId;
-
-  // 保存処理を非同期にする(putがよく失敗するため。サーバ側でBlobトリガーでの保存に切り替えてもいいかも（TODO))
-  setTimeout(async () => {
-    const ret = await putCharacter({
-      id,
-      uid: args.uid,
-      data: JSON.stringify(args),
-    });
-    if (ret.status !== 200) console.warn('Failed to save character');
-    // if (ret.status !== 200) throw new Error('Failed to save character');
-  }, 0);
+  // const id = args.characterId;
+  // // 保存処理を非同期にする(putがよく失敗するため。サーバ側でBlobトリガーでの保存に切り替え
+  // setTimeout(async () => {
+  //   const ret = await putCharacter({
+  //     id,
+  //     uid: args.uid,
+  //     data: JSON.stringify(args),
+  //   });
+  //   if (ret.status !== 200) console.warn('Failed to save character');
+  //   // if (ret.status !== 200) throw new Error('Failed to save character');
+  // }, 0);
 
   return setCharacter(args);
 };
