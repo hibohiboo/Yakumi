@@ -10,7 +10,7 @@
     "local-init": "bash ../infrastructure/local-db/bin/up.sh",
     "predev": "npm run clean && npm run build",
     "dev": "func start --port 7071",
-    "lint": "eslint",
+    "lint": "cross-env DEBUG=eslint:*  eslint ./src/",
     "test": "jest",
     "prestepci-generate": "npm run openapi-bundle",
     "stepci-generate": "cross-env STEPCI_DISABLE_ANALYTICS=0 npx stepci generate ./openapi/dist/bundle.yml ./tests/e2e/geranated.stepci.yml",

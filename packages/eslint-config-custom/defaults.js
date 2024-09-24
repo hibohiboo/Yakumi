@@ -2,9 +2,10 @@ import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
 import unuserdPlugin from 'eslint-plugin-unused-imports';
+import sonarjs from "eslint-plugin-sonarjs";
 
 export default tseslint.config({
-  extends: [js.configs.recommended, ...tseslint.configs.strict,...tseslint.configs.stylistic],
+  extends: [js.configs.recommended, ...tseslint.configs.strict,...tseslint.configs.stylistic,sonarjs.configs.recommended],
   plugins: { 
      import: importPlugin, 
     'unused-imports': unuserdPlugin
