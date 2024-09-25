@@ -1,6 +1,6 @@
 param location string
+param uploadStroageAccountName string
 
-var uploadStroageAccountName = 'upload2yakumi'
 var systemTopicName = 'mystoragesystemtopic'
 
 

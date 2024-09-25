@@ -12,6 +12,6 @@ export async function eventGridBlobTrigger1(
 app.storageBlob('eventGridBlobTrigger1', {
   path: 'samples-workitems/batch-functions',
   source: 'EventGrid',
-  connection: '0d5e76_STORAGE',
+  connection: 'TARGET_STORAGE_ACCOUNT',
   handler: eventGridBlobTrigger1,
 });

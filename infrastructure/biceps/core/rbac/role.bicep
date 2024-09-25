@@ -1,9 +1,9 @@
-param queueAndContainerStorageAccountName string
+param uploadStroageAccountName string
 param principalId string
 param roleDefinitionId string
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
-  name: queueAndContainerStorageAccountName
+  name: uploadStroageAccountName
 }
 
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {

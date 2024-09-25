@@ -1,5 +1,8 @@
 using 'batch.bicep'
 
+param location = 'japaneast'
+param functionAppName = ''
+param uploadStroageAccountName = 'upload2yakumi'
 param functionsRuntime = {
   runtime: 'node'
   linuxFxVersion: 'Node|20'
