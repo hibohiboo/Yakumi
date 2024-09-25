@@ -13,7 +13,7 @@
     "depcruise": "depcruise --include-only \"^src\" --config ./.dependency-cruiser.cjs --output-type mermaid"
   },
   "dependencies": {
-    "@azure/storage-blob": "^12.24.0",
+    "@azure/storage-blob": "^12.25.0",
     "@blueprintjs/core": "^5.13.0",
     "@reduxjs/toolkit": "^2.2.7",
     "@yakumi/ui": "*",
@@ -34,7 +34,7 @@
     "@types/file-saver": "^2.0.7",
     "@types/jest": "^29.5.13",
     "@types/papaparse": "^5.3.14",
-    "@types/react": "^18.3.8",
+    "@types/react": "^18.3.9",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "@yakumi/eslint-config-custom": "*",
@@ -46,7 +46,7 @@
     "jest-html-reporters": "^3.1.7",
     "msw": "^2.4.9",
     "ts-jest": "^29.2.5",
-    "vite": "^5.4.7"
+    "vite": "^5.4.8"
   },
   "msw": {
     "workerDirectory": "public"
