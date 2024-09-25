@@ -6,7 +6,7 @@ BICEP_DIR=$(cd $BIN_DIR/../biceps && pwd)
 # 環境変数読み込み
 source $BIN_DIR/.env
 
-EXT_KEY=$(az functionapp keys list -g yakumi -n nkymspaiut5dsazfunctionsapp |  jq -r '.systemKeys.blobs_extension' )
+EXT_KEY=$(az functionapp keys list -g yakumi -n nkymspaiut5dsazfunctionsapp |  jq -r '.systemKeys.blobs_extension'  | tr -d '[:space:]' )
 
 cd $BICEP_DIR && az deployment group create \
   --name ExampleDeployment \

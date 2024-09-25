@@ -1,6 +1,6 @@
 import { app, InvocationContext } from '@azure/functions';
 
-export async function eventGridBlobTrigger1(
+export async function BlobTriggerEventGrid(
   blob: unknown, // Buffer,
   context: InvocationContext,
 ): Promise<void> {
@@ -9,9 +9,9 @@ export async function eventGridBlobTrigger1(
   );
 }
 
-app.storageBlob('eventGridBlobTrigger1', {
-  path: 'samples-workitems/batch-functions',
+app.storageBlob('BlobTriggerEventGrid', {
+  path: '$web',
   source: 'EventGrid',
   connection: 'TARGET_STORAGE_ACCOUNT',
-  handler: eventGridBlobTrigger1,
+  handler: BlobTriggerEventGrid,
 });
