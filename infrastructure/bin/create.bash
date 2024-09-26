@@ -3,7 +3,6 @@
 BIN_DIR=$(cd $(dirname $0) && pwd)
 BICEP_DIR=$(cd $BIN_DIR/../biceps && pwd)
 
-source $BIN_DIR/.env
 
 cd $BICEP_DIR && az deployment sub create \
   --name demoSubDeployment \
