@@ -3,6 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "TARGET_STORAGE_ACCOUNT": "UseDevelopmentStorage=true"
+    "TARGET_STORAGE_ACCOUNT": "UseDevelopmentStorage=true",
+    "DATABASE_CONNECTION_STRING": "Server=tcp:hoge.database.windows.net;Authentication=Active Directory Default; Database=hogehoge;"
   }
 }

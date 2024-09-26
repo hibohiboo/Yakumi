@@ -9,4 +9,5 @@ param functionsRuntime = {
   kind: 'functionapp,linux'
   extensionVersion: '~4'
 }
-
+param sqlServerName = ''
+param sqlServerDbName = ''

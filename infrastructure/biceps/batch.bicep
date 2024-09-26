@@ -2,6 +2,8 @@ param location string = resourceGroup().location
 param functionsRuntime object
 param functionAppName string
 param uploadStroageAccountName string
+param sqlServerName string
+param sqlServerDbName string
 
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 var applicationInsightsName = '${uniqueString(resourceGroup().id)}applicationinsights'
@@ -18,6 +20,10 @@ var environments = [
   {
     name: 'TARGET_STORAGE_ACCOUNT__queueServiceUri'
     value: 'https://${uploadStroageAccountName}.queue.core.windows.net'
+  }
+  {
+    name: 'DATABASE_CONNECTION_STRING'
+    value: 'Server=tcp:${sqlServerName}.database.windows.net;Authentication=Active Directory Default; Database=${sqlServerDbName};'
   }
 ]
 module myFunctionsApplicationInsights 'core/host/applications.bicep' = {

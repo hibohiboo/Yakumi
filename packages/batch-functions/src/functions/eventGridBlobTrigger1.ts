@@ -1,20 +1,36 @@
-import { app, InvocationContext } from '@azure/functions';
+import { app, InvocationContext, output } from '@azure/functions';
+import { isBlobTriggerMetadata } from '../domain/blobTrigger';
+
+const sqlOutput = output.sql({
+  commandText: '[dbo].[YakumiCharacter]',
+  connectionStringSetting: 'DATABASE_CONNECTION_STRING',
+});
 
 export async function BlobTriggerEventGrid(
   blob: unknown, // Buffer,
   context: InvocationContext,
 ): Promise<void> {
-  console.log('context', JSON.stringify(context));
-  if (!Buffer.isBuffer(blob)) {
-    context.warn('blob is not buffer');
+  console.log('context'.endsWith('json'), JSON.stringify(context));
+  if (!isBlobTriggerMetadata(context.triggerMetadata)) {
+    context.warn('context.triggerMetadata is not BlobTriggerMetadata');
     return;
   }
-  context.log(
-    `Storage blob function processed blob "${context.triggerMetadata?.name}" with size ${blob.length} bytes`,
-  );
+  // zipファイルは処理しない
+  if (!context.triggerMetadata.blobTrigger.endsWith('json')) return;
+  if (!Buffer.isBuffer(blob)) return;
   const blobContent = blob.toString('utf-8');
-  const obj = JSON.parse(blobContent);
-  context.log('obj', obj);
+  const data = JSON.parse(blobContent);
+  const { uid, characterId } = data;
+  if (!uid || !characterId) {
+    context.log('obj is not Character', data);
+    return;
+  }
+  context.extraOutputs.set(sqlOutput, {
+    id: characterId,
+    uid,
+    data: blobContent,
+    updated: new Date(),
+  });
 }
 
 app.storageBlob('BlobTriggerEventGrid', {
@@ -22,4 +38,5 @@ app.storageBlob('BlobTriggerEventGrid', {
   source: 'EventGrid',
   connection: 'TARGET_STORAGE_ACCOUNT',
   handler: BlobTriggerEventGrid,
+  extraOutputs: [sqlOutput],
 });

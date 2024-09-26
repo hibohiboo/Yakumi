@@ -13,5 +13,7 @@ cd $BICEP_DIR && az deployment group create \
   --parameters \
     functionAppName=$BATCH_NAME \
     uploadStroageAccountName=$UPLOAD_STORAGE_ACCOUNT_NAME \
+    sqlServerName=$DB_SERVER_NAME \
+    sqlServerDbName=$SQLSERVER_DB_NAME \
   -g $RESOURCE_GROUP_NAME
 
