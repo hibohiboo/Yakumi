@@ -7,9 +7,7 @@ var systemTopicName = 'mystoragesystemtopic'
 resource systemTopic 'Microsoft.EventGrid/systemTopics@2023-12-15-preview' existing = {
   name: systemTopicName
 }
-// resource functionApp 'Microsoft.Web/sites/functions@2022-09-01' existing  = {
-//   name: functionAppName
-// }
+
 var endpoint = 'https://${functionAppName}.azurewebsites.net/runtime/webhooks/blobs?functionName=Host.Functions.BlobTriggerEventGrid&code=${blobExtensionKey}'
 
 resource eventSubscription 'Microsoft.EventGrid/systemTopics/eventSubscriptions@2023-12-15-preview' = {
