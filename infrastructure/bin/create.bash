@@ -2,7 +2,8 @@
 
 BIN_DIR=$(cd $(dirname $0) && pwd)
 BICEP_DIR=$(cd $BIN_DIR/../biceps && pwd)
-
+RESOURCE_GROUP_NAME='yakumi'
+LOCATION=japaneast
 
 cd $BICEP_DIR && az deployment sub create \
   --name demoSubDeployment \
