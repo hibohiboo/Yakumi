@@ -2,11 +2,11 @@ import React, { useCallback } from 'react';
 type DOMRectProperty = keyof Omit<DOMRect, 'toJSON'>;
 
 export const useGetElementProperty = <T extends HTMLElement>(
-  elementRef: React.RefObject<T>,
+  elementRef: React.RefObject<T | null>,
 ) => {
   const getElementProperty = useCallback(
     (targetProperty: DOMRectProperty): number => {
-      const clientRect = elementRef.current?.getBoundingClientRect();
+      const clientRect = elementRef?.current?.getBoundingClientRect();
       if (clientRect) {
         return clientRect[targetProperty];
       }
