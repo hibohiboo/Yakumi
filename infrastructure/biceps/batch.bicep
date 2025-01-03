@@ -53,7 +53,6 @@ module myFunctions 'core/host/functions.bicep' = {
     runtime: functionsRuntime.runtime
     linuxFxVersion: functionsRuntime.linuxFxVersion
     extensionVersion: functionsRuntime.extensionVersion
-    applicationInsightsInstrumentationKey: myFunctionsApplicationInsights.outputs.applicationInsightsInstrumentationKey
     applicationInsightsName: applicationInsightsName
     environments: environments
   }

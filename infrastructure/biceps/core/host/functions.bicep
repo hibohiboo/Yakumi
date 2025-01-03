@@ -4,7 +4,6 @@ param runtime string
 param kind string
 param linuxFxVersion string
 param extensionVersion string
-param applicationInsightsInstrumentationKey string
 param applicationInsightsName string
 param functionAppName string
 param environments array
@@ -49,10 +48,6 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
           value: runtime
-        }
-        {
-          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
-          value: applicationInsightsInstrumentationKey
         }
         {
           name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
