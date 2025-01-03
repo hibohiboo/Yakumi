@@ -15,15 +15,15 @@ var environments = [
   }
   {
     name: 'TARGET_STORAGE_ACCOUNT__blobServiceUri'
-    value: 'https://${uploadStroageAccountName}.blob.core.windows.net'
+    value: 'https://${uploadStroageAccountName}.blob.${environment().suffixes.storage}'
   }
   {
     name: 'TARGET_STORAGE_ACCOUNT__queueServiceUri'
-    value: 'https://${uploadStroageAccountName}.queue.core.windows.net'
+    value: 'https://${uploadStroageAccountName}.queue.${environment().suffixes.storage}'
   }
   {
     name: 'DATABASE_CONNECTION_STRING'
-    value: 'Server=tcp:${sqlServerName}.database.windows.net;Authentication=Active Directory Default; Database=${sqlServerDbName};'
+    value: 'Server=tcp:${sqlServerName}${environment().suffixes.sqlServerHostname};Authentication=Active Directory Default; Database=${sqlServerDbName};'
   }
 ]
 module myFunctionsApplicationInsights 'core/host/applications.bicep' = {
