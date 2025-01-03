@@ -5,13 +5,18 @@ param kind string
 param linuxFxVersion string
 param extensionVersion string
 param applicationInsightsInstrumentationKey string
+param applicationInsightsName string
 param functionAppName string
 param environments array
+
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
   name: storageAccountName
 }
 
+resource appInsights 'Microsoft.Insights/components@2020-02-02' existing = {
+  name: applicationInsightsName
+}
 
 resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
   name: functionAppName
@@ -48,6 +53,10 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
           value: applicationInsightsInstrumentationKey
+        }
+        {
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: appInsights.properties.ConnectionString
         }
         ...environments
       ]
