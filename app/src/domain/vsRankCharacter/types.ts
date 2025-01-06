@@ -20,7 +20,7 @@ export interface CharacterSheetPropsCard {
   effectVariable?: string; // cpOffの対象タグ
   extraTags?: string; // カードの特殊効果を表すタグ
   count: number;
-  index: number; //  refListのindex に使う（連番）
+  index: number; // refListのindex に使う（連番）
 }
 
 export interface ExtraTag {
