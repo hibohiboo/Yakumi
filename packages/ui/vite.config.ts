@@ -16,8 +16,8 @@ export default defineConfig({
           react: ['react', 'react-dom', 'react/jsx-runtime'],
           icons: ['react-icons'],
           others: ['dompurify'],
-          storybook: ['@storybook/react'],
-          storybookFamily: ['@storybook/blocks'], // 696.34kb
+          storybook: ['@storybook/react-vite'],
+          storybookFamily: ['@storybook/addon-docs/blocks'], // 696.34kb
         },
       },
     },

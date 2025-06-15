@@ -1,5 +1,5 @@
 import CardWrapper from '@yakumi-components/components/Card/layouts/CardWrapper';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Card/layouts/CardWrapper',

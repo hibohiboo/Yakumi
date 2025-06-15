@@ -1,7 +1,9 @@
-import path from 'path';
-import remarkGfm from 'remark-gfm';
+import { createRequire } from 'node:module';
+import path, { dirname, join } from 'path';
 import { loadConfigFromFile, mergeConfig } from 'vite';
 import type { StorybookConfig } from '@storybook/react-vite';
+
+const require = createRequire(import.meta.url);
 
 const configEnvServe = {
   mode: 'development',
@@ -10,27 +12,17 @@ const configEnvServe = {
 } as const;
 const storybookConfig: StorybookConfig = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|ts|tsx)'],
+
   addons: [
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
-          },
-        },
-      },
-    },
-    '@storybook/addon-links',
-    '@storybook/addon-interactions',
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-docs'),
   ],
+
   framework: {
-    name: '@storybook/react-vite',
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
+
   async viteFinal(config) {
     const f = await loadConfigFromFile(
       configEnvServe,
@@ -44,10 +36,16 @@ const storybookConfig: StorybookConfig = {
       plugins: [],
     });
   },
+
   staticDirs: ['../public'],
+
   previewHead: (head) => `
     ${head}
     <link rel="stylesheet" href="styles/globals.css" />
   `,
 };
 export default storybookConfig;
+
+function getAbsolutePath(value: string): string {
+  return dirname(require.resolve(join(value, 'package.json')));
+}

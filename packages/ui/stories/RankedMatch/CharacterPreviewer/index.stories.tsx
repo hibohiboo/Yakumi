@@ -1,5 +1,5 @@
 import Component from '@yakumi-components/components/vsRankedMatch/CharacterPreviwer';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'RankedMatch/CharacterPreviewer',
