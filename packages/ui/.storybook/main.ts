@@ -1,8 +1,8 @@
 import { createRequire } from 'node:module';
 import path, { dirname, join } from 'path';
+import remarkGfm from 'remark-gfm';
 import { loadConfigFromFile, mergeConfig } from 'vite';
 import type { StorybookConfig } from '@storybook/react-vite';
-
 const require = createRequire(import.meta.url);
 
 const configEnvServe = {
@@ -12,16 +12,23 @@ const configEnvServe = {
 } as const;
 const storybookConfig: StorybookConfig = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|ts|tsx)'],
-
-  addons: [
-    getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-docs'),
-  ],
-
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
+  addons: [
+    getAbsolutePath('@storybook/addon-links'),
+    {
+      name: getAbsolutePath('@storybook/addon-docs'),
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
+  ],
 
   async viteFinal(config) {
     const f = await loadConfigFromFile(
