@@ -1,7 +1,6 @@
 import { createRequire } from 'node:module';
 import path, { dirname, join } from 'path';
 import remarkGfm from 'remark-gfm';
-import { loadConfigFromFile, mergeConfig } from 'vite';
 import type { StorybookConfig } from '@storybook/react-vite';
 const require = createRequire(import.meta.url);
 
@@ -31,6 +30,9 @@ const storybookConfig: StorybookConfig = {
   ],
 
   async viteFinal(config) {
+    // The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details. の警告を回避するためにdynamic importを使用
+    // https://github.com/storybookjs/storybook/issues/26291
+    const { mergeConfig, loadConfigFromFile } = await import('vite');
     const f = await loadConfigFromFile(
       configEnvServe,
       path.resolve(__dirname, '../vite.config.ts'),
@@ -51,8 +53,9 @@ const storybookConfig: StorybookConfig = {
     <link rel="stylesheet" href="styles/globals.css" />
   `,
 };
-export default storybookConfig;
 
 function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, 'package.json')));
 }
+
+export default storybookConfig;
