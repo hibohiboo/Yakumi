@@ -4,6 +4,10 @@
     {
       "route": "/app/*",
       "rewrite": "/app/index.html"
+    },
+    {
+      "route": "/sub/*",
+      "rewrite": "/sub/index.html"
     }
   ]
 }
