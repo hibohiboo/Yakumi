@@ -4,6 +4,7 @@
   "version": "0.2.0",
   "description": "Udonarium支援ツール",
   "devDependencies": {
+    "@azure/static-web-apps-cli": "^2.0.6",
     "prettier": "^3.5.3",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
@@ -24,6 +25,7 @@
   "packageManager": "npm@11.4.2",
   "workspaces": [
     "packages/*",
+    "apps/*",
     "app",
     "api"
   ]
