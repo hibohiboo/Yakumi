@@ -6,6 +6,7 @@
     "outDir": "dist",
     "sourceMap": true,
     "strict": true,
+    "skipLibCheck": true, // ../node_modules/tedious/lib/errors.d.ts:14:59 - error TS2304: Cannot find name 'ErrorOptions'. などのエラーがでるため追加
     "paths": {
       "@yakumi-api/*": ["./src/*"],
       "@yakumi-prisma/*": ["../packages/prisma/*"],

@@ -181,7 +181,7 @@ function App() {
           style={{ color: 'white' }}
           href="https://github.com/hibohiboo/Yakumi"
         >
-          github
+          GitHub
         </a>
       </footer>
     </div>
