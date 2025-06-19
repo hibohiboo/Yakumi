@@ -18,8 +18,8 @@
     "lint": "turbo lint",
     "aws-deploy": "cd infrastructure && npm run deploy",
     "preazure-deploy": "npm run build && cp public/index.html ./dist/index.html && cp staticwebapp.config.json ./dist/staticwebapp.config.json",
-    "azure-deploy": "dotenv -e .env.local -- bash -c 'swa deploy ./dist --env production --api-location ./api'",
-    "azure-front-deploy": "dotenv -e .env.local -- bash -c 'swa deploy ./dist --env production'"
+    "azure-deploy": "dotenv -e .env -- bash -c 'swa deploy ./dist --env production --api-location ./api'",
+    "azure-front-deploy": "dotenv -e .env -- bash -c 'swa deploy ./dist --env production'"
   },
   "engines": {
     "node": ">=20.x"
