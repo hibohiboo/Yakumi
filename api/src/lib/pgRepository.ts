@@ -10,7 +10,7 @@ const getClient = () => {
   return sql;
 };
 
-export const execQuery = async (query: string) => {
+export const execQuery = async (query: TemplateStringsArray) => {
   const client = getClient();
   const result = await client(query);
   return result;

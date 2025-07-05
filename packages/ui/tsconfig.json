@@ -1,5 +1,5 @@
 {
-
+  "extends": "@yakumi/tsconfig/react",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -7,6 +7,5 @@
     }
   },
   "include": ["src", "stories/**/*"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "extends": "@yakumi/tsconfig/react"
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

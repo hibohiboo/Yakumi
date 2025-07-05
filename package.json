@@ -4,7 +4,9 @@
   "version": "0.2.0",
   "description": "Udonarium支援ツール",
   "devDependencies": {
-    "prettier": "^3.5.3",
+    "@azure/static-web-apps-cli": "^2.0.6",
+    "dotenv-cli": "^8.0.0",
+    "prettier": "^3.6.2",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },
@@ -15,15 +17,17 @@
     "ncu": "turbo ncu",
     "lint": "turbo lint",
     "aws-deploy": "cd infrastructure && npm run deploy",
-    "preazure-deploy": "npm run build",
-    "azure-deploy": "swa deploy ./dist --env production --api-location ./api"
+    "preazure-deploy": "npm run build && cp public/index.html ./dist/index.html && cp staticwebapp.config.json ./dist/staticwebapp.config.json",
+    "azure-deploy": "dotenv -e .env -- bash -c 'swa deploy ./dist --env production --api-location ./api'",
+    "azure-front-deploy": "dotenv -e .env -- bash -c 'swa deploy ./dist --env production'"
   },
   "engines": {
-    "node": ">=18.x"
+    "node": ">=20.x"
   },
   "packageManager": "npm@11.4.2",
   "workspaces": [
     "packages/*",
+    "apps/*",
     "app",
     "api"
   ]
